@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="12baf0ba7b6d41b9a78b73c8012ec1f0" Name="Diagram1" ZoomLevel="75">
+        <EntityTypeShape EntityType="REGFIELDTRIALSModel.AttachmentType" Width="1.5" PointX="14.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="REGFIELDTRIALSModel.ChemicalMaster" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="REGFIELDTRIALSModel.ChemicalType" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="REGFIELDTRIALSModel.Crop" Width="1.5" PointX="9" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="REGFIELDTRIALSModel.DB_Version" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="REGFIELDTRIALSModel.Question" Width="1.5" PointX="16.5" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="REGFIELDTRIALSModel.Response" Width="1.5" PointX="18.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="REGFIELDTRIALSModel.SiteMaster" Width="1.5" PointX="9" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="REGFIELDTRIALSModel.TraitMaster" Width="1.5" PointX="9" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="REGFIELDTRIALSModel.TrialCatalog" Width="1.5" PointX="11.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="REGFIELDTRIALSModel.TrialProgress" Width="1.5" PointX="13.5" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="REGFIELDTRIALSModel.TrialWorkflowAttachment" Width="1.5" PointX="16.5" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="REGFIELDTRIALSModel.User" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="REGFIELDTRIALSModel.UserType" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="REGFIELDTRIALSModel.Workflow" Width="1.5" PointX="11.25" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="REGFIELDTRIALSModel.WorkflowQuestion" Width="3" PointX="18.75" PointY="2.75" IsExpanded="true" />
+        <AssociationConnector Association="REGFIELDTRIALSModel.FK_TrialWorkflowAttachment_AttachmentType" ManuallyRouted="false" />
+        <AssociationConnector Association="REGFIELDTRIALSModel.FK_ChemicalMaster_ChemicalType" ManuallyRouted="false" />
+        <AssociationConnector Association="REGFIELDTRIALSModel.FK_TrialCatalog_Crop" ManuallyRouted="false" />
+        <AssociationConnector Association="REGFIELDTRIALSModel.FK_Response_Question" ManuallyRouted="false" />
+        <AssociationConnector Association="REGFIELDTRIALSModel.FK_WorkflowQuestion_Question" ManuallyRouted="false" />
+        <AssociationConnector Association="REGFIELDTRIALSModel.FK_Response_TrialProgress" ManuallyRouted="false" />
+        <AssociationConnector Association="REGFIELDTRIALSModel.FK_TrialCatalog_SiteMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="REGFIELDTRIALSModel.FK_TrialCatalog_TraitMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="REGFIELDTRIALSModel.FK_TrialCatalog_UserIRP" ManuallyRouted="false" />
+        <AssociationConnector Association="REGFIELDTRIALSModel.FK_TrialCatalog_UserSRR" ManuallyRouted="false" />
+        <AssociationConnector Association="REGFIELDTRIALSModel.FK_TrialProgress_TrialCatalog" ManuallyRouted="false" />
+        <AssociationConnector Association="REGFIELDTRIALSModel.FK_TrialWorkflowAttachment_Trial" ManuallyRouted="false" />
+        <AssociationConnector Association="REGFIELDTRIALSModel.FK_TrialProgress_User" ManuallyRouted="false" />
+        <AssociationConnector Association="REGFIELDTRIALSModel.FK_TrialProgress_Workflow" ManuallyRouted="false" />
+        <AssociationConnector Association="REGFIELDTRIALSModel.FK_TrialWorkflowAttachment_Workflow" ManuallyRouted="false" />
+        <AssociationConnector Association="REGFIELDTRIALSModel.FK_User_Manager" ManuallyRouted="false" />
+        <AssociationConnector Association="REGFIELDTRIALSModel.FK_User_UserType" ManuallyRouted="false" />
+        <AssociationConnector Association="REGFIELDTRIALSModel.FK_WorkflowQuestion_Workflow" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="REGFIELDTRIALSModel.SRR_EvalResponse" Width="2.125" PointX="5.25" PointY="6.625" />
+        <EntityTypeShape EntityType="REGFIELDTRIALSModel.SRRUser_Trial_Xref" Width="1.5" PointX="13.5" PointY="12.25" />
+        <AssociationConnector Association="REGFIELDTRIALSModel.FK_SRR_EvalResponse_User" />
+        <AssociationConnector Association="REGFIELDTRIALSModel.FK_SRRUserTrial_Trial" />
+        <AssociationConnector Association="REGFIELDTRIALSModel.FK_SRRUserTrial_User" />
+        <EntityTypeShape EntityType="REGFIELDTRIALSModel.v_UserTrials" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="REGFIELDTRIALSModel.LookupMaster" Width="1.5" PointX="5.375" PointY="3.75" />
+        <EntityTypeShape EntityType="REGFIELDTRIALSModel.TrialNote" Width="1.5" PointX="13.5" PointY="15.375" />
+        <AssociationConnector Association="REGFIELDTRIALSModel.FK_TrialNote_TrialCatalog" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

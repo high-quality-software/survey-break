@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript">
+        localStorage.removeItem('org.cubiq.addtohome');
+        </script>
+        <title>Victory Lock/Unlock Login Page</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <!-- Set Up the App Icon -->
+        <link rel="icon" href="../images/Victoryfavicon.ico" />
+        <!-- Load It Like A Native App -->
+        <meta name="apple-touch-fullscreen" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-title" content="Victory Lock/Unlock" />
+        <!-- Customize the Startup Screen -->
+        <script type="text/javascript" src="../js/Config.js"></script>
+        <link rel="apple-touch-icon" href="../images/icons/Victory_96x96.png">
+        <link rel="apple-touch-startup-image" href="../images/icons/Victoryapple-touch-startup-image-1024x768.png">
+        <script type="text/javascript">            (function (a, b, c) { if (c in b && b[c]) { var d, e = a.location, f = /^(a|html)$/i; a.addEventListener("click", function (a) { d = a.target; while (!f.test(d.nodeName)) d = d.parentNode; "href" in d && (d.href.indexOf("http") || ~d.href.indexOf(e.host)) && (a.preventDefault(), e.href = d.href) }, !1) } })(document, window.navigator, "standalone")</script>
+        <script type="text/javascript" src="../js/jquery-1.11.2.min.js"></script>
+        <script type="text/javascript" src="../js/jquery.mobile-1.4.5.js"></script>
+        <script type="text/javascript" src="../js/alertify.min.js"></script>
+        <script type="text/javascript" src="../js/addtohomescreen.js"></script>
+        <link rel="stylesheet" type="text/css" href="../css/addtohomescreen.css">
+        <link rel="stylesheet" href="../css/jquery.mobile-1.4.5.min.css" />
+        <link rel="stylesheet" href="../css/jquery.mobile.icons.min.css" />
+        <link rel="stylesheet" href="../css/Victory.css" />
+        <link rel="stylesheet" href="../css/alertify.core.css" />
+        <link rel="stylesheet" href="../css/alertify.default.css" />
+        <style type="text/css">
+            body
+            {
+                background: url(../images/bkg3.jpg) no-repeat center center fixed;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+                overflow: hidden;
+            }
+            .ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper
+            {
+                background-color: transparent;
+            }
+            html head + body .ui-body-c.ui-focus
+            {
+                -webkit-box-shadow: 0 0 12px #3388cc /*{b-active-background-color}*/;
+                -moz-box-shadow: 0 0 12px #3388cc /*{b-active-background-color}*/;
+                box-shadow: 0 0 12px #3388cc /*{b-active-background-color}*/;
+            }
+            .ui-body-c, .ui-page-theme-c .ui-body-inherit, html .ui-bar-c .ui-body-inherit, html .ui-body-c .ui-body-inherit, html body .ui-group-theme-c .ui-body-inherit, html .ui-panel-page-container-c
+            {
+                background-color: white /*{b-body-background-color}*/;
+                border-color: #ADADAD /*{b-body-border}*/;
+                color: #444444 /*{b-body-color}*/;
+                text-shadow: 0 /*{b-body-shadow-x}*/ 1px /*{b-body-shadow-y}*/ 0 /*{b-body-shadow-radius}*/ #444444 /*{b-body-shadow-color}*/;
+            }
+            input.centerText
+            {
+                text-align: center;
+            }
+        </style>
+        <script type="text/javascript">
+            addToHomescreen();
+            function Login() {
+                //showModal();
+                //event.preventDefault();
+                var User = { UserAlias: $("#UserId").val(), Password: $("#Password").val() };
+                $.ajax({
+                    type: "POST",
+                    data: JSON.stringify(User),
+                    url: LoginUrl,
+                    async: false,
+                    contentType: "application/json",
+                    success: function (data) {
+                        if (data.Success) {
+                            //hideModal();
+                            //$.mobile.navigate('#SyncPage');
+                            var loginInfo = {
+                                "UserId": $("#UserId").val(),
+                                "Access": data.User.UserTypeID,
+                                "Name": data.User.FirstName + " " + data.User.LastName,
+                                "LastTrial": "",
+                                "SRREval": data.User.SRRMustFillEvaluation
+                            }
+                            localStorage.setItem("Login", JSON.stringify(loginInfo));
+                            window.location.href = "Sync.html";
+                            //hideModal();
+                            //$.mobile.navigate('#Form_Harvest_and_Destruct', { transition: "slide", info: "" });
+                            //event.stopPropagation();
+                            //$.mobile.navigate("#SyncPage");
+                            //return false;
+                            //DownloadInitialData(data.User.SRRMustFillEvaluation);
+                            //                        $.mobile.navigate("#PageHome");
+                            //                        window.location.reload();
+                        } else {
+                            //alertify.alert(data.ExceptionMessage);
+                            alertify.alert("Username or password is incorrect.  Please try again.");
+                            $("#UserId").focus();
+                            //hideModal();
+                        }
+                    },
+                    error: function () {
+                        alertify.alert("Can't connect to the server.");
+                        $("#UserId").focus();
+                        //hideModal();
+                    }
+                });
+            }
+            $(document).ready(function () {
+                $.ajax({
+                    url: HealthUrl,
+                    type: 'GET',
+                    dataType: 'json',
+
+                    success: function (datas) {
+                        $(".WebVersion").text(WebVersion + '- API v.' + datas.APIVersion + ' - DB v.' + datas.DBReleaseName);
+                    },
+
+                    error: function (error) {
+                        $(".WebVersion").text(WebVersion + ' / Database OFFLINE');
+                    }
+                });
+            });
+            $(document).keypress(function (event) {
+
+                var keycode = event.which;
+                if (keycode == '13') {
+                    $('#SubmitLogin').click();
+                }
+
+            });
+        </script>
+    </head>
+<body>
+    <div data-role="page" id="Login" style="overflow: hidden;">
+        <div data-role="content" class="ui-content" style="height: 100%">
+            <div data-role="page" data-theme="c" style="overflow: hidden; display: table; min-height: 932px;"
+                class="ui-page ui-page-theme-c ui-page-active">
+                <div class="container">
+                    <div style="position: fixed; text-align: center; margin-top: -150px; width: 35%;
+                        margin-left: -17.5%; top: 50%; left: 50%; -webkit-border-radius: 50px; -moz-border-radius: 50px;
+                        border-radius: 50px; border: 3px solid #FFFFFF; background: linear-gradient(to right bottom, rgba(110, 80, 70, 0.9), rgb(255, 255, 255));
+                        -webkit-box-shadow: #757575 10px 10px 10px; -moz-box-shadow: #757575 10px 10px 10px;
+                        box-shadow: #757575 10px 10px 10px;">
+                        <div style="margin: 2% 15px 0 15px;">
+                            <img alt="" src="../images/logo.png" style="width: 50%; margin-bottom: -20px" />
+                            <input type="text" name="UserId" id="UserId" class="centerText" value="" placeholder="User Id"
+                                data-theme="c" hidden="true" />
+                            <input type="password" name="Password" id="Password" class="centerText" value=""
+                                placeholder="Password" data-theme="c" hidden="true" />
+                            <!--<input type="submit" value="Login" data-theme="b">-->
+                            <button id="SubmitLogin" onclick="Login()" data-theme="b" class="ui-btn-inline">
+                                Login</button>
+                            <div class="WebVersion" style="position: relative; font-weight: bold; color: rgb(174, 165, 150);
+                                text-align: right; padding-right: 20px; text-shadow: 0 0 0; font-family: Calibri;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

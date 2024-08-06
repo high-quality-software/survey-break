@@ -1,0 +1,27 @@
+﻿* Near to do
+
+
+
+* Future releases
+
+
+
+* Future Phases
+- ConnectionString selector for current Environment (DEV, IT, QA, PROD)
+
+
+* Funny ideas
+- n-depth update record taken in care when evaluate how many records have to be sync
+- Interal check to validate all input datetime are in UTC(Z)
+- When making logging for user that haven't trials assgined then fail with accordingly message
+
+
+* Discarted
+- Configure elmah to send emails when unhandled exception occurrs
+
+KK: Not for FIDO2.0. All we do is log errors  to log file and Elmah.  We try to set the log level to 
+‘ERROR’ so only errors are logged.  I change to INFO or DEBUG if need more info  etc. Emails are hard 
+to track and it from SUPPORT side.  Victory is not part of FIDO and we don’t have a support email 
+address.
+
+

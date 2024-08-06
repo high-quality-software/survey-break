@@ -1,0 +1,58 @@
+﻿// bootstrap library
+@import "../bootstrap/bootstrap.less";
+
+// redefine variables
+@import "variables.less";
+
+@import "select2.less";
+@import "paged-list.less";
+@import "flash-messages.less";
+@import "sticky-footer.less";
+
+//custom redefinitions
+
+//header
+header nav:after,
+header div:after,
+header ul:after,
+header li:after,
+header .container:after,
+header .container-fluid:after,
+header .collapse:after,
+header .navbar-collapse:after,
+header .navbar-default:after,
+header .navbar-nav:after,
+header .nav:after {
+    content: none;
+}
+
+//table
+.table {
+    // Bottom align for column headings
+    > thead > tr > th {
+        vertical-align: bottom;
+        border-bottom: 1px solid @table-border-color;
+    }
+}
+
+//inline forms
+.form-inline {
+    // Kick in the inline
+    @media (min-width: @screen-sm-min) {
+        
+        padding: initial;
+
+        .form-group {
+            padding-left: 0 !important;
+            padding-right: 8px !important;
+        }
+
+        .form-control {
+            display: inline-block;
+            //width: auto; // Prevent labels from stacking above inputs in `.form-group`
+            width: 100%;
+            vertical-align: middle;
+        }
+
+    }
+}

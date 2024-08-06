@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Compliance Dashboard</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <!-- Set Up the App Icon -->
+    <link rel="icon" href="../images/Victoryfavicon.ico" />
+    <!-- Load It Like A Native App -->
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Victory" />
+    <meta name="format-detection" content="telephone=no">
+    <!-- Customize the Startup Screen -->
+    <link rel="apple-touch-icon" href="../images/icons/Victory_96x96.png">
+    <link rel="apple-touch-startup-image" href="../images/icons/Victoryapple-touch-startup-image-1024x768.png">
+    <!-- Navigate Within the Web App -->
+    <script src="../js/Config.js"></script>
+    <script src="../js/jquery-1.11.2.min.js"></script>
+    <script src="../js/jquery.mobile-1.4.5.js"></script>
+    <script src="../js/jquery-ui.js"></script>
+    <script src="../js/alertify.min.js"></script>
+    <script src="../js/jquery.columns.js" type="text/javascript"></script>
+    <script src="../js/jquery.percentageloader-0.1.js"></script>
+    <script src="../js/lz-string.js"></script>
+    <script src="../js/jquery.mousewheel.min.js"></script>
+    <script src="../js/jquery.hammer.min.js" type="text/javascript"></script>
+    <script src="../js/modernizr.min.js" type="text/javascript"></script>
+    <script src="../js/TweenMax.min.js" type="text/javascript"></script>
+    <script src="../js/jquery.pinchzoomer.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="../css/pinchzoomer.min.css">
+    <link rel="stylesheet" href="../css/jquery.percentageloader-0.1.css" />
+    <link rel="stylesheet" href="../css/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="../css/Victory.css" />
+    <link rel="stylesheet" href="../css/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../css/alertify.core.css" />
+    <link rel="stylesheet" href="../css/alertify.default.css" />
+    <link rel="stylesheet" href="../css/App2.css" />
+    <link rel="stylesheet" href="../css/classic.css" />
+    <link rel="stylesheet" href="../css/jquery-ui.css" />
+    <script type="text/javascript" src="../js/GlobalVariables.js"></script>
+    <script type="text/javascript" src="../js/General.js"></script>
+    <script type="text/javascript">
+        if ((localStorage.getItem("Login") == null ? true : false)) {
+            window.location.href = "index.html";
+        } else {
+            var LogUser = JSON.parse(localStorage.getItem("Login"));
+        }
+    </script>
+    <script src="../js/App3.js"></script>
+    <script src="../js/localstore2.js"></script>
+    <script type="text/javascript">
+
+    </script>
+</head>
+<body class="ios7">
+    <div id="ios7statusbar">
+    </div>
+    <div data-role="page" id="PageCompliance" style="overflow: hidden;">
+        <div data-role="header" data-tap-toggle="false" data-position="fixed" style="overflow: hidden"
+            data-theme="b">
+            <div data-type="horizontal" data-role="controlgroup" class="ui-btn-left">
+                <!--<a id="GoTo" href="#popup-menu" data-role="button" data-icon="bars" data-theme="b" data-iconpos="notext" data-rel="popup" data-transition="fade" data-arrow="t" data-position-to="origin" title="Go to...">Go To...</a>-->
+                <a href="javascript:history.back()" data-role="button" data-icon="back" data-iconpos="notext" data-theme="b" title="Go Back">Back</a>
+            </div>
+            <!--<div data-role="popup" id="popup-menu" data-theme="b" style="margin-top: 30px;margin-left: -10px;">
+                <ul data-role="listview" style="min-width:210px;">
+                    <li data-role="divider">Go to:</li>
+                    <li><a href="#" onclick="window.location.href = 'ComplianceDashboard.html';">Compliance Dashboard</a></li>
+                    <li><a href="#" onclick="" disabled="disabled" style="opacity: .4; cursor: default;">QMS Dashboard</a></li>
+                </ul>
+            </div>-->
+            <h1>
+                Compliance
+            </h1>
+            <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
+                <a href="javascript:void(0)" onclick="if (CheckNetworkStatus() == true) {window.location.href = 'Sync.html';} else {alertify.alert('You need to be connected to the Monsanto Network in order to Sync.');}" class="Syncbtn"
+                    data-role="button" title="Sync" data-icon="gear"></a><a href="#pushPanel" onclick="Logoff()"
+                        data-role="button" data-icon="power" data-iconpos="notext" title="LogOff" data-theme="b">
+                        LogOff</a>
+            </div>
+        </div>
+        <div data-role="content" class="ui-content BackgroundPages">
+            <table style="height: 100%; width: 100%">
+                <tr>
+                    <td style="text-align: center; vertical-align: top;">
+                        <table id="BigTable">
+                            <tbody>
+                                <tr>
+                                    <td class="InnerBox2">
+                                        <div class="title2">
+                                            List of Trials</div>
+                                        <div style="overflow: auto;" class="innerDiv3 innerDiv">
+                                            <div id="example1">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="InnerBox2">
+                                        <div class="title2">
+                                            Forms</div>
+                                        <div style="overflow: auto;" class="innerDiv">
+                                            <div id="dvcontainer">
+                                            </div>
+                                            <div id="legend" style="position: absolute; bottom: 30px; width: 100%; color: black;
+                                                text-shadow: 0 0 0;font-size: 16px;">
+                                                <img alt="B1" src="../images/switchon.png" style="height: 50px; padding-left: 30px;">Locked
+                                                <img alt="B1" src="../images/switchoff.png" style="height: 50px; padding-left: 30px;">Unlocked
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div style="position: fixed; bottom: 0; right: 15px; text-shadow: 0 0; color: white;"
+            class="WebVersion">
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        $(".GPSDecimals").keyup(function (event) {
+            RemoveExtraDecimalPlaces(this, 7);
+            //            if (decimalPlaces($(this).val()) >= 7) {
+            //                $(this).val($(this).val().substring(0, $(this).val().length - 1));
+            //            }
+        });
+
+        $(".DecimalPoint1").keyup(function (event) {
+            RemoveExtraDecimalPlaces(this, 2);
+            //            if (decimalPlaces($(this).val()) >= 7) {
+            //                $(this).val($(this).val().substring(0, $(this).val().length - 1));
+            //            }
+        });
+
+        $(".DecimalPoint2").keyup(function (event) {
+            RemoveExtraDecimalPlaces(this, 3);
+            //            if (decimalPlaces($(this).val()) >= 7) {
+            //                $(this).val($(this).val().substring(0, $(this).val().length - 1));
+            //            }
+        });
+
+
+        $(function () {
+            $("#dialog").dialog({
+                modal: true,
+                autoOpen: false,
+                show: {
+                    effect: "blind",
+                    duration: 1000
+                },
+                hide: {
+                    effect: "explode",
+                    duration: 1000
+                }
+            });
+        });
+    </script>
+</body>
+</html>

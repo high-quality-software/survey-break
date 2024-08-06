@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D8BFED07-1304-44D7-B5DA-39062245AC36}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FIDOVictory.DataContract</RootNamespace>
+    <AssemblyName>FIDOVictory.DataContract</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attachment\AttachmentItem.cs" />
+    <Compile Include="Attachment\AttachmentContract.cs" />
+    <Compile Include="Attachment\AttachmentItemWithID.cs" />
+    <Compile Include="Attachment\AttachmentTypeItem.cs" />
+    <Compile Include="Attachment\DeleteAttachment\DeleteAttachmentRequest.cs" />
+    <Compile Include="Attachment\DeleteAttachment\DeleteAttachmentResponse.cs" />
+    <Compile Include="Attachment\UploadAttachment\UploadAttachmentRequest.cs" />
+    <Compile Include="Attachment\UploadAttachment\UploadAttachmentResponse.cs" />
+    <Compile Include="BaseResponseContract.cs" />
+    <Compile Include="Chemical\ChemicalContract.cs" />
+    <Compile Include="Chemical\ChemicalItem.cs" />
+    <Compile Include="Chemical\ChemicalTypeItem.cs" />
+    <Compile Include="Crop\CropItem.cs" />
+    <Compile Include="Form\DownloadForm\DownloadFormResponseContract.cs" />
+    <Compile Include="Form\FormResponseContract.cs" />
+    <Compile Include="Form\SRREvaluation\DownloadSRREvaluationRequest.cs" />
+    <Compile Include="Form\SRREvaluation\DownloadSRREvaluationResponse.cs" />
+    <Compile Include="Form\SRREvaluation\SRREvaluationContract.cs" />
+    <Compile Include="Form\SRREvaluation\UploadSRREvaluationRequest.cs" />
+    <Compile Include="Form\SRREvaluation\UploadSRREvaluationResponse.cs" />
+    <Compile Include="Form\Status\FormStatusContract.cs" />
+    <Compile Include="Form\Status\FormStatusResponseContract.cs" />
+    <Compile Include="Form\UploadFormStatus\UploadFormStatusRequestContract.cs" />
+    <Compile Include="Form\UploadFormStatus\UploadFormStatusResponseContract.cs" />
+    <Compile Include="Form\UploadForm\UploadFormRequestContract.cs" />
+    <Compile Include="Form\UploadForm\UploadFormResponseContract.cs" />
+    <Compile Include="Health\GetStatus\GetStatusResponseContract.cs" />
+    <Compile Include="Health\StatusContract.cs" />
+    <Compile Include="Login\LoginRequestContract.cs" />
+    <Compile Include="Login\LoginResponseContract.cs" />
+    <Compile Include="Lookup\LookupItem.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Question\QuestionItem.cs" />
+    <Compile Include="Trial\ComplianceStatusItem.cs" />
+    <Compile Include="Trial\DeleteTrialNote\DeleteTrialNoteRequestContract.cs" />
+    <Compile Include="Trial\DeleteTrialNote\DeleteTrialNoteResponseContract.cs" />
+    <Compile Include="Trial\TrialListItem.cs" />
+    <Compile Include="Trial\TrialNoteContract.cs" />
+    <Compile Include="Trial\SiteItem.cs" />
+    <Compile Include="Trial\TraitItem.cs" />
+    <Compile Include="Trial\TrialContract.cs" />
+    <Compile Include="Trial\TrialItem.cs" />
+    <Compile Include="Trial\UploadTrialNote\UploadTrialNoteRequestContract.cs" />
+    <Compile Include="Trial\UploadTrialNote\UploadTrialNoteResponseContract.cs" />
+    <Compile Include="User\UserContract.cs" />
+    <Compile Include="User\UserItem.cs" />
+    <Compile Include="Workflow\WorkflowContract.cs" />
+    <Compile Include="Workflow\WorkflowItem.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

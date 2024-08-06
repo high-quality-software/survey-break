@@ -1,0 +1,136 @@
+﻿FIDOVictory Project has its own wiki in
+http://stlwslimssqua01:120/mediawiki/index.php/VICTORY_Project:Regulatory_Field_Trials
+
+FIDOVictory Web Services was developed with:
+
+- Visual Studio 2013 community edition Update 4 (free download)
+- Microsoft .Net Framework 4.5
+- ASP.NET Web API 2.2 (http://www.asp.net/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api)
+- Entity Framework 6.1
+- Log4Net
+- Elmah
+- 100% RESTFul JSON and XML media types (but iPad UI App use JSON)
+- Swagger 2.0 enabled (Swashbuckle library) 
+  With a Swagger-enabled API, you get interactive documentation, client SDK generation and discoverability.
+
+
+Brief
+*****
+This project was started at early february 2015, and quickly release versions to support iPad UI App, 
+almost one version per day.
+
+The main objective of the Web API is make the syncrhonization between Database and iPads, in this sense Web API doesn't have business logic. It send/recieve data to/from iPad.
+
+It evolved according to the needs, and in spite happened shortly, covering all functional expectations 
+so far keeping almost 100% of coherence of its architecture. 
+
+The weaknesses are the yet unfinished logging, the refactoring of Managers to Repositories still in progress
+and the use of an authentication and authorization system really poor. (No session token, no API token, no OAuth).
+
+Current TEST version is 0.19
+Current DEV version is 0.20
+
+We are waiting for first testing feedback. Next step is start with Phase2 development. 
+So my approach is create a branch in SVN for Phase2, then for any issue in Phase1 we can use this version numbering
+
+0.20, 0.20.1, 0.20.2, 0.20.3 ...
+
+and for Phase2 0.21, 0.22, 0.23 .....
+
+
+Architecture
+************
+ASP.Net Web API is like a ASP.Net MVC application with a route table where controllers 
+and action parameters match against uri pattern, but where actions match against http methods (VERBS). 
+So you get an action for GET, PUT, POST, DELETE (main VERBS in RESTFul)
+
+Controllers can use Entity Framework context to access database or use Repositories classes (Previously Managers classes)
+
+
+
+Projects
+********
+
+- FIDOVictory.Common contains:
+	1) Entity Framework Model (and DBContext, in FIDOVictory I called it EntityContainer)
+	2) Repository Classes
+
+- FIDOVictory.DataContract:
+    1) Contains DataContracts, classes used to interact between API and Clients. 
+	2) This clases are converted to/from JSON automatically by ASP.Net Web API using Newtonsoft.JSON library. 
+	3) If the request was made in XML media type DataContract will be converted to/from XML automatically (No used by iPad UI App, but if you use google chrome as a client then that will be used.)
+
+- FIDOVictory.Tools
+	1) Contains that can be used by Web API, Unit Test and C# clients
+
+- FIDOVictoryWS
+	1) This is the Web API project
+
+- FIDOVictoryWS.Tests
+	1) Without business logic, it is imposible to do TDD, but I write some little Integration Test.
+	2) Managers/Repositories entry level Test (something minor)
+	3) API entry level test, this tests exercises the Web API.
+
+- FIDOVictory.Data.Generate
+	1) A quickly developed and no so smart data generation tool for generate Forms and then save it thru the API. 
+	2) Currently is very dirty because ReponseValue (the field in Response table that store the reponse for each question) is a string randomly generated.
+	3) A best approach can be developed thanks new table dbo.DataTypesMaster and AcceptableDataType column in table dbo.WorkflowQuestion.
+
+
+Logging
+*******
+
+* Unhandled exceptions logging using Elmah
+
+1) Web API catch unhandled exceptions to conform a RESTFul appropriate response
+   http://blogs.msdn.com/b/webdev/archive/2012/11/16/capturing-unhandled-exceptions-in-asp-net-web-api-s-with-elmah.aspx
+
+   So, it is neccesary to implement a Web API Filter to catch the unhandled expcetion before Web API and sent it to Elmah.
+
+   This is what makes the class FIDOVictoryWS.Tools.Web.Http.Filters.UnhandledExceptionFilter on OnException method.
+
+2) If an action (in a controller) catchs an exception and doesn't re thrown it, UnhandledExceptionFilter never notice about it, so developer have to take care about it and choice between:
+   
+   a) Re-throw the exception
+   b) Inform to Elmah like this 
+   
+		Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(ex));
+
+3) Elmah can log in memory, in xml files and in sql server.
+
+
+
+* Trace logging with log4net
+
+ 1) The objective is have a normal operation logging (all http request) so can trace some buggie situation.
+
+ 2) This logging should be off, but can be light when needed
+
+ 3) It is implemented with a Web API Filter too, class FIDOVictoryWS.Tools.Web.Http.Filters.VictoryLoggingFilter
+
+ 4) Like all Web API Filter, it can catch unhandled exceptions, so can be implemented a plain text file unhandeld exception logger too.
+
+
+ Database
+ ********
+
+At version 0.20 (phase1 - rc2), the API save data in those tables:
+
+			Response
+			TrialProgress
+			SRR_EvalResponse
+			TrialWorkflowAttachment
+
+
+References
+**********
+
+The RESTFul standard
+http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html
+
+Designing Evolvable Web APIs with ASP.NET
+http://chimera.labs.oreilly.com/books/1234000001708
+
+Cross-Origin Resource Sharing (CORS) mechanism
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
+

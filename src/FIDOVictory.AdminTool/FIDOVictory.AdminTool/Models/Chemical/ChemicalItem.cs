@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+
+namespace FIDOVictory.AdminTool.Models.Chemical
+{
+    public class ChemicalItem
+    {
+        public Int32 ChemicalID { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
+        [StringLength(50, ErrorMessage = "Name can be no larger than 50 characters")]
+        public String Name { get; set; }
+
+        public String ChemicalType { get; set; }
+    }
+}

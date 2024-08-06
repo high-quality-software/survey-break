@@ -1,0 +1,54 @@
+﻿@model FIDOVictory.AdminTool.Models.Chemical.ChemicalModel
+
+@{
+    ViewBag.Title = "Delete Chemical";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        @using (Html.BeginForm("Delete", "Chemical", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            <div class="form-group">
+                <label for="ChemicalID" class="control-label col-md-3">Chemical ID:</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.ChemicalID, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ChemicalType" class="control-label col-md-3">Chemical Type:</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.ChemicalType, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Name" class="control-label col-md-3">Name:</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9 centered">
+                    <div class="alert alert-warning ">
+                        <strong>Are you sure want to delete this chemical?</strong>
+                    </div>
+                </div>
+                <div class="col-md-offset-3 col-md-9">
+                    <div class="pull-right">
+                        <a href="@Url.RouteUrl("ListChemicals")" class="btn btn-default">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Yes</button>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <br />
+            <br />
+            <br />
+
+        }
+    </div>
+    <div class="col-md-2"></div>
+</div>

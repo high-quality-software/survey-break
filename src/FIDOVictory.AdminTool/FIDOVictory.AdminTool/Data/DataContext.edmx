@@ -1,0 +1,2320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="REGFIELDTRIALSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AttachmentType">
+          <Key>
+            <PropertyRef Name="AttachmentType_ID" />
+          </Key>
+          <Property Name="AttachmentType_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AttachmentTypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UpdateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ChemicalMaster">
+          <Key>
+            <PropertyRef Name="Chemical_ID" />
+          </Key>
+          <Property Name="Chemical_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChemicalName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ChemicalType_ID" Type="int" Nullable="false" />
+          <Property Name="UpdateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ChemicalType">
+          <Key>
+            <PropertyRef Name="ChemicalType_ID" />
+          </Key>
+          <Property Name="ChemicalType_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChemicalTypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UpdateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Crop">
+          <Key>
+            <PropertyRef Name="Crop_ID" />
+          </Key>
+          <Property Name="Crop_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CropName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UpdateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DB_Version">
+          <Key>
+            <PropertyRef Name="DB_Version_ID" />
+          </Key>
+          <Property Name="DB_Version_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DB_Version" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="UpdateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LookupMaster">
+          <Key>
+            <PropertyRef Name="Lookup_ID" />
+          </Key>
+          <Property Name="Lookup_ID" Type="int" Nullable="false" />
+          <Property Name="LookupName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="UpdateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="Question_ID" />
+          </Key>
+          <Property Name="Question_ID" Type="int" Nullable="false" />
+          <Property Name="QuestionName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="UpdateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="QuestionText" Type="nvarchar" MaxLength="1000" />
+          <Property Name="IsLookup" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Response">
+          <Key>
+            <PropertyRef Name="Response_ID" />
+          </Key>
+          <Property Name="Response_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Question_ID" Type="int" Nullable="false" />
+          <Property Name="TrialProgress_ID" Type="int" Nullable="false" />
+          <Property Name="ResponseValue" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="FollowupRequired" Type="bit" />
+          <Property Name="VerifiedDate" Type="datetime" />
+          <Property Name="UpdateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SiteMaster">
+          <Key>
+            <PropertyRef Name="Site_ID" />
+          </Key>
+          <Property Name="Site_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SiteName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="UpdateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SRR_EvalResponse">
+          <Key>
+            <PropertyRef Name="EvalResponse_ID" />
+          </Key>
+          <Property Name="EvalResponse_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SRR_ID" Type="int" Nullable="false" />
+          <Property Name="YearsExperience_SRR" Type="int" />
+          <Property Name="YearsExperience_SiteLeadSRR" Type="int" />
+          <Property Name="NumFieldsReponsibleFor" Type="int" />
+          <Property Name="NumAcresSRRManages" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="BackupSRRIdentified" Type="bit" />
+          <Property Name="BackupSRR_ID" Type="int" />
+          <Property Name="BackupSRRInformed" Type="bit" />
+          <Property Name="ComplianceQuestion1" Type="bit" />
+          <Property Name="ComplianceQuestion2" Type="bit" />
+          <Property Name="ComplianceQuestion3" Type="bit" />
+          <Property Name="ComplianceQuestion4" Type="bit" />
+          <Property Name="ComplianceQuestion5" Type="bit" />
+          <Property Name="ComplianceQuestion6" Type="bit" />
+          <Property Name="Flagged" Type="bit" />
+          <Property Name="UpdateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CompletedYear" Type="int" />
+          <Property Name="ComplianceResponse1" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ComplianceResponse2" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ComplianceResponse3" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ComplianceResponse4" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ComplianceResponse5" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ComplianceResponse6" Type="nvarchar" MaxLength="1000" />
+          <Property Name="LastTrainingYear" Type="int" />
+        </EntityType>
+        <EntityType Name="SRRUser_Trial_Xref">
+          <Key>
+            <PropertyRef Name="SRRUser_Trial_Xref" />
+          </Key>
+          <Property Name="SRRUser_Trial_Xref" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SRRUser_ID" Type="int" Nullable="false" />
+          <Property Name="Trial_ID" Type="int" Nullable="false" />
+          <Property Name="UpdateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="PrimarySRR" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TraitMaster">
+          <Key>
+            <PropertyRef Name="Trait_ID" />
+          </Key>
+          <Property Name="Trait_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TraitName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="UpdateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TrialCatalog">
+          <Key>
+            <PropertyRef Name="Trial_ID" />
+          </Key>
+          <Property Name="Trial_ID" Type="int" Nullable="false" />
+          <Property Name="SRRLeadUser_ID" Type="int" Nullable="false" />
+          <Property Name="IRPUser_ID" Type="int" />
+          <Property Name="Crop_ID" Type="int" Nullable="false" />
+          <Property Name="Trait_ID" Type="int" />
+          <Property Name="Site_ID" Type="int" />
+          <Property Name="TrialYear" Type="int" />
+          <Property Name="AgencyApprovalNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" />
+          <Property Name="Zip" Type="nvarchar" MaxLength="16" />
+          <Property Name="County" Type="nvarchar" MaxLength="50" />
+          <Property Name="FarmName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Internal" Type="bit" />
+          <Property Name="GPSLat1" Type="decimal" Precision="18" Scale="12" />
+          <Property Name="GPSLong1" Type="decimal" Precision="18" Scale="12" />
+          <Property Name="GPSLat2" Type="decimal" Precision="18" Scale="12" />
+          <Property Name="GPSLong2" Type="decimal" Precision="18" Scale="12" />
+          <Property Name="GPSLat3" Type="decimal" Precision="18" Scale="12" />
+          <Property Name="GPSLong3" Type="decimal" Precision="18" Scale="12" />
+          <Property Name="GPSLat4" Type="decimal" Precision="18" Scale="12" />
+          <Property Name="GPSLong4" Type="decimal" Precision="18" Scale="12" />
+          <Property Name="Approved_Area" Type="decimal" Precision="18" Scale="12" />
+          <Property Name="Approved_Area_UOM" Type="int" />
+          <Property Name="UpdateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="Archive" Type="bit" Nullable="false" />
+          <Property Name="ComplianceStatus" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TrialNote">
+          <Key>
+            <PropertyRef Name="TrialNote_ID" />
+          </Key>
+          <Property Name="TrialNote_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Trial_ID" Type="int" Nullable="false" />
+          <Property Name="NoteCategory" Type="int" />
+          <Property Name="NoteContent" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="UpdateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TrialProgress">
+          <Key>
+            <PropertyRef Name="TrialProgress_ID" />
+          </Key>
+          <Property Name="TrialProgress_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Trial_ID" Type="int" Nullable="false" />
+          <Property Name="SRRUser_ID" Type="int" Nullable="false" />
+          <Property Name="Workflow_ID" Type="int" />
+          <Property Name="WorkflowComplete" Type="bit" />
+          <Property Name="WorkflowCompleteDate" Type="datetime" />
+          <Property Name="UpdateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DueDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TrialWorkflowAttachment">
+          <Key>
+            <PropertyRef Name="Attachment_ID" />
+          </Key>
+          <Property Name="Attachment_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Trial_ID" Type="int" Nullable="false" />
+          <Property Name="Workflow_ID" Type="int" Nullable="false" />
+          <Property Name="AttachmentName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Attachment" Type="varbinary(max)" />
+          <Property Name="AttachmentType_ID" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="1000" />
+          <Property Name="UpdateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserType_ID" Type="int" Nullable="false" />
+          <Property Name="FName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="OfficeNumber" Type="varchar" MaxLength="25" />
+          <Property Name="CellNumber" Type="varchar" MaxLength="25" />
+          <Property Name="SiteLocation" Type="nvarchar" MaxLength="100" />
+          <Property Name="Manager_ID" Type="int" />
+          <Property Name="Internal" Type="bit" />
+          <Property Name="UpdateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="UserAlias" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="UserType_ID" />
+          </Key>
+          <Property Name="UserType_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserTypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UpdateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Workflow">
+          <Key>
+            <PropertyRef Name="Workflow_ID" />
+          </Key>
+          <Property Name="Workflow_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkflowName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="WorkflowOrder" Type="int" Nullable="false" />
+          <Property Name="UpdateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkflowQuestion">
+          <Key>
+            <PropertyRef Name="WorkflowQuestion_ID" />
+          </Key>
+          <Property Name="WorkflowQuestion_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Workflow_ID" Type="int" Nullable="false" />
+          <Property Name="Question_ID" Type="int" Nullable="false" />
+          <Property Name="AcceptableAnswers" Type="nvarchar" MaxLength="100" />
+          <Property Name="AcceptableLowRange" Type="int" />
+          <Property Name="AcceptableHighRange" Type="int" />
+          <Property Name="NotAcceptableAnswers" Type="nvarchar" MaxLength="100" />
+          <Property Name="NotAcceptableLowRange" Type="int" />
+          <Property Name="NotAcceptableHighRange" Type="int" />
+          <Property Name="UpdateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateUserID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ChemicalMaster_ChemicalType">
+          <End Role="ChemicalType" Type="Self.ChemicalType" Multiplicity="1" />
+          <End Role="ChemicalMaster" Type="Self.ChemicalMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChemicalType">
+              <PropertyRef Name="ChemicalType_ID" />
+            </Principal>
+            <Dependent Role="ChemicalMaster">
+              <PropertyRef Name="ChemicalType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Response_Question">
+          <End Role="Question" Type="Self.Question" Multiplicity="1" />
+          <End Role="Response" Type="Self.Response" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="Question_ID" />
+            </Principal>
+            <Dependent Role="Response">
+              <PropertyRef Name="Question_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Response_TrialProgress">
+          <End Role="TrialProgress" Type="Self.TrialProgress" Multiplicity="1" />
+          <End Role="Response" Type="Self.Response" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrialProgress">
+              <PropertyRef Name="TrialProgress_ID" />
+            </Principal>
+            <Dependent Role="Response">
+              <PropertyRef Name="TrialProgress_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SRR_EvalResponse_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="SRR_EvalResponse" Type="Self.SRR_EvalResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="SRR_EvalResponse">
+              <PropertyRef Name="SRR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SRRUserTrial_Trial">
+          <End Role="TrialCatalog" Type="Self.TrialCatalog" Multiplicity="1" />
+          <End Role="SRRUser_Trial_Xref" Type="Self.SRRUser_Trial_Xref" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrialCatalog">
+              <PropertyRef Name="Trial_ID" />
+            </Principal>
+            <Dependent Role="SRRUser_Trial_Xref">
+              <PropertyRef Name="Trial_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SRRUserTrial_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="SRRUser_Trial_Xref" Type="Self.SRRUser_Trial_Xref" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="SRRUser_Trial_Xref">
+              <PropertyRef Name="SRRUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrialCatalog_Crop">
+          <End Role="Crop" Type="Self.Crop" Multiplicity="1" />
+          <End Role="TrialCatalog" Type="Self.TrialCatalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Crop">
+              <PropertyRef Name="Crop_ID" />
+            </Principal>
+            <Dependent Role="TrialCatalog">
+              <PropertyRef Name="Crop_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrialCatalog_SiteMaster">
+          <End Role="SiteMaster" Type="Self.SiteMaster" Multiplicity="0..1" />
+          <End Role="TrialCatalog" Type="Self.TrialCatalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SiteMaster">
+              <PropertyRef Name="Site_ID" />
+            </Principal>
+            <Dependent Role="TrialCatalog">
+              <PropertyRef Name="Site_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrialCatalog_TraitMaster">
+          <End Role="TraitMaster" Type="Self.TraitMaster" Multiplicity="0..1" />
+          <End Role="TrialCatalog" Type="Self.TrialCatalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TraitMaster">
+              <PropertyRef Name="Trait_ID" />
+            </Principal>
+            <Dependent Role="TrialCatalog">
+              <PropertyRef Name="Trait_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrialCatalog_UserIRP">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="TrialCatalog" Type="Self.TrialCatalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="TrialCatalog">
+              <PropertyRef Name="IRPUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrialCatalog_UserSRR">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TrialCatalog" Type="Self.TrialCatalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="TrialCatalog">
+              <PropertyRef Name="SRRLeadUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrialNote_TrialCatalog">
+          <End Role="TrialCatalog" Type="Self.TrialCatalog" Multiplicity="1" />
+          <End Role="TrialNote" Type="Self.TrialNote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrialCatalog">
+              <PropertyRef Name="Trial_ID" />
+            </Principal>
+            <Dependent Role="TrialNote">
+              <PropertyRef Name="Trial_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrialProgress_TrialCatalog">
+          <End Role="TrialCatalog" Type="Self.TrialCatalog" Multiplicity="1" />
+          <End Role="TrialProgress" Type="Self.TrialProgress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrialCatalog">
+              <PropertyRef Name="Trial_ID" />
+            </Principal>
+            <Dependent Role="TrialProgress">
+              <PropertyRef Name="Trial_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrialProgress_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TrialProgress" Type="Self.TrialProgress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="TrialProgress">
+              <PropertyRef Name="SRRUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrialProgress_Workflow">
+          <End Role="Workflow" Type="Self.Workflow" Multiplicity="0..1" />
+          <End Role="TrialProgress" Type="Self.TrialProgress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workflow">
+              <PropertyRef Name="Workflow_ID" />
+            </Principal>
+            <Dependent Role="TrialProgress">
+              <PropertyRef Name="Workflow_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrialWorkflowAttachment_AttachmentType">
+          <End Role="AttachmentType" Type="Self.AttachmentType" Multiplicity="1" />
+          <End Role="TrialWorkflowAttachment" Type="Self.TrialWorkflowAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttachmentType">
+              <PropertyRef Name="AttachmentType_ID" />
+            </Principal>
+            <Dependent Role="TrialWorkflowAttachment">
+              <PropertyRef Name="AttachmentType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrialWorkflowAttachment_Trial">
+          <End Role="TrialCatalog" Type="Self.TrialCatalog" Multiplicity="1" />
+          <End Role="TrialWorkflowAttachment" Type="Self.TrialWorkflowAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrialCatalog">
+              <PropertyRef Name="Trial_ID" />
+            </Principal>
+            <Dependent Role="TrialWorkflowAttachment">
+              <PropertyRef Name="Trial_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrialWorkflowAttachment_Workflow">
+          <End Role="Workflow" Type="Self.Workflow" Multiplicity="1" />
+          <End Role="TrialWorkflowAttachment" Type="Self.TrialWorkflowAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workflow">
+              <PropertyRef Name="Workflow_ID" />
+            </Principal>
+            <Dependent Role="TrialWorkflowAttachment">
+              <PropertyRef Name="Workflow_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Manager">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="User1" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="User1">
+              <PropertyRef Name="Manager_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserType">
+          <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserType">
+              <PropertyRef Name="UserType_ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="UserType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkflowQuestion_Question">
+          <End Role="Question" Type="Self.Question" Multiplicity="1" />
+          <End Role="WorkflowQuestion" Type="Self.WorkflowQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="Question_ID" />
+            </Principal>
+            <Dependent Role="WorkflowQuestion">
+              <PropertyRef Name="Question_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkflowQuestion_Workflow">
+          <End Role="Workflow" Type="Self.Workflow" Multiplicity="1" />
+          <End Role="WorkflowQuestion" Type="Self.WorkflowQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workflow">
+              <PropertyRef Name="Workflow_ID" />
+            </Principal>
+            <Dependent Role="WorkflowQuestion">
+              <PropertyRef Name="Workflow_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetNextTrialID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="usp_Assign_PrimarySRR_ToTrial" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userID" Type="int" Mode="In" />
+          <Parameter Name="trialID" Type="int" Mode="In" />
+          <Parameter Name="updateUserID" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_Create_Trial" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="trial_ID" Type="int" Mode="In" />
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="SRRLeadUser_ID" Type="int" Mode="In" />
+          <Parameter Name="IRPUser_ID" Type="int" Mode="In" />
+          <Parameter Name="cropID" Type="int" Mode="In" />
+          <Parameter Name="traitID" Type="int" Mode="In" />
+          <Parameter Name="siteID" Type="int" Mode="In" />
+          <Parameter Name="trialYear" Type="int" Mode="In" />
+          <Parameter Name="internal" Type="bit" Mode="In" />
+          <Parameter Name="city" Type="nvarchar" Mode="In" />
+          <Parameter Name="state" Type="nvarchar" Mode="In" />
+          <Parameter Name="zip" Type="nvarchar" Mode="In" />
+          <Parameter Name="county" Type="nvarchar" Mode="In" />
+          <Parameter Name="farmName" Type="nvarchar" Mode="In" />
+          <Parameter Name="complianceStatus" Type="varchar" Mode="In" />
+          <Parameter Name="updateUserID" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_Create_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userAlias" Type="nvarchar" Mode="In" />
+          <Parameter Name="userTypeID" Type="int" Mode="In" />
+          <Parameter Name="fName" Type="nvarchar" Mode="In" />
+          <Parameter Name="lName" Type="nvarchar" Mode="In" />
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="officeNumber" Type="varchar" Mode="In" />
+          <Parameter Name="cellNumber" Type="varchar" Mode="In" />
+          <Parameter Name="siteLocation" Type="nvarchar" Mode="In" />
+          <Parameter Name="managerID" Type="int" Mode="In" />
+          <Parameter Name="internal" Type="bit" Mode="In" />
+          <Parameter Name="updateUserID" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_Delete_Trial_ByTrialID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="trialID" Type="int" Mode="In" />
+          <Parameter Name="updateuserID" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_Delete_User_ByUserID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userID" Type="int" Mode="In" />
+          <Parameter Name="updateuserID" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_Get_FormStatus_ByTrialID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="trialID" Type="int" Mode="In" />
+          <Parameter Name="userAlias" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_Get_Trial_ByTrialID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="trialID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_Get_User_ByUserAlias" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userAlias" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_Get_User_ByUserID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_PaginatedList_TrialMaps" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="page" Type="int" Mode="In" />
+          <Parameter Name="pageSize" Type="int" Mode="In" />
+          <Parameter Name="trialID_Filter" Type="int" Mode="In" />
+          <Parameter Name="trialName_Filter" Type="nvarchar" Mode="In" />
+          <Parameter Name="userAlias" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_PaginatedList_Trials" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="page" Type="int" Mode="In" />
+          <Parameter Name="pageSize" Type="int" Mode="In" />
+          <Parameter Name="trialID_Filter" Type="int" Mode="In" />
+          <Parameter Name="trialName_Filter" Type="nvarchar" Mode="In" />
+          <Parameter Name="userAlias" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_PaginatedList_Users" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="page" Type="int" Mode="In" />
+          <Parameter Name="pageSize" Type="int" Mode="In" />
+          <Parameter Name="userTypeID_Filter" Type="int" Mode="In" />
+          <Parameter Name="string_Filter" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_Update_Trial" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="trial_ID" Type="int" Mode="In" />
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="SRRLeadUser_ID" Type="int" Mode="In" />
+          <Parameter Name="IRPUser_ID" Type="int" Mode="In" />
+          <Parameter Name="cropID" Type="int" Mode="In" />
+          <Parameter Name="traitID" Type="int" Mode="In" />
+          <Parameter Name="siteID" Type="int" Mode="In" />
+          <Parameter Name="trialYear" Type="int" Mode="In" />
+          <Parameter Name="internal" Type="bit" Mode="In" />
+          <Parameter Name="city" Type="nvarchar" Mode="In" />
+          <Parameter Name="state" Type="nvarchar" Mode="In" />
+          <Parameter Name="zip" Type="nvarchar" Mode="In" />
+          <Parameter Name="county" Type="nvarchar" Mode="In" />
+          <Parameter Name="farmName" Type="nvarchar" Mode="In" />
+          <Parameter Name="complianceStatus" Type="varchar" Mode="In" />
+          <Parameter Name="updateUserID" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_Update_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userID" Type="int" Mode="In" />
+          <Parameter Name="userAlias" Type="nvarchar" Mode="In" />
+          <Parameter Name="userTypeID" Type="int" Mode="In" />
+          <Parameter Name="fName" Type="nvarchar" Mode="In" />
+          <Parameter Name="lName" Type="nvarchar" Mode="In" />
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="officeNumber" Type="varchar" Mode="In" />
+          <Parameter Name="cellNumber" Type="varchar" Mode="In" />
+          <Parameter Name="siteLocation" Type="nvarchar" Mode="In" />
+          <Parameter Name="managerID" Type="int" Mode="In" />
+          <Parameter Name="internal" Type="bit" Mode="In" />
+          <Parameter Name="updateUserID" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="REGFIELDTRIALSModelStoreContainer">
+          <EntitySet Name="AttachmentType" EntityType="Self.AttachmentType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChemicalMaster" EntityType="Self.ChemicalMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChemicalType" EntityType="Self.ChemicalType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Crop" EntityType="Self.Crop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DB_Version" EntityType="Self.DB_Version" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LookupMaster" EntityType="Self.LookupMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Question" EntityType="Self.Question" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Response" EntityType="Self.Response" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SiteMaster" EntityType="Self.SiteMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SRR_EvalResponse" EntityType="Self.SRR_EvalResponse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SRRUser_Trial_Xref" EntityType="Self.SRRUser_Trial_Xref" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TraitMaster" EntityType="Self.TraitMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrialCatalog" EntityType="Self.TrialCatalog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrialNote" EntityType="Self.TrialNote" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrialProgress" EntityType="Self.TrialProgress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrialWorkflowAttachment" EntityType="Self.TrialWorkflowAttachment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Workflow" EntityType="Self.Workflow" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkflowQuestion" EntityType="Self.WorkflowQuestion" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ChemicalMaster_ChemicalType" Association="Self.FK_ChemicalMaster_ChemicalType">
+            <End Role="ChemicalType" EntitySet="ChemicalType" />
+            <End Role="ChemicalMaster" EntitySet="ChemicalMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Response_Question" Association="Self.FK_Response_Question">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="Response" EntitySet="Response" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Response_TrialProgress" Association="Self.FK_Response_TrialProgress">
+            <End Role="TrialProgress" EntitySet="TrialProgress" />
+            <End Role="Response" EntitySet="Response" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SRR_EvalResponse_User" Association="Self.FK_SRR_EvalResponse_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="SRR_EvalResponse" EntitySet="SRR_EvalResponse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SRRUserTrial_Trial" Association="Self.FK_SRRUserTrial_Trial">
+            <End Role="TrialCatalog" EntitySet="TrialCatalog" />
+            <End Role="SRRUser_Trial_Xref" EntitySet="SRRUser_Trial_Xref" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SRRUserTrial_User" Association="Self.FK_SRRUserTrial_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="SRRUser_Trial_Xref" EntitySet="SRRUser_Trial_Xref" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrialCatalog_Crop" Association="Self.FK_TrialCatalog_Crop">
+            <End Role="Crop" EntitySet="Crop" />
+            <End Role="TrialCatalog" EntitySet="TrialCatalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrialCatalog_SiteMaster" Association="Self.FK_TrialCatalog_SiteMaster">
+            <End Role="SiteMaster" EntitySet="SiteMaster" />
+            <End Role="TrialCatalog" EntitySet="TrialCatalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrialCatalog_TraitMaster" Association="Self.FK_TrialCatalog_TraitMaster">
+            <End Role="TraitMaster" EntitySet="TraitMaster" />
+            <End Role="TrialCatalog" EntitySet="TrialCatalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrialCatalog_UserIRP" Association="Self.FK_TrialCatalog_UserIRP">
+            <End Role="User" EntitySet="User" />
+            <End Role="TrialCatalog" EntitySet="TrialCatalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrialCatalog_UserSRR" Association="Self.FK_TrialCatalog_UserSRR">
+            <End Role="User" EntitySet="User" />
+            <End Role="TrialCatalog" EntitySet="TrialCatalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrialNote_TrialCatalog" Association="Self.FK_TrialNote_TrialCatalog">
+            <End Role="TrialCatalog" EntitySet="TrialCatalog" />
+            <End Role="TrialNote" EntitySet="TrialNote" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrialProgress_TrialCatalog" Association="Self.FK_TrialProgress_TrialCatalog">
+            <End Role="TrialCatalog" EntitySet="TrialCatalog" />
+            <End Role="TrialProgress" EntitySet="TrialProgress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrialProgress_User" Association="Self.FK_TrialProgress_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="TrialProgress" EntitySet="TrialProgress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrialProgress_Workflow" Association="Self.FK_TrialProgress_Workflow">
+            <End Role="Workflow" EntitySet="Workflow" />
+            <End Role="TrialProgress" EntitySet="TrialProgress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrialWorkflowAttachment_AttachmentType" Association="Self.FK_TrialWorkflowAttachment_AttachmentType">
+            <End Role="AttachmentType" EntitySet="AttachmentType" />
+            <End Role="TrialWorkflowAttachment" EntitySet="TrialWorkflowAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrialWorkflowAttachment_Trial" Association="Self.FK_TrialWorkflowAttachment_Trial">
+            <End Role="TrialCatalog" EntitySet="TrialCatalog" />
+            <End Role="TrialWorkflowAttachment" EntitySet="TrialWorkflowAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrialWorkflowAttachment_Workflow" Association="Self.FK_TrialWorkflowAttachment_Workflow">
+            <End Role="Workflow" EntitySet="Workflow" />
+            <End Role="TrialWorkflowAttachment" EntitySet="TrialWorkflowAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Manager" Association="Self.FK_User_Manager">
+            <End Role="User" EntitySet="User" />
+            <End Role="User1" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserType" Association="Self.FK_User_UserType">
+            <End Role="UserType" EntitySet="UserType" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkflowQuestion_Question" Association="Self.FK_WorkflowQuestion_Question">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="WorkflowQuestion" EntitySet="WorkflowQuestion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkflowQuestion_Workflow" Association="Self.FK_WorkflowQuestion_Workflow">
+            <End Role="Workflow" EntitySet="Workflow" />
+            <End Role="WorkflowQuestion" EntitySet="WorkflowQuestion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="REGFIELDTRIALSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="REGFIELDTRIALSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AttachmentTypes" EntityType="REGFIELDTRIALSModel.AttachmentType" />
+          <EntitySet Name="ChemicalMasters" EntityType="REGFIELDTRIALSModel.ChemicalMaster" />
+          <EntitySet Name="ChemicalTypes" EntityType="REGFIELDTRIALSModel.ChemicalType" />
+          <EntitySet Name="Crops" EntityType="REGFIELDTRIALSModel.Crop" />
+          <EntitySet Name="DB_Version" EntityType="REGFIELDTRIALSModel.DB_Version" />
+          <EntitySet Name="LookupMasters" EntityType="REGFIELDTRIALSModel.LookupMaster" />
+          <EntitySet Name="Questions" EntityType="REGFIELDTRIALSModel.Question" />
+          <EntitySet Name="Responses" EntityType="REGFIELDTRIALSModel.Response" />
+          <EntitySet Name="SiteMasters" EntityType="REGFIELDTRIALSModel.SiteMaster" />
+          <EntitySet Name="SRR_EvalResponse" EntityType="REGFIELDTRIALSModel.SRR_EvalResponse" />
+          <EntitySet Name="SRRUser_Trial_Xref" EntityType="REGFIELDTRIALSModel.SRRUser_Trial_Xref" />
+          <EntitySet Name="sysdiagrams" EntityType="REGFIELDTRIALSModel.sysdiagram" />
+          <EntitySet Name="TraitMasters" EntityType="REGFIELDTRIALSModel.TraitMaster" />
+          <EntitySet Name="TrialCatalogs" EntityType="REGFIELDTRIALSModel.TrialCatalog" />
+          <EntitySet Name="TrialNotes" EntityType="REGFIELDTRIALSModel.TrialNote" />
+          <EntitySet Name="TrialProgresses" EntityType="REGFIELDTRIALSModel.TrialProgress" />
+          <EntitySet Name="TrialWorkflowAttachments" EntityType="REGFIELDTRIALSModel.TrialWorkflowAttachment" />
+          <EntitySet Name="Users" EntityType="REGFIELDTRIALSModel.User" />
+          <EntitySet Name="UserTypes" EntityType="REGFIELDTRIALSModel.UserType" />
+          <EntitySet Name="Workflows" EntityType="REGFIELDTRIALSModel.Workflow" />
+          <EntitySet Name="WorkflowQuestions" EntityType="REGFIELDTRIALSModel.WorkflowQuestion" />
+          <AssociationSet Name="FK_TrialWorkflowAttachment_AttachmentType" Association="REGFIELDTRIALSModel.FK_TrialWorkflowAttachment_AttachmentType">
+            <End Role="AttachmentType" EntitySet="AttachmentTypes" />
+            <End Role="TrialWorkflowAttachment" EntitySet="TrialWorkflowAttachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChemicalMaster_ChemicalType" Association="REGFIELDTRIALSModel.FK_ChemicalMaster_ChemicalType">
+            <End Role="ChemicalType" EntitySet="ChemicalTypes" />
+            <End Role="ChemicalMaster" EntitySet="ChemicalMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrialCatalog_Crop" Association="REGFIELDTRIALSModel.FK_TrialCatalog_Crop">
+            <End Role="Crop" EntitySet="Crops" />
+            <End Role="TrialCatalog" EntitySet="TrialCatalogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Response_Question" Association="REGFIELDTRIALSModel.FK_Response_Question">
+            <End Role="Question" EntitySet="Questions" />
+            <End Role="Response" EntitySet="Responses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkflowQuestion_Question" Association="REGFIELDTRIALSModel.FK_WorkflowQuestion_Question">
+            <End Role="Question" EntitySet="Questions" />
+            <End Role="WorkflowQuestion" EntitySet="WorkflowQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Response_TrialProgress" Association="REGFIELDTRIALSModel.FK_Response_TrialProgress">
+            <End Role="TrialProgress" EntitySet="TrialProgresses" />
+            <End Role="Response" EntitySet="Responses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrialCatalog_SiteMaster" Association="REGFIELDTRIALSModel.FK_TrialCatalog_SiteMaster">
+            <End Role="SiteMaster" EntitySet="SiteMasters" />
+            <End Role="TrialCatalog" EntitySet="TrialCatalogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SRR_EvalResponse_User" Association="REGFIELDTRIALSModel.FK_SRR_EvalResponse_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="SRR_EvalResponse" EntitySet="SRR_EvalResponse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SRRUserTrial_Trial" Association="REGFIELDTRIALSModel.FK_SRRUserTrial_Trial">
+            <End Role="TrialCatalog" EntitySet="TrialCatalogs" />
+            <End Role="SRRUser_Trial_Xref" EntitySet="SRRUser_Trial_Xref" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SRRUserTrial_User" Association="REGFIELDTRIALSModel.FK_SRRUserTrial_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="SRRUser_Trial_Xref" EntitySet="SRRUser_Trial_Xref" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrialCatalog_TraitMaster" Association="REGFIELDTRIALSModel.FK_TrialCatalog_TraitMaster">
+            <End Role="TraitMaster" EntitySet="TraitMasters" />
+            <End Role="TrialCatalog" EntitySet="TrialCatalogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrialCatalog_UserIRP" Association="REGFIELDTRIALSModel.FK_TrialCatalog_UserIRP">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TrialCatalog" EntitySet="TrialCatalogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrialCatalog_UserSRR" Association="REGFIELDTRIALSModel.FK_TrialCatalog_UserSRR">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TrialCatalog" EntitySet="TrialCatalogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrialNote_TrialCatalog" Association="REGFIELDTRIALSModel.FK_TrialNote_TrialCatalog">
+            <End Role="TrialCatalog" EntitySet="TrialCatalogs" />
+            <End Role="TrialNote" EntitySet="TrialNotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrialProgress_TrialCatalog" Association="REGFIELDTRIALSModel.FK_TrialProgress_TrialCatalog">
+            <End Role="TrialCatalog" EntitySet="TrialCatalogs" />
+            <End Role="TrialProgress" EntitySet="TrialProgresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrialWorkflowAttachment_Trial" Association="REGFIELDTRIALSModel.FK_TrialWorkflowAttachment_Trial">
+            <End Role="TrialCatalog" EntitySet="TrialCatalogs" />
+            <End Role="TrialWorkflowAttachment" EntitySet="TrialWorkflowAttachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrialProgress_User" Association="REGFIELDTRIALSModel.FK_TrialProgress_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TrialProgress" EntitySet="TrialProgresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrialProgress_Workflow" Association="REGFIELDTRIALSModel.FK_TrialProgress_Workflow">
+            <End Role="Workflow" EntitySet="Workflows" />
+            <End Role="TrialProgress" EntitySet="TrialProgresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrialWorkflowAttachment_Workflow" Association="REGFIELDTRIALSModel.FK_TrialWorkflowAttachment_Workflow">
+            <End Role="Workflow" EntitySet="Workflows" />
+            <End Role="TrialWorkflowAttachment" EntitySet="TrialWorkflowAttachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Manager" Association="REGFIELDTRIALSModel.FK_User_Manager">
+            <End Role="User" EntitySet="Users" />
+            <End Role="User1" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserType" Association="REGFIELDTRIALSModel.FK_User_UserType">
+            <End Role="UserType" EntitySet="UserTypes" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkflowQuestion_Workflow" Association="REGFIELDTRIALSModel.FK_WorkflowQuestion_Workflow">
+            <End Role="Workflow" EntitySet="Workflows" />
+            <End Role="WorkflowQuestion" EntitySet="WorkflowQuestions" />
+          </AssociationSet>
+          <FunctionImport Name="usp_Assign_PrimarySRR_ToTrial" ReturnType="Collection(REGFIELDTRIALSModel.usp_Assign_PrimarySRR_ToTrial_Result)">
+            <Parameter Name="userID" Mode="In" Type="Int32" />
+            <Parameter Name="trialID" Mode="In" Type="Int32" />
+            <Parameter Name="updateUserID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Create_User" ReturnType="Collection(REGFIELDTRIALSModel.usp_Create_User_Result)">
+            <Parameter Name="userAlias" Mode="In" Type="String" />
+            <Parameter Name="userTypeID" Mode="In" Type="Int32" />
+            <Parameter Name="fName" Mode="In" Type="String" />
+            <Parameter Name="lName" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="officeNumber" Mode="In" Type="String" />
+            <Parameter Name="cellNumber" Mode="In" Type="String" />
+            <Parameter Name="siteLocation" Mode="In" Type="String" />
+            <Parameter Name="managerID" Mode="In" Type="Int32" />
+            <Parameter Name="internal" Mode="In" Type="Boolean" />
+            <Parameter Name="updateUserID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Delete_Trial_ByTrialID" ReturnType="Collection(REGFIELDTRIALSModel.usp_Delete_Trial_ByTrialID_Result)">
+            <Parameter Name="trialID" Mode="In" Type="Int32" />
+            <Parameter Name="updateuserID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Delete_User_ByUserID" ReturnType="Collection(REGFIELDTRIALSModel.usp_Delete_User_ByUserID_Result)">
+            <Parameter Name="userID" Mode="In" Type="Int32" />
+            <Parameter Name="updateuserID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Get_FormStatus_ByTrialID" ReturnType="Collection(REGFIELDTRIALSModel.usp_Get_FormStatus_ByTrialID_Result)">
+            <Parameter Name="trialID" Mode="In" Type="Int32" />
+            <Parameter Name="userAlias" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Get_User_ByUserAlias" ReturnType="Collection(REGFIELDTRIALSModel.usp_Get_User_ByUserAlias_Result)">
+          <Parameter Name="userAlias" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Get_User_ByUserID" ReturnType="Collection(REGFIELDTRIALSModel.usp_Get_User_ByUserID_Result)">
+          <Parameter Name="userID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_PaginatedList_TrialMaps" ReturnType="Collection(REGFIELDTRIALSModel.usp_PaginatedList_TrialMaps_Result)">
+            <Parameter Name="page" Mode="In" Type="Int32" />
+            <Parameter Name="pageSize" Mode="In" Type="Int32" />
+            <Parameter Name="trialID_Filter" Mode="In" Type="Int32" />
+            <Parameter Name="trialName_Filter" Mode="In" Type="String" />
+            <Parameter Name="userAlias" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_PaginatedList_Trials" ReturnType="Collection(REGFIELDTRIALSModel.usp_PaginatedList_Trials_Result)">
+            <Parameter Name="page" Mode="In" Type="Int32" />
+            <Parameter Name="pageSize" Mode="In" Type="Int32" />
+            <Parameter Name="trialID_Filter" Mode="In" Type="Int32" />
+            <Parameter Name="trialName_Filter" Mode="In" Type="String" />
+            <Parameter Name="userAlias" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_PaginatedList_Users" ReturnType="Collection(REGFIELDTRIALSModel.usp_PaginatedList_Users_Result)">
+            <Parameter Name="page" Mode="In" Type="Int32" />
+            <Parameter Name="pageSize" Mode="In" Type="Int32" />
+            <Parameter Name="userTypeID_Filter" Mode="In" Type="Int32" />
+            <Parameter Name="string_Filter" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Update_User" ReturnType="Collection(REGFIELDTRIALSModel.usp_Update_User_Result)">
+            <Parameter Name="userID" Mode="In" Type="Int32" />
+            <Parameter Name="userAlias" Mode="In" Type="String" />
+            <Parameter Name="userTypeID" Mode="In" Type="Int32" />
+            <Parameter Name="fName" Mode="In" Type="String" />
+            <Parameter Name="lName" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="officeNumber" Mode="In" Type="String" />
+            <Parameter Name="cellNumber" Mode="In" Type="String" />
+            <Parameter Name="siteLocation" Mode="In" Type="String" />
+            <Parameter Name="managerID" Mode="In" Type="Int32" />
+            <Parameter Name="internal" Mode="In" Type="Boolean" />
+            <Parameter Name="updateUserID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Create_Trial" ReturnType="Collection(REGFIELDTRIALSModel.usp_Create_Trial_Result)">
+            <Parameter Name="trial_ID" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="SRRLeadUser_ID" Mode="In" Type="Int32" />
+            <Parameter Name="IRPUser_ID" Mode="In" Type="Int32" />
+            <Parameter Name="cropID" Mode="In" Type="Int32" />
+            <Parameter Name="traitID" Mode="In" Type="Int32" />
+            <Parameter Name="siteID" Mode="In" Type="Int32" />
+            <Parameter Name="trialYear" Mode="In" Type="Int32" />
+            <Parameter Name="internal" Mode="In" Type="Boolean" />
+            <Parameter Name="city" Mode="In" Type="String" />
+            <Parameter Name="state" Mode="In" Type="String" />
+            <Parameter Name="zip" Mode="In" Type="String" />
+            <Parameter Name="county" Mode="In" Type="String" />
+            <Parameter Name="farmName" Mode="In" Type="String" />
+            <Parameter Name="complianceStatus" Mode="In" Type="String" />
+            <Parameter Name="updateUserID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Get_Trial_ByTrialID" ReturnType="Collection(REGFIELDTRIALSModel.usp_Get_Trial_ByTrialID_Result)">
+            <Parameter Name="trialID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Update_Trial" ReturnType="Collection(REGFIELDTRIALSModel.usp_Update_Trial_Result)">
+            <Parameter Name="trial_ID" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="SRRLeadUser_ID" Mode="In" Type="Int32" />
+            <Parameter Name="IRPUser_ID" Mode="In" Type="Int32" />
+            <Parameter Name="cropID" Mode="In" Type="Int32" />
+            <Parameter Name="traitID" Mode="In" Type="Int32" />
+            <Parameter Name="siteID" Mode="In" Type="Int32" />
+            <Parameter Name="trialYear" Mode="In" Type="Int32" />
+            <Parameter Name="internal" Mode="In" Type="Boolean" />
+            <Parameter Name="city" Mode="In" Type="String" />
+            <Parameter Name="state" Mode="In" Type="String" />
+            <Parameter Name="zip" Mode="In" Type="String" />
+            <Parameter Name="county" Mode="In" Type="String" />
+            <Parameter Name="farmName" Mode="In" Type="String" />
+            <Parameter Name="complianceStatus" Mode="In" Type="String" />
+            <Parameter Name="updateUserID" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="AttachmentType">
+          <Key>
+            <PropertyRef Name="AttachmentType_ID" />
+          </Key>
+          <Property Name="AttachmentType_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AttachmentTypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TrialWorkflowAttachments" Relationship="REGFIELDTRIALSModel.FK_TrialWorkflowAttachment_AttachmentType" FromRole="AttachmentType" ToRole="TrialWorkflowAttachment" />
+        </EntityType>
+        <EntityType Name="ChemicalMaster">
+          <Key>
+            <PropertyRef Name="Chemical_ID" />
+          </Key>
+          <Property Name="Chemical_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChemicalName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ChemicalType_ID" Type="Int32" Nullable="false" />
+          <Property Name="UpdateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ChemicalType" Relationship="REGFIELDTRIALSModel.FK_ChemicalMaster_ChemicalType" FromRole="ChemicalMaster" ToRole="ChemicalType" />
+        </EntityType>
+        <EntityType Name="ChemicalType">
+          <Key>
+            <PropertyRef Name="ChemicalType_ID" />
+          </Key>
+          <Property Name="ChemicalType_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChemicalTypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ChemicalMasters" Relationship="REGFIELDTRIALSModel.FK_ChemicalMaster_ChemicalType" FromRole="ChemicalType" ToRole="ChemicalMaster" />
+        </EntityType>
+        <EntityType Name="Crop">
+          <Key>
+            <PropertyRef Name="Crop_ID" />
+          </Key>
+          <Property Name="Crop_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CropName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TrialCatalogs" Relationship="REGFIELDTRIALSModel.FK_TrialCatalog_Crop" FromRole="Crop" ToRole="TrialCatalog" />
+        </EntityType>
+        <EntityType Name="DB_Version">
+          <Key>
+            <PropertyRef Name="DB_Version_ID" />
+          </Key>
+          <Property Name="DB_Version_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DB_Version1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="UpdateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LookupMaster">
+          <Key>
+            <PropertyRef Name="Lookup_ID" />
+          </Key>
+          <Property Name="Lookup_ID" Type="Int32" Nullable="false" />
+          <Property Name="LookupName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="Question_ID" />
+          </Key>
+          <Property Name="Question_ID" Type="Int32" Nullable="false" />
+          <Property Name="QuestionName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="QuestionText" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="IsLookup" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Responses" Relationship="REGFIELDTRIALSModel.FK_Response_Question" FromRole="Question" ToRole="Response" />
+          <NavigationProperty Name="WorkflowQuestions" Relationship="REGFIELDTRIALSModel.FK_WorkflowQuestion_Question" FromRole="Question" ToRole="WorkflowQuestion" />
+        </EntityType>
+        <EntityType Name="Response">
+          <Key>
+            <PropertyRef Name="Response_ID" />
+          </Key>
+          <Property Name="Response_ID" Type="Guid" Nullable="false" />
+          <Property Name="Question_ID" Type="Int32" Nullable="false" />
+          <Property Name="TrialProgress_ID" Type="Int32" Nullable="false" />
+          <Property Name="ResponseValue" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="FollowupRequired" Type="Boolean" />
+          <Property Name="VerifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Question" Relationship="REGFIELDTRIALSModel.FK_Response_Question" FromRole="Response" ToRole="Question" />
+          <NavigationProperty Name="TrialProgress" Relationship="REGFIELDTRIALSModel.FK_Response_TrialProgress" FromRole="Response" ToRole="TrialProgress" />
+        </EntityType>
+        <EntityType Name="SiteMaster">
+          <Key>
+            <PropertyRef Name="Site_ID" />
+          </Key>
+          <Property Name="Site_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SiteName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TrialCatalogs" Relationship="REGFIELDTRIALSModel.FK_TrialCatalog_SiteMaster" FromRole="SiteMaster" ToRole="TrialCatalog" />
+        </EntityType>
+        <EntityType Name="SRR_EvalResponse">
+          <Key>
+            <PropertyRef Name="EvalResponse_ID" />
+          </Key>
+          <Property Name="EvalResponse_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SRR_ID" Type="Int32" Nullable="false" />
+          <Property Name="YearsExperience_SRR" Type="Int32" />
+          <Property Name="YearsExperience_SiteLeadSRR" Type="Int32" />
+          <Property Name="NumFieldsReponsibleFor" Type="Int32" />
+          <Property Name="NumAcresSRRManages" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="BackupSRRIdentified" Type="Boolean" />
+          <Property Name="BackupSRR_ID" Type="Int32" />
+          <Property Name="BackupSRRInformed" Type="Boolean" />
+          <Property Name="ComplianceQuestion1" Type="Boolean" />
+          <Property Name="ComplianceQuestion2" Type="Boolean" />
+          <Property Name="ComplianceQuestion3" Type="Boolean" />
+          <Property Name="ComplianceQuestion4" Type="Boolean" />
+          <Property Name="ComplianceQuestion5" Type="Boolean" />
+          <Property Name="ComplianceQuestion6" Type="Boolean" />
+          <Property Name="Flagged" Type="Boolean" />
+          <Property Name="UpdateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CompletedYear" Type="Int32" />
+          <Property Name="ComplianceResponse1" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ComplianceResponse2" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ComplianceResponse3" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ComplianceResponse4" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ComplianceResponse5" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ComplianceResponse6" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="LastTrainingYear" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="REGFIELDTRIALSModel.FK_SRR_EvalResponse_User" FromRole="SRR_EvalResponse" ToRole="User" />
+        </EntityType>
+        <EntityType Name="SRRUser_Trial_Xref">
+          <Key>
+            <PropertyRef Name="SRRUser_Trial_Xref1" />
+          </Key>
+          <Property Name="SRRUser_Trial_Xref1" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SRRUser_ID" Type="Int32" Nullable="false" />
+          <Property Name="Trial_ID" Type="Int32" Nullable="false" />
+          <Property Name="UpdateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="PrimarySRR" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TrialCatalog" Relationship="REGFIELDTRIALSModel.FK_SRRUserTrial_Trial" FromRole="SRRUser_Trial_Xref" ToRole="TrialCatalog" />
+          <NavigationProperty Name="User" Relationship="REGFIELDTRIALSModel.FK_SRRUserTrial_User" FromRole="SRRUser_Trial_Xref" ToRole="User" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TraitMaster">
+          <Key>
+            <PropertyRef Name="Trait_ID" />
+          </Key>
+          <Property Name="Trait_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TraitName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TrialCatalogs" Relationship="REGFIELDTRIALSModel.FK_TrialCatalog_TraitMaster" FromRole="TraitMaster" ToRole="TrialCatalog" />
+        </EntityType>
+        <EntityType Name="TrialCatalog">
+          <Key>
+            <PropertyRef Name="Trial_ID" />
+          </Key>
+          <Property Name="Trial_ID" Type="Int32" Nullable="false" />
+          <Property Name="SRRLeadUser_ID" Type="Int32" Nullable="false" />
+          <Property Name="IRPUser_ID" Type="Int32" />
+          <Property Name="Crop_ID" Type="Int32" Nullable="false" />
+          <Property Name="Trait_ID" Type="Int32" />
+          <Property Name="Site_ID" Type="Int32" />
+          <Property Name="TrialYear" Type="Int32" />
+          <Property Name="AgencyApprovalNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Zip" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="County" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FarmName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Internal" Type="Boolean" />
+          <Property Name="GPSLat1" Type="Decimal" Precision="18" Scale="12" />
+          <Property Name="GPSLong1" Type="Decimal" Precision="18" Scale="12" />
+          <Property Name="GPSLat2" Type="Decimal" Precision="18" Scale="12" />
+          <Property Name="GPSLong2" Type="Decimal" Precision="18" Scale="12" />
+          <Property Name="GPSLat3" Type="Decimal" Precision="18" Scale="12" />
+          <Property Name="GPSLong3" Type="Decimal" Precision="18" Scale="12" />
+          <Property Name="GPSLat4" Type="Decimal" Precision="18" Scale="12" />
+          <Property Name="GPSLong4" Type="Decimal" Precision="18" Scale="12" />
+          <Property Name="Approved_Area" Type="Decimal" Precision="18" Scale="12" />
+          <Property Name="Approved_Area_UOM" Type="Int32" />
+          <Property Name="UpdateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="Archive" Type="Boolean" Nullable="false" />
+          <Property Name="ComplianceStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Crop" Relationship="REGFIELDTRIALSModel.FK_TrialCatalog_Crop" FromRole="TrialCatalog" ToRole="Crop" />
+          <NavigationProperty Name="SiteMaster" Relationship="REGFIELDTRIALSModel.FK_TrialCatalog_SiteMaster" FromRole="TrialCatalog" ToRole="SiteMaster" />
+          <NavigationProperty Name="SRRUser_Trial_Xref" Relationship="REGFIELDTRIALSModel.FK_SRRUserTrial_Trial" FromRole="TrialCatalog" ToRole="SRRUser_Trial_Xref" />
+          <NavigationProperty Name="TraitMaster" Relationship="REGFIELDTRIALSModel.FK_TrialCatalog_TraitMaster" FromRole="TrialCatalog" ToRole="TraitMaster" />
+          <NavigationProperty Name="User" Relationship="REGFIELDTRIALSModel.FK_TrialCatalog_UserIRP" FromRole="TrialCatalog" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="REGFIELDTRIALSModel.FK_TrialCatalog_UserSRR" FromRole="TrialCatalog" ToRole="User" />
+          <NavigationProperty Name="TrialNotes" Relationship="REGFIELDTRIALSModel.FK_TrialNote_TrialCatalog" FromRole="TrialCatalog" ToRole="TrialNote" />
+          <NavigationProperty Name="TrialProgresses" Relationship="REGFIELDTRIALSModel.FK_TrialProgress_TrialCatalog" FromRole="TrialCatalog" ToRole="TrialProgress" />
+          <NavigationProperty Name="TrialWorkflowAttachments" Relationship="REGFIELDTRIALSModel.FK_TrialWorkflowAttachment_Trial" FromRole="TrialCatalog" ToRole="TrialWorkflowAttachment" />
+        </EntityType>
+        <EntityType Name="TrialNote">
+          <Key>
+            <PropertyRef Name="TrialNote_ID" />
+          </Key>
+          <Property Name="TrialNote_ID" Type="Guid" Nullable="false" />
+          <Property Name="Trial_ID" Type="Int32" Nullable="false" />
+          <Property Name="NoteCategory" Type="Int32" />
+          <Property Name="NoteContent" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TrialCatalog" Relationship="REGFIELDTRIALSModel.FK_TrialNote_TrialCatalog" FromRole="TrialNote" ToRole="TrialCatalog" />
+        </EntityType>
+        <EntityType Name="TrialProgress">
+          <Key>
+            <PropertyRef Name="TrialProgress_ID" />
+          </Key>
+          <Property Name="TrialProgress_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Trial_ID" Type="Int32" Nullable="false" />
+          <Property Name="SRRUser_ID" Type="Int32" Nullable="false" />
+          <Property Name="Workflow_ID" Type="Int32" />
+          <Property Name="WorkflowComplete" Type="Boolean" />
+          <Property Name="WorkflowCompleteDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DueDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Responses" Relationship="REGFIELDTRIALSModel.FK_Response_TrialProgress" FromRole="TrialProgress" ToRole="Response" />
+          <NavigationProperty Name="TrialCatalog" Relationship="REGFIELDTRIALSModel.FK_TrialProgress_TrialCatalog" FromRole="TrialProgress" ToRole="TrialCatalog" />
+          <NavigationProperty Name="User" Relationship="REGFIELDTRIALSModel.FK_TrialProgress_User" FromRole="TrialProgress" ToRole="User" />
+          <NavigationProperty Name="Workflow" Relationship="REGFIELDTRIALSModel.FK_TrialProgress_Workflow" FromRole="TrialProgress" ToRole="Workflow" />
+        </EntityType>
+        <EntityType Name="TrialWorkflowAttachment">
+          <Key>
+            <PropertyRef Name="Attachment_ID" />
+          </Key>
+          <Property Name="Attachment_ID" Type="Guid" Nullable="false" />
+          <Property Name="Trial_ID" Type="Int32" Nullable="false" />
+          <Property Name="Workflow_ID" Type="Int32" Nullable="false" />
+          <Property Name="AttachmentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Attachment" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="AttachmentType_ID" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AttachmentType" Relationship="REGFIELDTRIALSModel.FK_TrialWorkflowAttachment_AttachmentType" FromRole="TrialWorkflowAttachment" ToRole="AttachmentType" />
+          <NavigationProperty Name="TrialCatalog" Relationship="REGFIELDTRIALSModel.FK_TrialWorkflowAttachment_Trial" FromRole="TrialWorkflowAttachment" ToRole="TrialCatalog" />
+          <NavigationProperty Name="Workflow" Relationship="REGFIELDTRIALSModel.FK_TrialWorkflowAttachment_Workflow" FromRole="TrialWorkflowAttachment" ToRole="Workflow" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserType_ID" Type="Int32" Nullable="false" />
+          <Property Name="FName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OfficeNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CellNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="SiteLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Manager_ID" Type="Int32" />
+          <Property Name="Internal" Type="Boolean" />
+          <Property Name="UpdateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="UserAlias" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SRR_EvalResponse" Relationship="REGFIELDTRIALSModel.FK_SRR_EvalResponse_User" FromRole="User" ToRole="SRR_EvalResponse" />
+          <NavigationProperty Name="SRRUser_Trial_Xref" Relationship="REGFIELDTRIALSModel.FK_SRRUserTrial_User" FromRole="User" ToRole="SRRUser_Trial_Xref" />
+          <NavigationProperty Name="TrialCatalogs" Relationship="REGFIELDTRIALSModel.FK_TrialCatalog_UserIRP" FromRole="User" ToRole="TrialCatalog" />
+          <NavigationProperty Name="TrialCatalogs1" Relationship="REGFIELDTRIALSModel.FK_TrialCatalog_UserSRR" FromRole="User" ToRole="TrialCatalog" />
+          <NavigationProperty Name="TrialProgresses" Relationship="REGFIELDTRIALSModel.FK_TrialProgress_User" FromRole="User" ToRole="TrialProgress" />
+          <NavigationProperty Name="User1" Relationship="REGFIELDTRIALSModel.FK_User_Manager" FromRole="User" ToRole="User1" />
+          <NavigationProperty Name="User2" Relationship="REGFIELDTRIALSModel.FK_User_Manager" FromRole="User1" ToRole="User" />
+          <NavigationProperty Name="UserType" Relationship="REGFIELDTRIALSModel.FK_User_UserType" FromRole="User" ToRole="UserType" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="UserType_ID" />
+          </Key>
+          <Property Name="UserType_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserTypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="REGFIELDTRIALSModel.FK_User_UserType" FromRole="UserType" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Workflow">
+          <Key>
+            <PropertyRef Name="Workflow_ID" />
+          </Key>
+          <Property Name="Workflow_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkflowName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WorkflowOrder" Type="Int32" Nullable="false" />
+          <Property Name="UpdateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TrialProgresses" Relationship="REGFIELDTRIALSModel.FK_TrialProgress_Workflow" FromRole="Workflow" ToRole="TrialProgress" />
+          <NavigationProperty Name="TrialWorkflowAttachments" Relationship="REGFIELDTRIALSModel.FK_TrialWorkflowAttachment_Workflow" FromRole="Workflow" ToRole="TrialWorkflowAttachment" />
+          <NavigationProperty Name="WorkflowQuestions" Relationship="REGFIELDTRIALSModel.FK_WorkflowQuestion_Workflow" FromRole="Workflow" ToRole="WorkflowQuestion" />
+        </EntityType>
+        <EntityType Name="WorkflowQuestion">
+          <Key>
+            <PropertyRef Name="WorkflowQuestion_ID" />
+          </Key>
+          <Property Name="WorkflowQuestion_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Workflow_ID" Type="Int32" Nullable="false" />
+          <Property Name="Question_ID" Type="Int32" Nullable="false" />
+          <Property Name="AcceptableAnswers" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AcceptableLowRange" Type="Int32" />
+          <Property Name="AcceptableHighRange" Type="Int32" />
+          <Property Name="NotAcceptableAnswers" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NotAcceptableLowRange" Type="Int32" />
+          <Property Name="NotAcceptableHighRange" Type="Int32" />
+          <Property Name="UpdateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateUserID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Question" Relationship="REGFIELDTRIALSModel.FK_WorkflowQuestion_Question" FromRole="WorkflowQuestion" ToRole="Question" />
+          <NavigationProperty Name="Workflow" Relationship="REGFIELDTRIALSModel.FK_WorkflowQuestion_Workflow" FromRole="WorkflowQuestion" ToRole="Workflow" />
+        </EntityType>
+        <Association Name="FK_TrialWorkflowAttachment_AttachmentType">
+          <End Type="REGFIELDTRIALSModel.AttachmentType" Role="AttachmentType" Multiplicity="1" />
+          <End Type="REGFIELDTRIALSModel.TrialWorkflowAttachment" Role="TrialWorkflowAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttachmentType">
+              <PropertyRef Name="AttachmentType_ID" />
+            </Principal>
+            <Dependent Role="TrialWorkflowAttachment">
+              <PropertyRef Name="AttachmentType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChemicalMaster_ChemicalType">
+          <End Type="REGFIELDTRIALSModel.ChemicalType" Role="ChemicalType" Multiplicity="1" />
+          <End Type="REGFIELDTRIALSModel.ChemicalMaster" Role="ChemicalMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChemicalType">
+              <PropertyRef Name="ChemicalType_ID" />
+            </Principal>
+            <Dependent Role="ChemicalMaster">
+              <PropertyRef Name="ChemicalType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrialCatalog_Crop">
+          <End Type="REGFIELDTRIALSModel.Crop" Role="Crop" Multiplicity="1" />
+          <End Type="REGFIELDTRIALSModel.TrialCatalog" Role="TrialCatalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Crop">
+              <PropertyRef Name="Crop_ID" />
+            </Principal>
+            <Dependent Role="TrialCatalog">
+              <PropertyRef Name="Crop_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Response_Question">
+          <End Type="REGFIELDTRIALSModel.Question" Role="Question" Multiplicity="1" />
+          <End Type="REGFIELDTRIALSModel.Response" Role="Response" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="Question_ID" />
+            </Principal>
+            <Dependent Role="Response">
+              <PropertyRef Name="Question_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkflowQuestion_Question">
+          <End Type="REGFIELDTRIALSModel.Question" Role="Question" Multiplicity="1" />
+          <End Type="REGFIELDTRIALSModel.WorkflowQuestion" Role="WorkflowQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="Question_ID" />
+            </Principal>
+            <Dependent Role="WorkflowQuestion">
+              <PropertyRef Name="Question_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Response_TrialProgress">
+          <End Type="REGFIELDTRIALSModel.TrialProgress" Role="TrialProgress" Multiplicity="1" />
+          <End Type="REGFIELDTRIALSModel.Response" Role="Response" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrialProgress">
+              <PropertyRef Name="TrialProgress_ID" />
+            </Principal>
+            <Dependent Role="Response">
+              <PropertyRef Name="TrialProgress_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrialCatalog_SiteMaster">
+          <End Type="REGFIELDTRIALSModel.SiteMaster" Role="SiteMaster" Multiplicity="0..1" />
+          <End Type="REGFIELDTRIALSModel.TrialCatalog" Role="TrialCatalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SiteMaster">
+              <PropertyRef Name="Site_ID" />
+            </Principal>
+            <Dependent Role="TrialCatalog">
+              <PropertyRef Name="Site_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SRR_EvalResponse_User">
+          <End Type="REGFIELDTRIALSModel.User" Role="User" Multiplicity="1" />
+          <End Type="REGFIELDTRIALSModel.SRR_EvalResponse" Role="SRR_EvalResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="SRR_EvalResponse">
+              <PropertyRef Name="SRR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SRRUserTrial_Trial">
+          <End Type="REGFIELDTRIALSModel.TrialCatalog" Role="TrialCatalog" Multiplicity="1" />
+          <End Type="REGFIELDTRIALSModel.SRRUser_Trial_Xref" Role="SRRUser_Trial_Xref" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrialCatalog">
+              <PropertyRef Name="Trial_ID" />
+            </Principal>
+            <Dependent Role="SRRUser_Trial_Xref">
+              <PropertyRef Name="Trial_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SRRUserTrial_User">
+          <End Type="REGFIELDTRIALSModel.User" Role="User" Multiplicity="1" />
+          <End Type="REGFIELDTRIALSModel.SRRUser_Trial_Xref" Role="SRRUser_Trial_Xref" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="SRRUser_Trial_Xref">
+              <PropertyRef Name="SRRUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrialCatalog_TraitMaster">
+          <End Type="REGFIELDTRIALSModel.TraitMaster" Role="TraitMaster" Multiplicity="0..1" />
+          <End Type="REGFIELDTRIALSModel.TrialCatalog" Role="TrialCatalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TraitMaster">
+              <PropertyRef Name="Trait_ID" />
+            </Principal>
+            <Dependent Role="TrialCatalog">
+              <PropertyRef Name="Trait_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrialCatalog_UserIRP">
+          <End Type="REGFIELDTRIALSModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="REGFIELDTRIALSModel.TrialCatalog" Role="TrialCatalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="TrialCatalog">
+              <PropertyRef Name="IRPUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrialCatalog_UserSRR">
+          <End Type="REGFIELDTRIALSModel.User" Role="User" Multiplicity="1" />
+          <End Type="REGFIELDTRIALSModel.TrialCatalog" Role="TrialCatalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="TrialCatalog">
+              <PropertyRef Name="SRRLeadUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrialNote_TrialCatalog">
+          <End Type="REGFIELDTRIALSModel.TrialCatalog" Role="TrialCatalog" Multiplicity="1" />
+          <End Type="REGFIELDTRIALSModel.TrialNote" Role="TrialNote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrialCatalog">
+              <PropertyRef Name="Trial_ID" />
+            </Principal>
+            <Dependent Role="TrialNote">
+              <PropertyRef Name="Trial_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrialProgress_TrialCatalog">
+          <End Type="REGFIELDTRIALSModel.TrialCatalog" Role="TrialCatalog" Multiplicity="1" />
+          <End Type="REGFIELDTRIALSModel.TrialProgress" Role="TrialProgress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrialCatalog">
+              <PropertyRef Name="Trial_ID" />
+            </Principal>
+            <Dependent Role="TrialProgress">
+              <PropertyRef Name="Trial_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrialWorkflowAttachment_Trial">
+          <End Type="REGFIELDTRIALSModel.TrialCatalog" Role="TrialCatalog" Multiplicity="1" />
+          <End Type="REGFIELDTRIALSModel.TrialWorkflowAttachment" Role="TrialWorkflowAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrialCatalog">
+              <PropertyRef Name="Trial_ID" />
+            </Principal>
+            <Dependent Role="TrialWorkflowAttachment">
+              <PropertyRef Name="Trial_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrialProgress_User">
+          <End Type="REGFIELDTRIALSModel.User" Role="User" Multiplicity="1" />
+          <End Type="REGFIELDTRIALSModel.TrialProgress" Role="TrialProgress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="TrialProgress">
+              <PropertyRef Name="SRRUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrialProgress_Workflow">
+          <End Type="REGFIELDTRIALSModel.Workflow" Role="Workflow" Multiplicity="0..1" />
+          <End Type="REGFIELDTRIALSModel.TrialProgress" Role="TrialProgress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workflow">
+              <PropertyRef Name="Workflow_ID" />
+            </Principal>
+            <Dependent Role="TrialProgress">
+              <PropertyRef Name="Workflow_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TrialWorkflowAttachment_Workflow">
+          <End Type="REGFIELDTRIALSModel.Workflow" Role="Workflow" Multiplicity="1" />
+          <End Type="REGFIELDTRIALSModel.TrialWorkflowAttachment" Role="TrialWorkflowAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workflow">
+              <PropertyRef Name="Workflow_ID" />
+            </Principal>
+            <Dependent Role="TrialWorkflowAttachment">
+              <PropertyRef Name="Workflow_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Manager">
+          <End Type="REGFIELDTRIALSModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="REGFIELDTRIALSModel.User" Role="User1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="User1">
+              <PropertyRef Name="Manager_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserType">
+          <End Type="REGFIELDTRIALSModel.UserType" Role="UserType" Multiplicity="1" />
+          <End Type="REGFIELDTRIALSModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserType">
+              <PropertyRef Name="UserType_ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="UserType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkflowQuestion_Workflow">
+          <End Type="REGFIELDTRIALSModel.Workflow" Role="Workflow" Multiplicity="1" />
+          <End Type="REGFIELDTRIALSModel.WorkflowQuestion" Role="WorkflowQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workflow">
+              <PropertyRef Name="Workflow_ID" />
+            </Principal>
+            <Dependent Role="WorkflowQuestion">
+              <PropertyRef Name="Workflow_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="usp_Assign_PrimarySRR_ToTrial_Result">
+          <Property Type="Int32" Name="ReturnCode" Nullable="false" />
+          <Property Type="Int32" Name="ErrorNumber" Nullable="false" />
+          <Property Type="Int32" Name="ErrorSeverity" Nullable="false" />
+          <Property Type="Int32" Name="ErrorState" Nullable="false" />
+          <Property Type="String" Name="ErrorProcedure" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="ErrorLine" Nullable="false" />
+          <Property Type="String" Name="ErrorMessage" Nullable="false" MaxLength="19" />
+        </ComplexType>
+        <ComplexType Name="usp_Create_User_Result">
+          <Property Type="Int32" Name="ReturnCode" Nullable="false" />
+          <Property Type="Int32" Name="ErrorNumber" Nullable="false" />
+          <Property Type="Int32" Name="ErrorSeverity" Nullable="false" />
+          <Property Type="Int32" Name="ErrorState" Nullable="false" />
+          <Property Type="String" Name="ErrorProcedure" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="ErrorLine" Nullable="false" />
+          <Property Type="String" Name="ErrorMessage" Nullable="false" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="usp_Delete_Trial_ByTrialID_Result">
+          <Property Type="Int32" Name="ReturnCode" Nullable="false" />
+          <Property Type="Int32" Name="ErrorNumber" Nullable="false" />
+          <Property Type="Int32" Name="ErrorSeverity" Nullable="false" />
+          <Property Type="Int32" Name="ErrorState" Nullable="false" />
+          <Property Type="String" Name="ErrorProcedure" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="ErrorLine" Nullable="false" />
+          <Property Type="String" Name="ErrorMessage" Nullable="false" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="usp_Delete_User_ByUserID_Result">
+          <Property Type="Int32" Name="ReturnCode" Nullable="false" />
+          <Property Type="Int32" Name="ErrorNumber" Nullable="false" />
+          <Property Type="Int32" Name="ErrorSeverity" Nullable="false" />
+          <Property Type="Int32" Name="ErrorState" Nullable="false" />
+          <Property Type="String" Name="ErrorProcedure" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="ErrorLine" Nullable="false" />
+          <Property Type="String" Name="ErrorMessage" Nullable="false" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="usp_Get_FormStatus_ByTrialID_Result">
+          <Property Type="Int32" Name="Workflow_ID" Nullable="true" />
+          <Property Type="String" Name="WorkflowName" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="WorkflowComplete" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_Get_User_ByUserAlias_Result">
+          <Property Type="Int32" Name="User_ID" Nullable="false" />
+          <Property Type="Int32" Name="UserType_ID" Nullable="false" />
+          <Property Type="String" Name="FName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="OfficeNumber" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="CellNumber" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="SiteLocation" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Manager_ID" Nullable="true" />
+          <Property Type="Boolean" Name="Internal" Nullable="true" />
+          <Property Type="String" Name="UserAlias" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="usp_Get_User_ByUserID_Result">
+          <Property Type="Int32" Name="User_ID" Nullable="false" />
+          <Property Type="Int32" Name="UserType_ID" Nullable="false" />
+          <Property Type="String" Name="FName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="OfficeNumber" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="CellNumber" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="SiteLocation" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Manager_ID" Nullable="true" />
+          <Property Type="Boolean" Name="Internal" Nullable="true" />
+          <Property Type="String" Name="UserAlias" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="usp_PaginatedList_TrialMaps_Result">
+          <Property Type="Int64" Name="RowNumber" Nullable="true" />
+          <Property Type="Int32" Name="RowCount" Nullable="true" />
+          <Property Type="Int32" Name="Trial_Year" Nullable="true" />
+          <Property Type="Int32" Name="Trial_ID" Nullable="false" />
+          <Property Type="String" Name="Trial_Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Farm_Name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Crop_Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Site_Name" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="City_Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="State_Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LeadSRR_UserAlias" Nullable="true" MaxLength="50" />
+          <Property Type="Guid" Name="Image_ID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usp_PaginatedList_Trials_Result">
+          <Property Type="Int64" Name="RowNumber" Nullable="true" />
+          <Property Type="Int32" Name="RowCount" Nullable="true" />
+          <Property Type="Int32" Name="Trial_Year" Nullable="true" />
+          <Property Type="Int32" Name="Trial_ID" Nullable="false" />
+          <Property Type="String" Name="Trial_Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Farm_Name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Crop_Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Site_Name" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Trait_Name" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="PrimarySRR" Nullable="true" MaxLength="101" />
+        </ComplexType>
+        <ComplexType Name="usp_PaginatedList_Users_Result">
+          <Property Type="Int64" Name="RowNumber" Nullable="true" />
+          <Property Type="Int32" Name="RowCount" Nullable="true" />
+          <Property Type="Int32" Name="User_ID" Nullable="false" />
+          <Property Type="String" Name="FName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="UserAlias" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="Internal" Nullable="true" />
+          <Property Type="String" Name="SiteLocation" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="usp_Update_User_Result">
+          <Property Type="Int32" Name="ReturnCode" Nullable="false" />
+          <Property Type="Int32" Name="ErrorNumber" Nullable="false" />
+          <Property Type="Int32" Name="ErrorSeverity" Nullable="false" />
+          <Property Type="Int32" Name="ErrorState" Nullable="false" />
+          <Property Type="String" Name="ErrorProcedure" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="ErrorLine" Nullable="false" />
+          <Property Type="String" Name="ErrorMessage" Nullable="false" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="usp_Create_Trial_Result">
+          <Property Type="Int32" Name="ReturnCode" Nullable="false" />
+          <Property Type="Int32" Name="TrialID" Nullable="true" />
+          <Property Type="Int32" Name="ErrorNumber" Nullable="false" />
+          <Property Type="Int32" Name="ErrorSeverity" Nullable="false" />
+          <Property Type="Int32" Name="ErrorState" Nullable="false" />
+          <Property Type="String" Name="ErrorProcedure" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="ErrorLine" Nullable="false" />
+          <Property Type="String" Name="ErrorMessage" Nullable="false" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="usp_Get_Trial_ByTrialID_Result">
+          <Property Type="Int32" Name="Trial_ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="TrialYear" Nullable="true" />
+          <Property Type="String" Name="FarmName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="SRRLeadUser_ID" Nullable="false" />
+          <Property Type="Int32" Name="IRPUser_ID" Nullable="true" />
+          <Property Type="Int32" Name="Crop_ID" Nullable="false" />
+          <Property Type="Int32" Name="Trait_ID" Nullable="true" />
+          <Property Type="Int32" Name="Site_ID" Nullable="true" />
+          <Property Type="Boolean" Name="Internal" Nullable="true" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Zip" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="County" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ComplianceStatus" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="usp_Update_Trial_Result">
+          <Property Type="Int32" Name="ReturnCode" Nullable="false" />
+          <Property Type="Int32" Name="ErrorNumber" Nullable="false" />
+          <Property Type="Int32" Name="ErrorSeverity" Nullable="false" />
+          <Property Type="Int32" Name="ErrorState" Nullable="false" />
+          <Property Type="String" Name="ErrorProcedure" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="ErrorLine" Nullable="false" />
+          <Property Type="String" Name="ErrorMessage" Nullable="false" MaxLength="1" />
+        </ComplexType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="REGFIELDTRIALSModelStoreContainer" CdmEntityContainer="REGFIELDTRIALSEntities">
+          <EntitySetMapping Name="AttachmentTypes">
+            <EntityTypeMapping TypeName="REGFIELDTRIALSModel.AttachmentType">
+              <MappingFragment StoreEntitySet="AttachmentType">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="UpdateDateTime" ColumnName="UpdateDateTime" />
+                <ScalarProperty Name="AttachmentTypeName" ColumnName="AttachmentTypeName" />
+                <ScalarProperty Name="AttachmentType_ID" ColumnName="AttachmentType_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChemicalMasters">
+            <EntityTypeMapping TypeName="REGFIELDTRIALSModel.ChemicalMaster">
+              <MappingFragment StoreEntitySet="ChemicalMaster">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="UpdateDateTime" ColumnName="UpdateDateTime" />
+                <ScalarProperty Name="ChemicalType_ID" ColumnName="ChemicalType_ID" />
+                <ScalarProperty Name="ChemicalName" ColumnName="ChemicalName" />
+                <ScalarProperty Name="Chemical_ID" ColumnName="Chemical_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChemicalTypes">
+            <EntityTypeMapping TypeName="REGFIELDTRIALSModel.ChemicalType">
+              <MappingFragment StoreEntitySet="ChemicalType">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="UpdateDateTime" ColumnName="UpdateDateTime" />
+                <ScalarProperty Name="ChemicalTypeName" ColumnName="ChemicalTypeName" />
+                <ScalarProperty Name="ChemicalType_ID" ColumnName="ChemicalType_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Crops">
+            <EntityTypeMapping TypeName="REGFIELDTRIALSModel.Crop">
+              <MappingFragment StoreEntitySet="Crop">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="UpdateDateTime" ColumnName="UpdateDateTime" />
+                <ScalarProperty Name="CropName" ColumnName="CropName" />
+                <ScalarProperty Name="Crop_ID" ColumnName="Crop_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DB_Version">
+            <EntityTypeMapping TypeName="REGFIELDTRIALSModel.DB_Version">
+              <MappingFragment StoreEntitySet="DB_Version">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="UpdateDateTime" ColumnName="UpdateDateTime" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="DB_Version1" ColumnName="DB_Version" />
+                <ScalarProperty Name="DB_Version_ID" ColumnName="DB_Version_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LookupMasters">
+            <EntityTypeMapping TypeName="REGFIELDTRIALSModel.LookupMaster">
+              <MappingFragment StoreEntitySet="LookupMaster">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="UpdateDateTime" ColumnName="UpdateDateTime" />
+                <ScalarProperty Name="LookupName" ColumnName="LookupName" />
+                <ScalarProperty Name="Lookup_ID" ColumnName="Lookup_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="REGFIELDTRIALSModel.Question">
+              <MappingFragment StoreEntitySet="Question">
+                <ScalarProperty Name="IsLookup" ColumnName="IsLookup" />
+                <ScalarProperty Name="QuestionText" ColumnName="QuestionText" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="UpdateDateTime" ColumnName="UpdateDateTime" />
+                <ScalarProperty Name="QuestionName" ColumnName="QuestionName" />
+                <ScalarProperty Name="Question_ID" ColumnName="Question_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Responses">
+            <EntityTypeMapping TypeName="REGFIELDTRIALSModel.Response">
+              <MappingFragment StoreEntitySet="Response">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="UpdateDateTime" ColumnName="UpdateDateTime" />
+                <ScalarProperty Name="VerifiedDate" ColumnName="VerifiedDate" />
+                <ScalarProperty Name="FollowupRequired" ColumnName="FollowupRequired" />
+                <ScalarProperty Name="ResponseValue" ColumnName="ResponseValue" />
+                <ScalarProperty Name="TrialProgress_ID" ColumnName="TrialProgress_ID" />
+                <ScalarProperty Name="Question_ID" ColumnName="Question_ID" />
+                <ScalarProperty Name="Response_ID" ColumnName="Response_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SiteMasters">
+            <EntityTypeMapping TypeName="REGFIELDTRIALSModel.SiteMaster">
+              <MappingFragment StoreEntitySet="SiteMaster">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="UpdateDateTime" ColumnName="UpdateDateTime" />
+                <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+                <ScalarProperty Name="Site_ID" ColumnName="Site_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SRR_EvalResponse">
+            <EntityTypeMapping TypeName="REGFIELDTRIALSModel.SRR_EvalResponse">
+              <MappingFragment StoreEntitySet="SRR_EvalResponse">
+                <ScalarProperty Name="LastTrainingYear" ColumnName="LastTrainingYear" />
+                <ScalarProperty Name="ComplianceResponse6" ColumnName="ComplianceResponse6" />
+                <ScalarProperty Name="ComplianceResponse5" ColumnName="ComplianceResponse5" />
+                <ScalarProperty Name="ComplianceResponse4" ColumnName="ComplianceResponse4" />
+                <ScalarProperty Name="ComplianceResponse3" ColumnName="ComplianceResponse3" />
+                <ScalarProperty Name="ComplianceResponse2" ColumnName="ComplianceResponse2" />
+                <ScalarProperty Name="ComplianceResponse1" ColumnName="ComplianceResponse1" />
+                <ScalarProperty Name="CompletedYear" ColumnName="CompletedYear" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="UpdateDateTime" ColumnName="UpdateDateTime" />
+                <ScalarProperty Name="Flagged" ColumnName="Flagged" />
+                <ScalarProperty Name="ComplianceQuestion6" ColumnName="ComplianceQuestion6" />
+                <ScalarProperty Name="ComplianceQuestion5" ColumnName="ComplianceQuestion5" />
+                <ScalarProperty Name="ComplianceQuestion4" ColumnName="ComplianceQuestion4" />
+                <ScalarProperty Name="ComplianceQuestion3" ColumnName="ComplianceQuestion3" />
+                <ScalarProperty Name="ComplianceQuestion2" ColumnName="ComplianceQuestion2" />
+                <ScalarProperty Name="ComplianceQuestion1" ColumnName="ComplianceQuestion1" />
+                <ScalarProperty Name="BackupSRRInformed" ColumnName="BackupSRRInformed" />
+                <ScalarProperty Name="BackupSRR_ID" ColumnName="BackupSRR_ID" />
+                <ScalarProperty Name="BackupSRRIdentified" ColumnName="BackupSRRIdentified" />
+                <ScalarProperty Name="NumAcresSRRManages" ColumnName="NumAcresSRRManages" />
+                <ScalarProperty Name="NumFieldsReponsibleFor" ColumnName="NumFieldsReponsibleFor" />
+                <ScalarProperty Name="YearsExperience_SiteLeadSRR" ColumnName="YearsExperience_SiteLeadSRR" />
+                <ScalarProperty Name="YearsExperience_SRR" ColumnName="YearsExperience_SRR" />
+                <ScalarProperty Name="SRR_ID" ColumnName="SRR_ID" />
+                <ScalarProperty Name="EvalResponse_ID" ColumnName="EvalResponse_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SRRUser_Trial_Xref">
+            <EntityTypeMapping TypeName="REGFIELDTRIALSModel.SRRUser_Trial_Xref">
+              <MappingFragment StoreEntitySet="SRRUser_Trial_Xref">
+                <ScalarProperty Name="PrimarySRR" ColumnName="PrimarySRR" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="UpdateDateTime" ColumnName="UpdateDateTime" />
+                <ScalarProperty Name="Trial_ID" ColumnName="Trial_ID" />
+                <ScalarProperty Name="SRRUser_ID" ColumnName="SRRUser_ID" />
+                <ScalarProperty Name="SRRUser_Trial_Xref1" ColumnName="SRRUser_Trial_Xref" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="REGFIELDTRIALSModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TraitMasters">
+            <EntityTypeMapping TypeName="REGFIELDTRIALSModel.TraitMaster">
+              <MappingFragment StoreEntitySet="TraitMaster">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="UpdateDateTime" ColumnName="UpdateDateTime" />
+                <ScalarProperty Name="TraitName" ColumnName="TraitName" />
+                <ScalarProperty Name="Trait_ID" ColumnName="Trait_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrialCatalogs">
+            <EntityTypeMapping TypeName="REGFIELDTRIALSModel.TrialCatalog">
+              <MappingFragment StoreEntitySet="TrialCatalog">
+                <ScalarProperty Name="ComplianceStatus" ColumnName="ComplianceStatus" />
+                <ScalarProperty Name="Archive" ColumnName="Archive" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="UpdateDateTime" ColumnName="UpdateDateTime" />
+                <ScalarProperty Name="Approved_Area_UOM" ColumnName="Approved_Area_UOM" />
+                <ScalarProperty Name="Approved_Area" ColumnName="Approved_Area" />
+                <ScalarProperty Name="GPSLong4" ColumnName="GPSLong4" />
+                <ScalarProperty Name="GPSLat4" ColumnName="GPSLat4" />
+                <ScalarProperty Name="GPSLong3" ColumnName="GPSLong3" />
+                <ScalarProperty Name="GPSLat3" ColumnName="GPSLat3" />
+                <ScalarProperty Name="GPSLong2" ColumnName="GPSLong2" />
+                <ScalarProperty Name="GPSLat2" ColumnName="GPSLat2" />
+                <ScalarProperty Name="GPSLong1" ColumnName="GPSLong1" />
+                <ScalarProperty Name="GPSLat1" ColumnName="GPSLat1" />
+                <ScalarProperty Name="Internal" ColumnName="Internal" />
+                <ScalarProperty Name="FarmName" ColumnName="FarmName" />
+                <ScalarProperty Name="County" ColumnName="County" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AgencyApprovalNo" ColumnName="AgencyApprovalNo" />
+                <ScalarProperty Name="TrialYear" ColumnName="TrialYear" />
+                <ScalarProperty Name="Site_ID" ColumnName="Site_ID" />
+                <ScalarProperty Name="Trait_ID" ColumnName="Trait_ID" />
+                <ScalarProperty Name="Crop_ID" ColumnName="Crop_ID" />
+                <ScalarProperty Name="IRPUser_ID" ColumnName="IRPUser_ID" />
+                <ScalarProperty Name="SRRLeadUser_ID" ColumnName="SRRLeadUser_ID" />
+                <ScalarProperty Name="Trial_ID" ColumnName="Trial_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrialNotes">
+            <EntityTypeMapping TypeName="REGFIELDTRIALSModel.TrialNote">
+              <MappingFragment StoreEntitySet="TrialNote">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="UpdateDateTime" ColumnName="UpdateDateTime" />
+                <ScalarProperty Name="NoteContent" ColumnName="NoteContent" />
+                <ScalarProperty Name="NoteCategory" ColumnName="NoteCategory" />
+                <ScalarProperty Name="Trial_ID" ColumnName="Trial_ID" />
+                <ScalarProperty Name="TrialNote_ID" ColumnName="TrialNote_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrialProgresses">
+            <EntityTypeMapping TypeName="REGFIELDTRIALSModel.TrialProgress">
+              <MappingFragment StoreEntitySet="TrialProgress">
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="UpdateDateTime" ColumnName="UpdateDateTime" />
+                <ScalarProperty Name="WorkflowCompleteDate" ColumnName="WorkflowCompleteDate" />
+                <ScalarProperty Name="WorkflowComplete" ColumnName="WorkflowComplete" />
+                <ScalarProperty Name="Workflow_ID" ColumnName="Workflow_ID" />
+                <ScalarProperty Name="SRRUser_ID" ColumnName="SRRUser_ID" />
+                <ScalarProperty Name="Trial_ID" ColumnName="Trial_ID" />
+                <ScalarProperty Name="TrialProgress_ID" ColumnName="TrialProgress_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrialWorkflowAttachments">
+            <EntityTypeMapping TypeName="REGFIELDTRIALSModel.TrialWorkflowAttachment">
+              <MappingFragment StoreEntitySet="TrialWorkflowAttachment">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="UpdateDateTime" ColumnName="UpdateDateTime" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="AttachmentType_ID" ColumnName="AttachmentType_ID" />
+                <ScalarProperty Name="Attachment" ColumnName="Attachment" />
+                <ScalarProperty Name="AttachmentName" ColumnName="AttachmentName" />
+                <ScalarProperty Name="Workflow_ID" ColumnName="Workflow_ID" />
+                <ScalarProperty Name="Trial_ID" ColumnName="Trial_ID" />
+                <ScalarProperty Name="Attachment_ID" ColumnName="Attachment_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="REGFIELDTRIALSModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserAlias" ColumnName="UserAlias" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="UpdateDateTime" ColumnName="UpdateDateTime" />
+                <ScalarProperty Name="Internal" ColumnName="Internal" />
+                <ScalarProperty Name="Manager_ID" ColumnName="Manager_ID" />
+                <ScalarProperty Name="SiteLocation" ColumnName="SiteLocation" />
+                <ScalarProperty Name="CellNumber" ColumnName="CellNumber" />
+                <ScalarProperty Name="OfficeNumber" ColumnName="OfficeNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LName" ColumnName="LName" />
+                <ScalarProperty Name="FName" ColumnName="FName" />
+                <ScalarProperty Name="UserType_ID" ColumnName="UserType_ID" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTypes">
+            <EntityTypeMapping TypeName="REGFIELDTRIALSModel.UserType">
+              <MappingFragment StoreEntitySet="UserType">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="UpdateDateTime" ColumnName="UpdateDateTime" />
+                <ScalarProperty Name="UserTypeName" ColumnName="UserTypeName" />
+                <ScalarProperty Name="UserType_ID" ColumnName="UserType_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workflows">
+            <EntityTypeMapping TypeName="REGFIELDTRIALSModel.Workflow">
+              <MappingFragment StoreEntitySet="Workflow">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="UpdateDateTime" ColumnName="UpdateDateTime" />
+                <ScalarProperty Name="WorkflowOrder" ColumnName="WorkflowOrder" />
+                <ScalarProperty Name="WorkflowName" ColumnName="WorkflowName" />
+                <ScalarProperty Name="Workflow_ID" ColumnName="Workflow_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkflowQuestions">
+            <EntityTypeMapping TypeName="REGFIELDTRIALSModel.WorkflowQuestion">
+              <MappingFragment StoreEntitySet="WorkflowQuestion">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="UpdateDateTime" ColumnName="UpdateDateTime" />
+                <ScalarProperty Name="NotAcceptableHighRange" ColumnName="NotAcceptableHighRange" />
+                <ScalarProperty Name="NotAcceptableLowRange" ColumnName="NotAcceptableLowRange" />
+                <ScalarProperty Name="NotAcceptableAnswers" ColumnName="NotAcceptableAnswers" />
+                <ScalarProperty Name="AcceptableHighRange" ColumnName="AcceptableHighRange" />
+                <ScalarProperty Name="AcceptableLowRange" ColumnName="AcceptableLowRange" />
+                <ScalarProperty Name="AcceptableAnswers" ColumnName="AcceptableAnswers" />
+                <ScalarProperty Name="Question_ID" ColumnName="Question_ID" />
+                <ScalarProperty Name="Workflow_ID" ColumnName="Workflow_ID" />
+                <ScalarProperty Name="WorkflowQuestion_ID" ColumnName="WorkflowQuestion_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_Assign_PrimarySRR_ToTrial" FunctionName="REGFIELDTRIALSModel.Store.usp_Assign_PrimarySRR_ToTrial">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="REGFIELDTRIALSModel.usp_Assign_PrimarySRR_ToTrial_Result">
+                <ScalarProperty Name="ReturnCode" ColumnName="ReturnCode" />
+                <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+                <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+                <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+                <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_Create_User" FunctionName="REGFIELDTRIALSModel.Store.usp_Create_User">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="REGFIELDTRIALSModel.usp_Create_User_Result">
+                <ScalarProperty Name="ReturnCode" ColumnName="ReturnCode" />
+                <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+                <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+                <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+                <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_Delete_Trial_ByTrialID" FunctionName="REGFIELDTRIALSModel.Store.usp_Delete_Trial_ByTrialID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="REGFIELDTRIALSModel.usp_Delete_Trial_ByTrialID_Result">
+                <ScalarProperty Name="ReturnCode" ColumnName="ReturnCode" />
+                <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+                <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+                <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+                <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_Delete_User_ByUserID" FunctionName="REGFIELDTRIALSModel.Store.usp_Delete_User_ByUserID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="REGFIELDTRIALSModel.usp_Delete_User_ByUserID_Result">
+                <ScalarProperty Name="ReturnCode" ColumnName="ReturnCode" />
+                <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+                <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+                <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+                <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_Get_FormStatus_ByTrialID" FunctionName="REGFIELDTRIALSModel.Store.usp_Get_FormStatus_ByTrialID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="REGFIELDTRIALSModel.usp_Get_FormStatus_ByTrialID_Result">
+                <ScalarProperty Name="Workflow_ID" ColumnName="Workflow_ID" />
+                <ScalarProperty Name="WorkflowName" ColumnName="WorkflowName" />
+                <ScalarProperty Name="WorkflowComplete" ColumnName="WorkflowComplete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_Get_User_ByUserAlias" FunctionName="REGFIELDTRIALSModel.Store.usp_Get_User_ByUserAlias">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="REGFIELDTRIALSModel.usp_Get_User_ByUserAlias_Result">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="UserType_ID" ColumnName="UserType_ID" />
+                <ScalarProperty Name="FName" ColumnName="FName" />
+                <ScalarProperty Name="LName" ColumnName="LName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="OfficeNumber" ColumnName="OfficeNumber" />
+                <ScalarProperty Name="CellNumber" ColumnName="CellNumber" />
+                <ScalarProperty Name="SiteLocation" ColumnName="SiteLocation" />
+                <ScalarProperty Name="Manager_ID" ColumnName="Manager_ID" />
+                <ScalarProperty Name="Internal" ColumnName="Internal" />
+                <ScalarProperty Name="UserAlias" ColumnName="UserAlias" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_Get_User_ByUserID" FunctionName="REGFIELDTRIALSModel.Store.usp_Get_User_ByUserID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="REGFIELDTRIALSModel.usp_Get_User_ByUserID_Result">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="UserType_ID" ColumnName="UserType_ID" />
+                <ScalarProperty Name="FName" ColumnName="FName" />
+                <ScalarProperty Name="LName" ColumnName="LName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="OfficeNumber" ColumnName="OfficeNumber" />
+                <ScalarProperty Name="CellNumber" ColumnName="CellNumber" />
+                <ScalarProperty Name="SiteLocation" ColumnName="SiteLocation" />
+                <ScalarProperty Name="Manager_ID" ColumnName="Manager_ID" />
+                <ScalarProperty Name="Internal" ColumnName="Internal" />
+                <ScalarProperty Name="UserAlias" ColumnName="UserAlias" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_PaginatedList_TrialMaps" FunctionName="REGFIELDTRIALSModel.Store.usp_PaginatedList_TrialMaps">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="REGFIELDTRIALSModel.usp_PaginatedList_TrialMaps_Result">
+                <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
+                <ScalarProperty Name="RowCount" ColumnName="RowCount" />
+                <ScalarProperty Name="Trial_Year" ColumnName="Trial_Year" />
+                <ScalarProperty Name="Trial_ID" ColumnName="Trial_ID" />
+                <ScalarProperty Name="Trial_Name" ColumnName="Trial_Name" />
+                <ScalarProperty Name="Farm_Name" ColumnName="Farm_Name" />
+                <ScalarProperty Name="Crop_Name" ColumnName="Crop_Name" />
+                <ScalarProperty Name="Site_Name" ColumnName="Site_Name" />
+                <ScalarProperty Name="City_Name" ColumnName="City_Name" />
+                <ScalarProperty Name="State_Name" ColumnName="State_Name" />
+                <ScalarProperty Name="LeadSRR_UserAlias" ColumnName="LeadSRR_UserAlias" />
+                <ScalarProperty Name="Image_ID" ColumnName="Image_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_PaginatedList_Trials" FunctionName="REGFIELDTRIALSModel.Store.usp_PaginatedList_Trials">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="REGFIELDTRIALSModel.usp_PaginatedList_Trials_Result">
+                <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
+                <ScalarProperty Name="RowCount" ColumnName="RowCount" />
+                <ScalarProperty Name="Trial_Year" ColumnName="Trial_Year" />
+                <ScalarProperty Name="Trial_ID" ColumnName="Trial_ID" />
+                <ScalarProperty Name="Trial_Name" ColumnName="Trial_Name" />
+                <ScalarProperty Name="Farm_Name" ColumnName="Farm_Name" />
+                <ScalarProperty Name="Crop_Name" ColumnName="Crop_Name" />
+                <ScalarProperty Name="Site_Name" ColumnName="Site_Name" />
+                <ScalarProperty Name="Trait_Name" ColumnName="Trait_Name" />
+                <ScalarProperty Name="PrimarySRR" ColumnName="PrimarySRR" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_PaginatedList_Users" FunctionName="REGFIELDTRIALSModel.Store.usp_PaginatedList_Users">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="REGFIELDTRIALSModel.usp_PaginatedList_Users_Result">
+                <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
+                <ScalarProperty Name="RowCount" ColumnName="RowCount" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="FName" ColumnName="FName" />
+                <ScalarProperty Name="LName" ColumnName="LName" />
+                <ScalarProperty Name="UserAlias" ColumnName="UserAlias" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Internal" ColumnName="Internal" />
+                <ScalarProperty Name="SiteLocation" ColumnName="SiteLocation" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_Update_User" FunctionName="REGFIELDTRIALSModel.Store.usp_Update_User">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="REGFIELDTRIALSModel.usp_Update_User_Result">
+                <ScalarProperty Name="ReturnCode" ColumnName="ReturnCode" />
+                <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+                <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+                <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+                <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_Create_Trial" FunctionName="REGFIELDTRIALSModel.Store.usp_Create_Trial">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="REGFIELDTRIALSModel.usp_Create_Trial_Result">
+                <ScalarProperty Name="ReturnCode" ColumnName="ReturnCode" />
+                <ScalarProperty Name="TrialID" ColumnName="TrialID" />
+                <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+                <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+                <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+                <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_Get_Trial_ByTrialID" FunctionName="REGFIELDTRIALSModel.Store.usp_Get_Trial_ByTrialID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="REGFIELDTRIALSModel.usp_Get_Trial_ByTrialID_Result">
+                <ScalarProperty Name="Trial_ID" ColumnName="Trial_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TrialYear" ColumnName="TrialYear" />
+                <ScalarProperty Name="FarmName" ColumnName="FarmName" />
+                <ScalarProperty Name="SRRLeadUser_ID" ColumnName="SRRLeadUser_ID" />
+                <ScalarProperty Name="IRPUser_ID" ColumnName="IRPUser_ID" />
+                <ScalarProperty Name="Crop_ID" ColumnName="Crop_ID" />
+                <ScalarProperty Name="Trait_ID" ColumnName="Trait_ID" />
+                <ScalarProperty Name="Site_ID" ColumnName="Site_ID" />
+                <ScalarProperty Name="Internal" ColumnName="Internal" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="County" ColumnName="County" />
+                <ScalarProperty Name="ComplianceStatus" ColumnName="ComplianceStatus" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_Update_Trial" FunctionName="REGFIELDTRIALSModel.Store.usp_Update_Trial">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="REGFIELDTRIALSModel.usp_Update_Trial_Result">
+                <ScalarProperty Name="ReturnCode" ColumnName="ReturnCode" />
+                <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+                <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+                <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+                <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,49 @@
+﻿@using FIDOVictory.AdminTool.Tools.Razor;
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#victory-admin-tool-navbar" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <ul class="nav navbar-nav">
+                <li class="@Html.IsActive("Index", "Home")">
+                    @Html.ActionLink("Victory Admin Tool", "Index", "Home", new { }, new { @class = "navbar-brand" })
+                </li>
+            </ul>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="victory-admin-tool-navbar">
+
+            <ul class="nav navbar-nav">
+                <li class="@Html.IsActive("Index,Edit,Delete,Create", "User")">
+                    @Html.ActionLink("Users", "Index", "User")
+                </li>
+
+                <li class="@Html.IsActive("Index,Edit,Delete,Create,Unlock", "Trial")">
+                    @Html.ActionLink("Trials", "Index", "Trial")
+                </li>
+
+                <li class="@Html.IsActive("Maps", "Trial")">
+                    @Html.ActionLink("Trial Maps", "Maps", "Trial")
+                </li>
+
+                <li class="@Html.IsActive("Index,Edit,Delete,Create", "Chemical")">
+                    @Html.ActionLink("Chemicals", "Index", "Chemical")
+                </li>
+
+                <li class="@Html.IsActive("Index,Edit,Delete,Create", "Site")">
+                    @Html.ActionLink("Sites", "Index", "Site")
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+</nav>

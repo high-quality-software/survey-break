@@ -1,0 +1,6 @@
+
+use REGFIELDTRIALS
+go
+
+IF NOT EXISTS ( SELECT * FROM INFORMATION_SCHEMA . COLUMNS WHERE      TABLE_NAME= 'SRR_EvalResponse' AND COLUMN_NAME ='CompletedYear' )
+ALTER TABLE [dbo].[SRR_EvalResponse] ADD CompletedYear int null;

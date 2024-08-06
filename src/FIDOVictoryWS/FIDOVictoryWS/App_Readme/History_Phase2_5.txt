@@ -1,0 +1,10 @@
+﻿v1.2.0
+
+Fix Get Attachment Web API, issue came from attachment name can contain invalid url characters.
+
+This issue has generated the creation of:
+
+Victory Web API Rule #1:
+Avoid free text strings in URL (url path and url get paramters), all free text strings values must be sent into request body in JSON format
+
+

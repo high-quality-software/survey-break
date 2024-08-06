@@ -1,0 +1,1742 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Sync Page</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <!-- Set Up the App Icon -->
+    <link rel="icon" href="images/Victoryfavicon.ico" />
+    <!-- Load It Like A Native App -->
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Victory" />
+    <!-- Customize the Startup Screen -->
+    <link rel="apple-touch-icon" href="images/icons/Victory_96x96.png">
+    <link rel="apple-touch-startup-image" href="images/icons/Victoryapple-touch-startup-image-1024x768.png">
+    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
+    <script type="text/javascript" src="js/alertify.min.js"></script>
+    <script type="text/javascript" src="js/jquery.percentageloader-0.1.js"></script>
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="css/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="css/alertify.core.css" />
+    <link rel="stylesheet" href="css/alertify.default.css" />
+    <link rel="stylesheet" href="css/jquery.percentageloader-0.1.css" />
+    <script type="text/javascript" src="js/Config.js"></script>
+    <script type="text/javascript" src="js/GlobalVariables.js"></script>
+    <script type="text/javascript" src="js/General.js"></script>
+    <style type="text/css">
+        body {
+            background: url(images/bkg3.jpg) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            overflow: hidden;
+        }
+
+        .ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper {
+            background-color: transparent;
+        }
+
+        html head + body .ui-body-c.ui-focus {
+            -webkit-box-shadow: 0 0 12px #3388cc /*{b-active-background-color}*/;
+            -moz-box-shadow: 0 0 12px #3388cc /*{b-active-background-color}*/;
+            box-shadow: 0 0 12px #3388cc /*{b-active-background-color}*/;
+        }
+
+        .ui-body-c, .ui-page-theme-c .ui-body-inherit, html .ui-bar-c .ui-body-inherit, html .ui-body-c .ui-body-inherit, html body .ui-group-theme-c .ui-body-inherit, html .ui-panel-page-container-c {
+            background-color: white /*{b-body-background-color}*/;
+            border-color: #ADADAD /*{b-body-border}*/;
+            color: #444444 /*{b-body-color}*/;
+            text-shadow: 0 /*{b-body-shadow-x}*/ 1px /*{b-body-shadow-y}*/ 0 /*{b-body-shadow-radius}*/ #444444 /*{b-body-shadow-color}*/;
+        }
+
+        input.centerText {
+            text-align: center;
+        }
+
+        .modalBack2 {
+            opacity: .8;
+            background: black;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1002;
+        }
+
+        .modalDialog2 {
+            position: fixed;
+            opacity: 1;
+            width: 700px;
+            height: 500px;
+            margin-left: -350px;
+            left: 50%;
+            margin-top: -250px;
+            top: 50%;
+            z-index: 1003;
+            padding: 5px 20px 13px 20px;
+            border-radius: 20px;
+            background: #fff;
+            -webkit-transition: opacity 400ms ease-in;
+            -moz-transition: opacity 400ms ease-in;
+            transition: opacity 400ms ease-in;
+            background: -moz-linear-gradient(#fff, #999);
+            background: -webkit-linear-gradient(#fff, #999);
+            background: -o-linear-gradient(#fff, #999);
+        }
+    </style>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            DownloadInitialData();
+        });
+
+        var FinishDownload = 0;
+        var QtyCat = 0;
+        var QtyProcess = 0;
+        var data = JSON.parse(localStorage.getItem("LastSync"));
+        var FormArray = ["", "F01_Form_Trial_Info", "F02_Form_SRR_Evaluation", "F03_Form_Site_Selection_Checklist", "F04_Form_Land_Contracts", "F05_Form_Compliance_Exceptions", "F06_Form_Compliance_Map", "F07_Form_Trial_Risk_Evaluation", "F08_Form_CQA", "F09_Form_Cleanouts", "F10_Form_Dicamba_Spray_Tracking", "F11_Form_In_Season_Monitoring", "F12_Form_Harvest_and_Destruct", "F13_Form_Drip_Tape_Verification", "F14_Form_Bin_Inspections", "F15_Form_Post_Harvest_SRR_Evaluation", "F16_Form_Volunteer_Monitoring", "F17_Form_Replant", "F18_Form_PrePlanting", "F19_Form_Planting", "F20_Form_Material_Movement"];
+
+        var Steps = 0;
+        var TotalSteps = 22;
+
+        if (data === undefined || data === null) {
+            var complianceTable = { "C01": "2015-01-01T04:00:00.000Z", "C02": "2015-01-01T04:00:00.000Z", "C03": "2015-01-01T04:00:00.000Z", "C04": "2015-01-01T04:00:00.000Z", "C05": "2015-01-01T04:00:00.000Z", "C06": "2015-01-01T04:00:00.000Z", "C07": "2015-01-01T04:00:00.000Z", "C08": "2015-01-01T04:00:00.000Z", "C09": "2015-01-01T04:00:00.000Z", "C10": "2015-01-01T04:00:00.000Z", "Forms": "2015-01-01T04:00:00.000Z", "App": "2015-01-01T04:00:00.000Z" };
+            localStorage.setItem('LastSync', JSON.stringify(complianceTable));
+        }
+
+        function animateFunc() {
+            $('#DownloadInfoDiv').scrollTop($('#DownloadInfoDiv')[0].scrollHeight);
+            Steps += 1;
+            $topLoader.setProgress(Steps / TotalSteps);
+            $topLoader.setValue('Steps' + Steps);
+            $('#DownloadInfoDiv').scrollTop = $('#DownloadInfoDiv').scrollHeight;
+        }
+
+        function DownloadInitialData() {
+            var localUserData = JSON.parse(localStorage.getItem("Login"));
+            if (FinishDownload == 0) {
+                $('#DownloadInfo').html($('#DownloadInfo').html() + '<br/> Uploading Sync Data...');
+                animateFunc();
+                UploadSync();
+            } else if (FinishDownload == 1) {
+                (QtyCat == 99999 ? $('#DownloadInfo').html($('#DownloadInfo').html() + '<br /> There where some error uploading the data.') : $('#DownloadInfo').html($('#DownloadInfo').html() + '<br /> Upload Completed.  ' + QtyProcess + ' out of ' + QtyCat + ' forms uploaded.'));
+                QtyProcess = 0;
+                animateFunc();
+                FinishDownload += 1;
+                DownloadInitialData();
+            } else if (FinishDownload == 2) {
+                $('#DownloadInfo').html($('#DownloadInfo').html() + '<br/> Downloading Crop Catalog...');
+                animateFunc();
+                CatalogSync("crop", "C03", "C03_Catalog_Crops", "CropID", "");
+            } else if (FinishDownload == 3) {
+                (QtyCat == 99999 ? $('#DownloadInfo').html($('#DownloadInfo').html() + '<br /> There where some error downloading the Crop Catalog.') : $('#DownloadInfo').html($('#DownloadInfo').html() + '<br /> Download Completed.  ' + QtyProcess + ' out of ' + QtyCat + ' Crops downloaded.'));
+                QtyProcess = 0;
+                animateFunc();
+                FinishDownload += 1;
+                DownloadInitialData();
+            } else if (FinishDownload == 4) {
+                $('#DownloadInfo').html($('#DownloadInfo').html() + '<br/> Downloading Trait Catalog...');
+                animateFunc();
+                CatalogSync("trial/trait", "C04", "C04_Trait", "TraitID", "");
+            } else if (FinishDownload == 5) {
+                (QtyCat == 99999 ? $('#DownloadInfo').html($('#DownloadInfo').html() + '<br /> There where some error downloading the Trait Catalog.') : $('#DownloadInfo').html($('#DownloadInfo').html() + '<br /> Download Completed.  ' + QtyProcess + ' out of ' + QtyCat + ' Traits downloaded.'));
+                QtyProcess = 0;
+                animateFunc();
+                FinishDownload += 1;
+                DownloadInitialData();
+            } else if (FinishDownload == 6) {
+                $('#DownloadInfo').html($('#DownloadInfo').html() + '<br/> Downloading Personnel Catalog...');
+                animateFunc();
+                CatalogSync("user", "C02", "C02_Personnel", "UserID", "");
+            } else if (FinishDownload == 7) {
+                (QtyCat == 99999 ? $('#DownloadInfo').html($('#DownloadInfo').html() + '<br /> There where some error downloading the Personnel Catalog.') : $('#DownloadInfo').html($('#DownloadInfo').html() + '<br /> Download Completed.  ' + QtyProcess + ' out of ' + QtyCat + ' Personnel downloaded.'));
+                QtyProcess = 0;
+                animateFunc();
+                FinishDownload += 1;
+                DownloadInitialData();
+            } else if (FinishDownload == 8) {
+                $('#DownloadInfo').html($('#DownloadInfo').html() + '<br/> Downloading Site Catalog...');
+                animateFunc();
+                CatalogSync("trial/site", "C06", "C06_Site", "SiteID", "");
+            } else if (FinishDownload == 9) {
+                (QtyCat == 99999 ? $('#DownloadInfo').html($('#DownloadInfo').html() + '<br /> There where some error downloading the Site Catalog.') : $('#DownloadInfo').html($('#DownloadInfo').html() + '<br /> Download Completed.  ' + QtyProcess + ' out of ' + QtyCat + ' Sites downloaded.'));
+                QtyProcess = 0;
+                animateFunc();
+                FinishDownload += 1;
+                DownloadInitialData();
+            } else if (FinishDownload == 10) {
+                $('#DownloadInfo').html($('#DownloadInfo').html() + '<br/> Downloading Attachment Type Catalog...');
+                animateFunc();
+                CatalogSync("attachment/type", "C07", "C07_Attachment_Type", "AttachmentTypeID", "");
+            } else if (FinishDownload == 11) {
+                (QtyCat == 99999 ? $('#DownloadInfo').html($('#DownloadInfo').html() + '<br /> There where some error downloading the Attachment Type Catalog.') : $('#DownloadInfo').html($('#DownloadInfo').html() + '<br /> Download Completed.  ' + QtyProcess + ' out of ' + QtyCat + ' Attachment type downloaded.'));
+                QtyProcess = 0;
+                animateFunc();
+                FinishDownload += 1;
+                DownloadInitialData();
+            } else if (FinishDownload == 12) {
+                $('#DownloadInfo').html($('#DownloadInfo').html() + '<br/> Downloading Trials Notes...');
+                animateFunc();
+                CatalogSync("trial/note", "C08", "C08_Trial_Note", "TrialNoteID", "&userAlias=" + localUserData.UserId);
+            } else if (FinishDownload == 13) {
+                (QtyCat == 99999 ? $('#DownloadInfo').html($('#DownloadInfo').html() + '<br /> There where some error downloading the Trials Notes.') : $('#DownloadInfo').html($('#DownloadInfo').html() + '<br /> Download Completed.  ' + QtyProcess + ' out of ' + QtyCat + ' Trials Notes downloaded.'));
+                QtyProcess = 0;
+                animateFunc();
+                FinishDownload += 1;
+                DownloadInitialData();
+            } else if (FinishDownload == 14) {
+                $('#DownloadInfo').html($('#DownloadInfo').html() + '<br/> Downloading Trial Catalog...');
+                animateFunc();
+                CatalogSync("trial", "C01", "C01_Catalog_Trial", "TrialID", "&userAlias=" + localUserData.UserId);
+            } else if (FinishDownload == 15) {
+                (QtyCat == 99999 ? $('#DownloadInfo').html($('#DownloadInfo').html() + '<br /> There where some error downloading the Trial Catalog.') : $('#DownloadInfo').html($('#DownloadInfo').html() + '<br /> Download Completed.  ' + QtyProcess + ' out of ' + QtyCat + ' Trials downloaded.'));
+                QtyProcess = 0;
+                animateFunc();
+                FinishDownload += 1;
+                DownloadInitialData();
+            } else if (FinishDownload == 16) {
+                $('#DownloadInfo').html($('#DownloadInfo').html() + '<br/> Creating Dashboard...');
+                animateFunc();
+                DashboardCreation("trial", "C01", "C01_Catalog_Trial", "TrialID", "&userAlias=" + localUserData.UserId);
+            } else if (FinishDownload == 17) {
+                (QtyCat == 99999 ? $('#DownloadInfo').html($('#DownloadInfo').html() + '<br /> There where some error creating the Dashboard.') : $('#DownloadInfo').html($('#DownloadInfo').html() + '<br /> Dashboard Completed.  ' + QtyProcess + ' out of ' + QtyCat + ' Trials created.'));
+                QtyProcess = 0;
+                animateFunc();
+                FinishDownload += 1;
+                DownloadInitialData();
+            } else if (FinishDownload == 18) {
+                $('#DownloadInfo').html($('#DownloadInfo').html() + '<br/> Downloading Forms Data...');
+                animateFunc();
+                FormSync(localUserData.UserId);
+            } else if (FinishDownload == 19) {
+                (QtyCat == 99999 ? $('#DownloadInfo').html($('#DownloadInfo').html() + '<br /> There where some error downloading the Forms Tables.') : $('#DownloadInfo').html($('#DownloadInfo').html() + '<br /> Download Completed.  ' + QtyProcess + ' out of ' + QtyCat + ' Form Data downloaded.'));
+                QtyProcess = 0;
+                animateFunc();
+                FinishDownload += 1;
+                DownloadInitialData();
+            } else if (FinishDownload == 20) {
+                $('#DownloadInfo').html($('#DownloadInfo').html() + '<br/> Adding Forms Data to Dashboard...');
+                animateFunc();
+                SetFormsInDashboard();
+            } else if (FinishDownload == 21) {
+                (QtyCat == 99999 ? $('#DownloadInfo').html($('#DownloadInfo').html() + '<br /> There where some error adding the form to the Dashboard.') : $('#DownloadInfo').html($('#DownloadInfo').html() + '<br /> Adding Completed.  ' + QtyProcess + ' out of ' + QtyCat + ' Form Data added.'));
+                QtyProcess = 0;
+                animateFunc();
+                FinishDownload += 1;
+                DownloadInitialData();
+            } else {
+                FinishDownload = 0;
+                animateFunc();
+                var LastSyncLocal = JSON.parse(localStorage.getItem("LastSync"));
+                var todateJSON = (new Date()).toJSON();
+                LastSyncLocal.App = todateJSON;
+                localStorage.setItem('LastSync', JSON.stringify(LastSyncLocal));
+
+                if (localUserData.SRREval && localUserData.UserTypeID == 1) {
+                    window.location.href = "SRR_Profile.html";
+                } else {
+                    window.location.href = "ComplianceDashboard.html";
+                }
+
+            }
+        }
+
+        function createBlankLocalStorage() {
+            var complianceTable = { "Id_Compliance_Status": 1, "Compliance_Status": "Stewarded" };
+            localStorage.setItem('C05_Compliance_Status_1', JSON.stringify(complianceTable));
+            var complianceTable = { "Id_Compliance_Status": 2, "Compliance_Status": "Regulated" };
+            localStorage.setItem('C05_Compliance_Status_2', JSON.stringify(complianceTable));
+        }
+
+        function CatalogSync(APIName, catalog, fullCatalogName, tableID, extraParm) {
+
+            var data = JSON.parse(localStorage.getItem("LastSync"));
+
+            var CatUrl = APIUrl + APIName + "?lastSync=" + data[catalog] + extraParm;
+            $.ajax({
+                url: CatUrl,
+                type: 'GET',
+                dataType: 'json',
+                success: function (datas) {
+                    QtyCat = datas.length;
+                    for (var i = 0; i < datas.length; i++) {
+                        QtyProcess += 1;
+                        SetLocalStorageData(fullCatalogName, datas[i][tableID], tableID, datas[i]);
+                    }
+                    var todate = (new Date()).toJSON();
+                    data[catalog] = todate;
+                    localStorage.setItem('LastSync', JSON.stringify(data));
+
+                    FinishDownload += 1;
+                    DownloadInitialData();
+                },
+                error: function (a, b, c) {
+                    QtyCat = 99999;
+                    FinishDownload += 1;
+                    DownloadInitialData();
+                }
+            });
+        }
+
+        //Upload pending to sync forms (those forms saved when iPAD was offline)
+        function UploadSync() {
+            var LogUser = JSON.parse(localStorage.getItem("Login"));
+            QtyCat = 0;
+            QtyProcess = 0;
+            var datacount = localStorage.length;
+
+            for (var i2 = 0; i2 < datacount; i2++) {
+                if (localStorage.key(i2).substr(0, 1) == "F") {
+                    var trial1 = localStorage.getItem(localStorage.key(i2)); //Get Data from Key
+                    var data1 = JSON.parse(trial1); //Parse the Data back into the object
+                    if (data1.Sync == 1) {
+                        QtyCat += 1;
+                    }
+                }
+            }
+
+            for (var i1 = 0; i1 < datacount; i1++) {
+                if (localStorage.key(i1).substr(0, 1) == "F") {
+                    var trial = localStorage.getItem(localStorage.key(i1)); //Get Data from Key
+                    var data = JSON.parse(trial); //Parse the Data back into the object
+                    var n = localStorage.key(i1).lastIndexOf("_");
+                    if (data.Sync == 1) {
+
+                        //F03_Form_Site_Selection_Checklist
+                        if (localStorage.key(i1).substr(0, n) == FormArray[3]) {
+                            if (SendData("form", "Site_Selection_Checklist",
+                                '{"TrialID": ' + data.Trial_Id + ',"WorkflowID": 3, "UserID": ' + LogUser.UserIdId + ', "CurrentUserAlias": "' + LogUser.UserId + '","Locked": ' + data.Locked + ',"Responses": [' +
+                                '{"QuestionID": 40,"ResponseValue": "' + data[getName(40)] + '"},' +
+                                '{"QuestionID": 41,"ResponseValue": "' + data[getName(41)] + '"},' +
+                                '{"QuestionID": 42,"ResponseValue": "' + data[getName(42)] + '"},' +
+                                '{"QuestionID": 43,"ResponseValue": "' + data[getName(43)] + '"},' +
+                                '{"QuestionID": 44,"ResponseValue": "' + data[getName(44)] + '"},' +
+                                '{"QuestionID": 45,"ResponseValue": "' + data[getName(45)] + '"},' +
+                                '{"QuestionID": 46,"ResponseValue": "' + data[getName(46)] + '"},' +
+                                '{"QuestionID": 47,"ResponseValue": "' + data[getName(47)] + '"}]}')) { SetLocalStorageSingleData("F03_Form_Site_Selection_Checklist", data.Trial_Id, "Trial_Id", 0, "Sync"); QtyProcess += 1; }
+                        }
+
+                        //F04_Form_Land_Contracts
+                        else if (localStorage.key(i1).substr(0, n) == FormArray[4]) {
+                            if (SendData("form", "Land_Contracts",
+                                '{"TrialID": ' + data.Trial_Id + ',"WorkflowID": 4, "UserID": ' + LogUser.UserIdId + ', "CurrentUserAlias": "' + LogUser.UserId + '","Locked": ' + data.Locked + ',"Responses": [' +
+                                '{"QuestionID": 48,"ResponseValue": "' + data[getName(48)] + '"},' +
+                                '{"QuestionID": 49,"ResponseValue": "' + data[getName(49)] + '"}]}')) { SetLocalStorageSingleData("F04_Form_Land_Contracts", data.Trial_Id, "Trial_Id", 0, "Sync"); QtyProcess += 1; }
+                        }
+
+                        //F05_Form_Compliance_Exceptions
+                        else if (localStorage.key(i1).substr(0, n) == FormArray[5]) {
+                            if (SendData("form", "Compliance_Exceptions",
+                                '{"TrialID": ' + data.Trial_Id + ',"WorkflowID": 5, "UserID": ' + LogUser.UserIdId + ', "CurrentUserAlias": "' + LogUser.UserId + '","Locked": ' + data.Locked + ',"Responses": [' +
+                                '{"QuestionID": 50,"ResponseValue": "' + data[getName(50)] + '"},' +
+                                '{"QuestionID": 51,"ResponseValue": "' + data[getName(51)] + '"},' +
+                                '{"QuestionID": 52,"ResponseValue": "' + data[getName(52)] + '"},' +
+                                '{"QuestionID": 53,"ResponseValue": "' + data[getName(53)] + '"},' +
+                                '{"QuestionID": 54,"ResponseValue": "' + data[getName(54)] + '"}]}')) { SetLocalStorageSingleData("F05_Form_Compliance_Exceptions", data.Trial_Id, "Trial_Id", 0, "Sync"); QtyProcess += 1; }
+                        }
+
+                        //F06_Form_Compliance_Map
+                        else if (localStorage.key(i1).substr(0, n) == FormArray[6]) {
+                            if (SendData("form", "Compliance_Map",
+                                '{"TrialID": ' + data.Trial_Id + ',"WorkflowID": 6, "UserID": ' + LogUser.UserIdId + ', "CurrentUserAlias": "' + LogUser.UserId + '","Locked": ' + data.Locked + ',"Responses": [' +
+                                '{"QuestionID": 55,"ResponseValue": "' + data[getName(55)] + '"},' +
+                                '{"QuestionID": 56,"ResponseValue": "' + data[getName(56)] + '"},' +
+                                '{"QuestionID": 57,"ResponseValue": "' + data[getName(57)] + '"},' +
+                                '{"QuestionID": 58,"ResponseValue": "' + data[getName(58)] + '"},' +
+                                '{"QuestionID": 59,"ResponseValue": "' + data[getName(59)] + '"},' +
+                                '{"QuestionID": 60,"ResponseValue": "' + data[getName(60)] + '"},' +
+                                '{"QuestionID": 61,"ResponseValue": "' + data[getName(61)] + '"},' +
+                                '{"QuestionID": 62,"ResponseValue": "' + data[getName(62)] + '"},' +
+                                '{"QuestionID": 63,"ResponseValue": "' + data[getName(63)] + '"},' +
+                                '{"QuestionID": 64,"ResponseValue": "' + data[getName(64)] + '"},' +
+                                '{"QuestionID": 65,"ResponseValue": "' + data[getName(65)] + '"},' +
+                                '{"QuestionID": 66,"ResponseValue": "' + data[getName(66)] + '"},' +
+                                '{"QuestionID": 67,"ResponseValue": "' + data[getName(67)] + '"},' +
+                                '{"QuestionID": 68,"ResponseValue": "' + data[getName(68)] + '"},' +
+                                '{"QuestionID": 69,"ResponseValue": "' + data[getName(69)] + '"},' +
+                                '{"QuestionID": 70,"ResponseValue": "' + data[getName(70)] + '"},' +
+                                '{"QuestionID": 71,"ResponseValue": "' + data[getName(71)] + '"},' +
+                                '{"QuestionID": 72,"ResponseValue": "' + data[getName(72)] + '"}]}')) { SetLocalStorageSingleData("F06_Form_Compliance_Map", data.Trial_Id, "Trial_Id", 0, "Sync"); QtyProcess += 1; }
+                        }
+
+                        //F10_Form_Dicamba_Spray_Tracking
+                        else if (localStorage.key(i1).substr(0, n) == FormArray[10]) {
+                            if (SendData("form", "Dicamba_Spray_Tracking",
+                                '{"TrialID": ' + data.Trial_Id + ',"WorkflowID": 10, "UserID": ' + LogUser.UserIdId + ', "CurrentUserAlias": "' + LogUser.UserId + '","Locked": ' + data.Locked + ',"Responses": [' +
+                                '{"QuestionID": 98,"ResponseValue": "' + data[getName(98)] + '"},' +
+                                '{"QuestionID": 99,"ResponseValue": "' + data[getName(98)] + '"},' +
+                                '{"QuestionID": 100,"ResponseValue": "' + data[getName(100)] + '"},' +
+                                '{"QuestionID": 101,"ResponseValue": "' + data[getName(101)] + '"},' +
+                                '{"QuestionID": 102,"ResponseValue": "' + data[getName(102)] + '"},' +
+                                '{"QuestionID": 103,"ResponseValue": "' + data[getName(103)] + '"},' +
+                                '{"QuestionID": 104,"ResponseValue": "' + data[getName(104)] + '"},' +
+                                '{"QuestionID": 105,"ResponseValue": "' + data[getName(105)] + '"},' +
+                                '{"QuestionID": 106,"ResponseValue": "' + data[getName(106)] + '"},' +
+                                '{"QuestionID": 107,"ResponseValue": "' + data[getName(107)] + '"},' +
+                                '{"QuestionID": 108,"ResponseValue": "' + data[getName(108)] + '"},' +
+                                '{"QuestionID": 109,"ResponseValue": "' + data[getName(109)] + '"},' +
+                                '{"QuestionID": 110,"ResponseValue": "' + data[getName(110)] + '"},' +
+                                '{"QuestionID": 111,"ResponseValue": "' + data[getName(111)] + '"},' +
+                                '{"QuestionID": 112,"ResponseValue": "' + data[getName(112)] + '"},' +
+                                '{"QuestionID": 113,"ResponseValue": "' + data[getName(113)] + '"},' +
+                                '{"QuestionID": 114,"ResponseValue": "' + data[getName(114)] + '"},' +
+                                '{"QuestionID": 115,"ResponseValue": "' + data[getName(115)] + '"},' +
+                                '{"QuestionID": 116,"ResponseValue": "' + data[getName(116)] + '"},' +
+                                '{"QuestionID": 117,"ResponseValue": "' + data[getName(117)] + '"},' +
+                                '{"QuestionID": 118,"ResponseValue": "' + data[getName(118)] + '"},' +
+                                '{"QuestionID": 119,"ResponseValue": "' + data[getName(119)] + '"},' +
+                                '{"QuestionID": 120,"ResponseValue": "' + data[getName(120)] + '"},' +
+                                '{"QuestionID": 121,"ResponseValue": "' + data[getName(121)] + '"},' +
+                                '{"QuestionID": 122,"ResponseValue": "' + data[getName(122)] + '"},' +
+                                '{"QuestionID": 123,"ResponseValue": "' + data[getName(123)] + '"},' +
+                                '{"QuestionID": 124,"ResponseValue": "' + data[getName(124)] + '"},' +
+                                '{"QuestionID": 125,"ResponseValue": "' + data[getName(125)] + '"},' +
+                                '{"QuestionID": 126,"ResponseValue": "' + data[getName(126)] + '"},' +
+                                '{"QuestionID": 127,"ResponseValue": "' + data[getName(127)] + '"},' +
+                                '{"QuestionID": 128,"ResponseValue": "' + data[getName(128)] + '"},' +
+                                '{"QuestionID": 129,"ResponseValue": "' + data[getName(129)] + '"},' +
+                                '{"QuestionID": 130,"ResponseValue": "' + data[getName(130)] + '"},' +
+                                '{"QuestionID": 131,"ResponseValue": "' + data[getName(131)] + '"},' +
+                                '{"QuestionID": 132,"ResponseValue": "' + data[getName(132)] + '"},' +
+                                '{"QuestionID": 133,"ResponseValue": "' + data[getName(133)] + '"},' +
+                                '{"QuestionID": 134,"ResponseValue": "' + data[getName(134)] + '"},' +
+                                '{"QuestionID": 135,"ResponseValue": "' + data[getName(135)] + '"},' +
+                                '{"QuestionID": 136,"ResponseValue": "' + data[getName(136)] + '"},' +
+                                '{"QuestionID": 137,"ResponseValue": "' + data[getName(137)] + '"},' +
+                                '{"QuestionID": 138,"ResponseValue": "' + data[getName(138)] + '"},' +
+                                '{"QuestionID": 139,"ResponseValue": "' + data[getName(139)] + '"},' +
+                                '{"QuestionID": 140,"ResponseValue": "' + data[getName(140)] + '"},' +
+                                '{"QuestionID": 141,"ResponseValue": "' + data[getName(141)] + '"},' +
+                                '{"QuestionID": 142,"ResponseValue": "' + data[getName(142)] + '"},' +
+                                '{"QuestionID": 143,"ResponseValue": "' + data[getName(143)] + '"},' +
+                                '{"QuestionID": 144,"ResponseValue": "' + data[getName(144)] + '"},' +
+                                '{"QuestionID": 145,"ResponseValue": "' + data[getName(145)] + '"},' +
+                                '{"QuestionID": 146,"ResponseValue": "' + data[getName(146)] + '"},' +
+                                '{"QuestionID": 147,"ResponseValue": "' + data[getName(147)] + '"},' +
+                                '{"QuestionID": 148,"ResponseValue": "' + data[getName(148)] + '"},' +
+                                '{"QuestionID": 149,"ResponseValue": "' + data[getName(149)] + '"},' +
+                                '{"QuestionID": 150,"ResponseValue": "' + data[getName(150)] + '"},' +
+                                '{"QuestionID": 151,"ResponseValue": "' + data[getName(151)] + '"},' +
+                                '{"QuestionID": 152,"ResponseValue": "' + data[getName(152)] + '"},' +
+                                '{"QuestionID": 153,"ResponseValue": "' + data[getName(153)] + '"},' +
+                                '{"QuestionID": 154,"ResponseValue": "' + data[getName(154)] + '"},' +
+                                '{"QuestionID": 155,"ResponseValue": "' + data[getName(155)] + '"},' +
+                                '{"QuestionID": 156,"ResponseValue": "' + data[getName(156)] + '"},' +
+                                '{"QuestionID": 157,"ResponseValue": "' + data[getName(157)] + '"}]}')) { SetLocalStorageSingleData("F10_Form_Dicamba_Spray_Tracking", data.Trial_Id, "Trial_Id", 0, "Sync"); QtyProcess += 1; }
+                        }
+
+                        //F11_Form_In_Season_Monitoring
+                        else if (localStorage.key(i1).substr(0, n) == FormArray[11]) {
+                            if (SendData("form", "In_Season",
+                                '{"TrialID": ' + data.Trial_Id + ',"WorkflowID": 11, "UserID": ' + LogUser.UserIdId + ', "CurrentUserAlias": "' + LogUser.UserId + '","Locked": ' + data.Locked + ',"Responses": [' +
+                                '{"QuestionID": 158,"ResponseValue": "' + data[getName(158)] + '"},' +
+                                '{"QuestionID": 159,"ResponseValue": "' + data[getName(159)] + '"},' +
+                                '{"QuestionID": 160,"ResponseValue": "' + data[getName(160)] + '"},' +
+                                '{"QuestionID": 161,"ResponseValue": "' + data[getName(161)] + '"},' +
+                                '{"QuestionID": 162,"ResponseValue": "' + data[getName(162)] + '"},' +
+                                '{"QuestionID": 163,"ResponseValue": "' + data[getName(163)] + '"},' +
+                                '{"QuestionID": 164,"ResponseValue": "' + data[getName(164)] + '"},' +
+                                '{"QuestionID": 165,"ResponseValue": "' + data[getName(165)] + '"},' +
+                                '{"QuestionID": 166,"ResponseValue": "' + data[getName(166)] + '"},' +
+                                '{"QuestionID": 167,"ResponseValue": "' + data[getName(167)] + '"},' +
+                                '{"QuestionID": 168,"ResponseValue": "' + data[getName(168)] + '"},' +
+                                '{"QuestionID": 169,"ResponseValue": "' + data[getName(169)] + '"},' +
+                                '{"QuestionID": 170,"ResponseValue": "' + data[getName(170)] + '"}]}')) { SetLocalStorageSingleData("F11_Form_In_Season", data.Trial_Id, "Trial_Id", 0, "Sync"); QtyProcess += 1; }
+                        }
+
+                        //F18_Form_PrePlanting
+                        else if (localStorage.key(i1).substr(0, n) == FormArray[18]) {
+                            if (SendData("form", "Pre_Planting",
+                                '{"TrialID": ' + data.Trial_Id + ',"WorkflowID": 18, "UserID": ' + LogUser.UserIdId + ', "CurrentUserAlias": "' + LogUser.UserId + '","Locked": ' + data.Locked + ',"Responses": [' +
+                                '{"QuestionID": 75,"ResponseValue": "' + data[getName(75)] + '"},' +
+                                '{"QuestionID": 76,"ResponseValue": "' + data[getName(76)] + '"},' +
+                                '{"QuestionID": 77,"ResponseValue": "' + data[getName(77)] + '"},' +
+                                '{"QuestionID": 78,"ResponseValue": "' + data[getName(78)] + '"}]}')) { SetLocalStorageSingleData("F18_Form_Pre_Planting", data.Trial_Id, "Trial_Id", 0, "Sync"); QtyProcess += 1; }
+
+                        //F19_Form_Planting
+                        } else if (localStorage.key(i1).substr(0, n) == FormArray[19]) {
+                            if (SendData("form", "Planting",
+                                '{"TrialID": ' + data.Trial_Id + ',"WorkflowID": 19, "UserID": ' + LogUser.UserIdId + ', "CurrentUserAlias": "' + LogUser.UserId + '","Locked": ' + data.Locked + ',"Responses": [' +
+                                '{"QuestionID": 79,"ResponseValue": "' + data[getName(79)] + '"},' +
+                                '{"QuestionID": 80,"ResponseValue": "' + data[getName(80)] + '"},' +
+                                '{"QuestionID": 81,"ResponseValue": "' + data[getName(81)] + '"},' +
+                                '{"QuestionID": 82,"ResponseValue": "' + data[getName(82)] + '"},' +
+                                '{"QuestionID": 83,"ResponseValue": "' + data[getName(83)] + '"},' +
+                                '{"QuestionID": 84,"ResponseValue": "' + data[getName(84)] + '"},' +
+                                '{"QuestionID": 85,"ResponseValue": "' + data[getName(85)] + '"},' +
+                                '{"QuestionID": 86,"ResponseValue": "' + data[getName(86)] + '"},' +
+                                '{"QuestionID": 87,"ResponseValue": "' + data[getName(87)] + '"},' +
+                                '{"QuestionID": 88,"ResponseValue": "' + data[getName(88)] + '"},' +
+                                '{"QuestionID": 89,"ResponseValue": "' + data[getName(89)] + '"},' +
+                                '{"QuestionID": 90,"ResponseValue": "' + data[getName(90)] + '"},' +
+                                '{"QuestionID": 91,"ResponseValue": "' + data[getName(91)] + '"},' +
+                                '{"QuestionID": 92,"ResponseValue": "' + data[getName(92)] + '"},' +
+                                '{"QuestionID": 93,"ResponseValue": "' + data[getName(93)] + '"},' +
+                                '{"QuestionID": 94,"ResponseValue": "' + data[getName(94)] + '"},' +
+                                '{"QuestionID": 95,"ResponseValue": "' + data[getName(95)] + '"},' +
+                                '{"QuestionID": 96,"ResponseValue": "' + data[getName(96)] + '"},' +
+                                '{"QuestionID": 97,"ResponseValue": "' + data[getName(97)] + '"}]}')) { SetLocalStorageSingleData("F19_Form_Planting", data.Trial_Id, "Trial_Id", 0, "Sync"); QtyProcess += 1; }
+                        }
+
+                        //F16_Form_Volunteer_Monitoring
+                        else if (localStorage.key(i1).substr(0, n) == FormArray[16]) {
+                            if (SendData("form", "Volunteer_Monitoring",
+                                '{"TrialID": ' + data.Trial_Id + ',"WorkflowID": 16, "UserID": ' + LogUser.UserIdId + ', "CurrentUserAlias": "' + LogUser.UserId + '","Locked": ' + data.Locked + ',"Responses": [' +
+                                '{"QuestionID": 1,"ResponseValue": "' + data[getName(1)] + '"},' +
+                                '{"QuestionID": 2,"ResponseValue": "' + data[getName(2)] + '"},' +
+                                '{"QuestionID": 3,"ResponseValue": "' + data[getName(3)] + '"},' +
+                                '{"QuestionID": 4,"ResponseValue": "' + data[getName(4)] + '"},' +
+                                '{"QuestionID": 5,"ResponseValue": "' + data[getName(5)] + '"},' +
+                                '{"QuestionID": 6,"ResponseValue": "' + data[getName(6)] + '"},' +
+                                '{"QuestionID": 7,"ResponseValue": "' + data[getName(7)] + '"},' +
+                                '{"QuestionID": 8,"ResponseValue": "' + data[getName(8)] + '"},' +
+                                '{"QuestionID": 9,"ResponseValue": "' + data[getName(9)] + '"},' +
+                                '{"QuestionID": 10,"ResponseValue": "' + data[getName(10)] + '"},' +
+                                '{"QuestionID": 11,"ResponseValue": "' + data[getName(11)] + '"},' +
+                                '{"QuestionID": 12,"ResponseValue": "' + data[getName(12)] + '"},' +
+                                '{"QuestionID": 13,"ResponseValue": "' + data[getName(13)] + '"},' +
+                                '{"QuestionID": 14,"ResponseValue": "' + data[getName(14)] + '"},' +
+                                '{"QuestionID": 15,"ResponseValue": "' + data[getName(15)] + '"},' +
+                                '{"QuestionID": 16,"ResponseValue": "' + data[getName(16)] + '"},' +
+                                '{"QuestionID": 17,"ResponseValue": "' + data[getName(17)] + '"},' +
+                                '{"QuestionID": 18,"ResponseValue": "' + data[getName(18)] + '"},' +
+                                '{"QuestionID": 19,"ResponseValue": "' + data[getName(19)] + '"},' +
+                                '{"QuestionID": 20,"ResponseValue": "' + data[getName(20)] + '"},' +
+                                '{"QuestionID": 21,"ResponseValue": "' + data[getName(21)] + '"},' +
+                                '{"QuestionID": 22,"ResponseValue": "' + data[getName(22)] + '"},' +
+                                '{"QuestionID": 23,"ResponseValue": "' + data[getName(23)] + '"},' +
+                                '{"QuestionID": 24,"ResponseValue": "' + data[getName(24)] + '"},' +
+                                '{"QuestionID": 25,"ResponseValue": "' + data[getName(25)] + '"},' +
+                                '{"QuestionID": 26,"ResponseValue": "' + data[getName(26)] + '"},' +
+                                '{"QuestionID": 27,"ResponseValue": "' + data[getName(27)] + '"},' +
+                                '{"QuestionID": 28,"ResponseValue": "' + data[getName(28)] + '"},' +
+                                '{"QuestionID": 29,"ResponseValue": "' + data[getName(29)] + '"},' +
+                                '{"QuestionID": 30,"ResponseValue": "' + data[getName(30)] + '"},' +
+                                '{"QuestionID": 31,"ResponseValue": "' + data[getName(31)] + '"},' +
+                                '{"QuestionID": 32,"ResponseValue": "' + data[getName(32)] + '"},' +
+                                '{"QuestionID": 33,"ResponseValue": "' + data[getName(33)] + '"},' +
+                                '{"QuestionID": 34,"ResponseValue": "' + data[getName(34)] + '"},' +
+                                '{"QuestionID": 35,"ResponseValue": "' + data[getName(35)] + '"},' +
+                                '{"QuestionID": 36,"ResponseValue": "' + data[getName(36)] + '"},' +
+                                '{"QuestionID": 37,"ResponseValue": "' + data[getName(37)] + '"},' +
+                                '{"QuestionID": 38,"ResponseValue": "' + data[getName(38)] + '"},' +
+                                '{"QuestionID": 39,"ResponseValue": "' + data[getName(39)] + '"},' +
+                                '{"QuestionID": 73,"ResponseValue": "' + data[getName(40)] + '"},' +
+                                '{"QuestionID": 74,"ResponseValue": "' + data[getName(41)] + '"}]}')) { SetLocalStorageSingleData("F16_Form_Volunteer_Monitoring", data.Trial_Id, "Trial_Id", 0, "Sync"); QtyProcess += 1; }
+                        }
+
+                        //F12_Form_Harvest_and_Destruct
+                        else if (localStorage.key(i1).substr(0, n) == FormArray[12]) {
+                            if (SendData("form", "Harvest_and_Destruct",
+                                '{"TrialID": ' + data.Trial_Id + ',"WorkflowID": 12, "UserID": ' + LogUser.UserIdId + ', "CurrentUserAlias": "' + LogUser.UserId + '","Locked": ' + data.Locked + ',"Responses": [' +
+                                '{"QuestionID": 264,"ResponseValue": "' + data[getName(264)] + '"},' +
+                                '{"QuestionID": 265,"ResponseValue": "' + data[getName(265)] + '"},' +
+                                '{"QuestionID": 267,"ResponseValue": "' + data[getName(267)] + '"},' +
+                                '{"QuestionID": 269,"ResponseValue": "' + data[getName(269)] + '"},' +
+                                '{"QuestionID": 270,"ResponseValue": "' + data[getName(270)] + '"},' +
+                                '{"QuestionID": 271,"ResponseValue": "' + data[getName(271)] + '"},' +
+                                '{"QuestionID": 272,"ResponseValue": "' + data[getName(272)] + '"},' +
+                                '{"QuestionID": 273,"ResponseValue": "' + data[getName(273)] + '"},' +
+                                '{"QuestionID": 274,"ResponseValue": "' + data[getName(274)] + '"},' +
+                                '{"QuestionID": 276,"ResponseValue": "' + data[getName(276)] + '"},' +
+                                '{"QuestionID": 277,"ResponseValue": "' + data[getName(277)] + '"},' +
+                                '{"QuestionID": 278,"ResponseValue": "' + data[getName(278)] + '"},' +
+                                '{"QuestionID": 279,"ResponseValue": "' + data[getName(279)] + '"},' +
+                                '{"QuestionID": 280,"ResponseValue": "' + data[getName(280)] + '"},' +
+                                //'{"QuestionID": 338,"ResponseValue": "' + data[getName(338)] + '"},' +
+                                '{"QuestionID": 339,"ResponseValue": "' + data[getName(339)] + '"},' +
+                                '{"QuestionID": 340,"ResponseValue": "' + data[getName(340)] + '"},' +
+                                '{"QuestionID": 341,"ResponseValue": "' + data[getName(341)] + '"},' +
+                                '{"QuestionID": 342,"ResponseValue": "' + data[getName(342)] + '"},' +
+                                '{"QuestionID": 343,"ResponseValue": "' + data[getName(343)] + '"},' +
+                                '{"QuestionID": 344,"ResponseValue": "' + data[getName(344)] + '"},' +
+                                '{"QuestionID": 345,"ResponseValue": "' + data[getName(345)] + '"},' +
+                                '{"QuestionID": 347,"ResponseValue": "' + data[getName(347)] + '"},' +
+                                '{"QuestionID": 348,"ResponseValue": "' + data[getName(348)] + '"}]}')) { SetLocalStorageSingleData("F12_Form_Harvest_and_Destruct", data.Trial_Id, "Trial_Id", 0, "Sync"); QtyProcess += 1; }
+                        }
+
+                        //F14_Form_Bin_Inspections
+                        else if (localStorage.key(i1).substr(0, n) == FormArray[14]) {
+                            if (SendData("form", "Bin_Inspections",
+                                '{"TrialID": ' + data.Trial_Id + ',"WorkflowID": 14, "UserID": ' + LogUser.UserIdId + ', "CurrentUserAlias": "' + LogUser.UserId + '","Locked": ' + data.Locked + ',"Responses": [' +
+                                '{"QuestionID": 171,"ResponseValue": "' + data[getName(171)] + '"},' +
+                                '{"QuestionID": 172,"ResponseValue": "' + data[getName(172)] + '"},' +
+                                '{"QuestionID": 187,"ResponseValue": "' + data[getName(187)] + '"},' +
+                                '{"QuestionID": 188,"ResponseValue": "' + data[getName(188)] + '"},' +
+                                '{"QuestionID": 189,"ResponseValue": "' + data[getName(189)] + '"},' +
+                                '{"QuestionID": 190,"ResponseValue": "' + data[getName(190)] + '"},' +
+                                '{"QuestionID": 205,"ResponseValue": "' + data[getName(205)] + '"},' +
+                                '{"QuestionID": 206,"ResponseValue": "' + data[getName(206)] + '"},' +
+                                '{"QuestionID": 207,"ResponseValue": "' + data[getName(207)] + '"},' +
+                                '{"QuestionID": 208,"ResponseValue": "' + data[getName(208)] + '"},' +
+                                '{"QuestionID": 223,"ResponseValue": "' + data[getName(223)] + '"},' +
+                                '{"QuestionID": 224,"ResponseValue": "' + data[getName(224)] + '"},' +
+                                '{"QuestionID": 225,"ResponseValue": "' + data[getName(225)] + '"},' +
+                                '{"QuestionID": 226,"ResponseValue": "' + data[getName(226)] + '"},' +
+                                '{"QuestionID": 241,"ResponseValue": "' + data[getName(241)] + '"},' +
+                                '{"QuestionID": 242,"ResponseValue": "' + data[getName(242)] + '"},' +
+                                '{"QuestionID": 243,"ResponseValue": "' + data[getName(243)] + '"},' +
+                                '{"QuestionID": 244,"ResponseValue": "' + data[getName(244)] + '"},' +
+                                '{"QuestionID": 259,"ResponseValue": "' + data[getName(259)] + '"},' +
+                                '{"QuestionID": 260,"ResponseValue": "' + data[getName(260)] + '"},' +
+                                '{"QuestionID": 282,"ResponseValue": "' + data[getName(282)] + '"},' +
+                                '{"QuestionID": 283,"ResponseValue": "' + data[getName(283)] + '"},' +
+                                '{"QuestionID": 284,"ResponseValue": "' + data[getName(284)] + '"},' +
+                                '{"QuestionID": 285,"ResponseValue": "' + data[getName(285)] + '"},' +
+                                '{"QuestionID": 286,"ResponseValue": "' + data[getName(286)] + '"},' +
+                                '{"QuestionID": 288,"ResponseValue": "' + data[getName(288)] + '"},' +
+                                '{"QuestionID": 289,"ResponseValue": "' + data[getName(289)] + '"},' +
+                                '{"QuestionID": 290,"ResponseValue": "' + data[getName(290)] + '"},' +
+                                '{"QuestionID": 291,"ResponseValue": "' + data[getName(291)] + '"},' +
+                                '{"QuestionID": 292,"ResponseValue": "' + data[getName(292)] + '"},' +
+                                '{"QuestionID": 294,"ResponseValue": "' + data[getName(294)] + '"},' +
+                                '{"QuestionID": 295,"ResponseValue": "' + data[getName(295)] + '"},' +
+                                '{"QuestionID": 296,"ResponseValue": "' + data[getName(296)] + '"},' +
+                                '{"QuestionID": 297,"ResponseValue": "' + data[getName(297)] + '"},' +
+                                '{"QuestionID": 298,"ResponseValue": "' + data[getName(298)] + '"},' +
+                                '{"QuestionID": 300,"ResponseValue": "' + data[getName(300)] + '"},' +
+                                '{"QuestionID": 301,"ResponseValue": "' + data[getName(301)] + '"},' +
+                                '{"QuestionID": 302,"ResponseValue": "' + data[getName(302)] + '"},' +
+                                '{"QuestionID": 303,"ResponseValue": "' + data[getName(303)] + '"},' +
+                                '{"QuestionID": 304,"ResponseValue": "' + data[getName(304)] + '"},' +
+                                '{"QuestionID": 306,"ResponseValue": "' + data[getName(306)] + '"},' +
+                                '{"QuestionID": 307,"ResponseValue": "' + data[getName(307)] + '"},' +
+                                '{"QuestionID": 308,"ResponseValue": "' + data[getName(308)] + '"},' +
+                                '{"QuestionID": 309,"ResponseValue": "' + data[getName(309)] + '"},' +
+                                '{"QuestionID": 310,"ResponseValue": "' + data[getName(310)] + '"},' +
+                                '{"QuestionID": 312,"ResponseValue": "' + data[getName(312)] + '"},' +
+                                '{"QuestionID": 313,"ResponseValue": "' + data[getName(313)] + '"},' +
+                                '{"QuestionID": 314,"ResponseValue": "' + data[getName(314)] + '"},' +
+                                '{"QuestionID": 315,"ResponseValue": "' + data[getName(315)] + '"},' +
+                                '{"QuestionID": 316,"ResponseValue": "' + data[getName(316)] + '"},' +
+                                '{"QuestionID": 317,"ResponseValue": "' + data[getName(317)] + '"},' +
+                                '{"QuestionID": 318,"ResponseValue": "' + data[getName(318)] + '"},' +
+                                '{"QuestionID": 319,"ResponseValue": "' + data[getName(319)] + '"},' +
+                                '{"QuestionID": 320,"ResponseValue": "' + data[getName(320)] + '"},' +
+                                '{"QuestionID": 321,"ResponseValue": "' + data[getName(321)] + '"},' +
+                                '{"QuestionID": 322,"ResponseValue": "' + data[getName(322)] + '"},' +
+                                '{"QuestionID": 323,"ResponseValue": "' + data[getName(323)] + '"},' +
+                                '{"QuestionID": 324,"ResponseValue": "' + data[getName(324)] + '"},' +
+                                '{"QuestionID": 325,"ResponseValue": "' + data[getName(325)] + '"},' +
+                                '{"QuestionID": 326,"ResponseValue": "' + data[getName(326)] + '"},' +
+                                '{"QuestionID": 327,"ResponseValue": "' + data[getName(327)] + '"},' +
+                                '{"QuestionID": 328,"ResponseValue": "' + data[getName(328)] + '"},' +
+                                '{"QuestionID": 329,"ResponseValue": "' + data[getName(329)] + '"},' +
+                                '{"QuestionID": 330,"ResponseValue": "' + data[getName(330)] + '"},' +
+                                '{"QuestionID": 331,"ResponseValue": "' + data[getName(331)] + '"},' +
+                                '{"QuestionID": 332,"ResponseValue": "' + data[getName(332)] + '"},' +
+                                '{"QuestionID": 333,"ResponseValue": "' + data[getName(333)] + '"},' +
+                                '{"QuestionID": 334,"ResponseValue": "' + data[getName(334)] + '"},' +
+                                '{"QuestionID": 335,"ResponseValue": "' + data[getName(335)] + '"},' +
+                                '{"QuestionID": 336,"ResponseValue": "' + data[getName(336)] + '"},' +
+                                '{"QuestionID": 337,"ResponseValue": "' + data[getName(337)] + '"}]}'))
+                            { SetLocalStorageSingleData("F14_Form_Bin_Inspections", data.Trial_Id, "Trial_Id", 0, "Sync"); QtyProcess += 1; }
+                        }
+
+                    }
+                }
+            }
+
+            FinishDownload += 1;
+            DownloadInitialData();
+        }
+
+        function DashboardCreation() {
+            var datacount = localStorage.length;
+            var TempArg = [];
+            QtyCat = 0;
+            var TempLoc = {};
+
+            for (var i1 = 0; i1 < datacount; i1++) {
+                if (localStorage.key(i1) != null && localStorage.key(i1).substr(0, 3) == "D01") {
+                    TempLoc = {};
+                    TempLoc.Key = localStorage.key(i1);
+                    TempArg.push(TempLoc);
+                }
+            }
+            for (var i2 = 0; i2 < TempArg.length; i2++) {
+                localStorage.removeItem(TempArg[i2].Key);
+            }
+            datacount = localStorage.length;
+            TempArg = [];
+
+            for (var i3 = 0; i3 < datacount; i3++) {
+                if (localStorage.key(i3) != null && localStorage.key(i3).substr(0, 3) == "C01") {
+                    TempLoc = {};
+                    TempLoc.Key = localStorage.key(i3);
+                    TempLoc.Val = localStorage.getItem(localStorage.key(i3));
+                    TempArg.push(TempLoc);
+                    QtyCat += 1;
+                }
+            }
+
+            var firstTrialCat = JSON.parse(localStorage.getItem('C01_Catalog_Trial_001'));
+            if (typeof firstTrialCat != 'undefined' & firstTrialCat != null) {
+
+                for (var i4 = 0; i4 < TempArg.length; i4++) {
+                    if (TempArg[i4].Key.substr(0, 3) == "C01") {
+                        QtyProcess += 1;
+
+                        var FormArrData = { "Trial_Id": 0, "Trial_Id_Name": "", "Trial_Name": "", "Trial_Farm": "", "Crop": "", "Trial_Year": "", "Site_Name": "", "Primary_SRR": "", "Trait": "", "Site_Selection_Checklist": "", "Land_Contracts": "", "Compliance_Exceptions": "", "Compliance_Map": "", "PrePlanting": "", "Planting": "", "Material_Movement": "", "Dicamba_Spray_Tracking": "", "In_Season_Monitoring": "", "Harvest_and_Destruct": "", "Bin_Inspections": "", "Volunteer_Monitoring": "", "Last_Page": "" };;
+                        var data = JSON.parse(TempArg[i4].Val); //Parse the Data back into the object
+
+                        FormArrData.Trial_Id = data.TrialID;
+                        FormArrData.Trial_Id_Name = '"' + data.TrialID + '"';
+                        FormArrData.Trial_Name = data.Name;
+                        FormArrData.Trial_Farm = data.FarmName;
+                        FormArrData.Trial_Year = data.TrialYear;
+                        FormArrData.Trait = GetLocalStorageSingleData("C04", data.TraitID, "TraitID", "Name");
+                        FormArrData.Site_Name = GetLocalStorageSingleData("C06", data.SiteID, "SiteID", "Name");
+                        FormArrData.Primary_SRR = GetLocalStorageSingleData("C02", data.PrimarySRRUserID, "UserID", "FirstName") + ' ' + GetLocalStorageSingleData("C02", data.PrimarySRRUserID, "UserID", "LastName");
+                        FormArrData.Crop = GetLocalStorageSingleData("C03", data.CropID, "CropID", "Name");
+
+
+                        SetLocalStorageData("D01_Trial", data.TrialID, "Trial_Id", FormArrData);
+                    }
+                }
+
+                FinishDownload += 1;
+                DownloadInitialData();
+            } else {
+                QtyCat = 99999;
+                FinishDownload += 1;
+                DownloadInitialData();
+            }
+        }
+
+        function AttachmentNameDownload() {
+            QtyCat = 0;
+            QtyProcess = 0;
+            var datacount = localStorage.length;
+            for (var i1 = 0; i1 < datacount; i1++) {
+                if (localStorage.key(i1).substr(0, 1) == "F") {
+                    var trial = localStorage.getItem(localStorage.key(i1)); //Get Data from Key
+                    var data = JSON.parse(trial); //Parse the Data back into the object
+
+                    $.ajax({
+                        url: APIUrl + 'attachment?trialID=' + data.Trial_Id + '&workflowID=' + localStorage.key(i1).substr(1, 2),
+                        type: 'GET',
+                        async: false,
+                        dataType: 'json',
+                        success: function (datas) {
+                            QtyCat += 1;
+                            QtyProcess += 1;
+                            if (datas.length >= 1) {
+                                data.File_Name = datas[0].Name;
+                                data.File_ID = datas[0].AttachmentID;
+                                SetLocalStorageData(localStorage.key(i1).substr(0, localStorage.key(i1).lastIndexOf("_")), data.Trial_Id, "Trial_Id", data);
+                            }
+                        },
+                        error: function (a, b, c) {
+                            //                    QtyCat = 99999;
+                            //                    FinishDownload += 1;
+                            //                    DownloadInitialData();
+                        }
+                    });
+                }
+            }
+            FinishDownload += 1;
+            DownloadInitialData();
+        }
+
+
+        //read form data and 
+        //1) update local storage trial form status
+        //2) update local storage form
+        function FormSync(userAlias) {
+
+            QtyCat = 0;
+            QtyProcess = 0;
+            var data = JSON.parse(localStorage.getItem("LastSync"));
+            var trialVolunteer = [];
+            var trialSSC = [];
+            var trialLandContract = [];
+            var trialComplianceExceptions = [];
+            var trialComplianceMap = [];
+            var trialPrePlanting = [];
+            var trialPlanting = [];
+            var trialDicambaSprayTraking = [];
+            var trialInSeason = [];
+            var trialBinInspections = [];
+            var trialHarvestAndDestruct = [];
+
+            var FormArrNames = ["", "", "", "Site_Selection_Checklist", "Land_Contracts", "Compliance_Exceptions", "Compliance_Map", "", "", "", "Dicamba_Spray_Tracking", "In_Season_Monitoring", "Harvest_and_Destruct", "", "Bin_Inspections", "", "Volunteer_Monitoring", "", "PrePlanting", "Planting", "Material_Movement"];
+            var VolBlank = true;
+            var SSCBlank = true;
+            var LandContractBlank = true;
+            var ComplianceExceptionsBlank = true;
+            var ComplianceMapBlank = true;
+            var PrePlantingBlank = true;
+            var PlantingBlank = true;
+            var DicambaSprayTrakingBlank = true;
+            var InSeasonBlank = true;
+            var BinInspectionsBlank = true;
+            var HarvestAndDestructBlank = true;
+            var FormUrl = APIUrl + "form/with-attachments?userAlias=" + userAlias + "&lastSync=" + data.Forms;
+            var fullCatalogName;
+            var complianceTable;
+            $.ajax({
+                url: FormUrl,
+                type: 'GET',
+                dataType: 'json',
+                success: function (datas) {
+                    QtyCat = datas.length;
+                    for (var i = 0; i < datas.length; i++) {
+                        QtyProcess += 1;
+                        try {
+                            var DashName;
+                            fullCatalogName = FormArray[(datas[i].WorkflowID)];
+                            if (datas[i].WorkflowID == 16) {
+                                DashName = "Volunteer_Monitoring";
+                                for (var r = 0; r < datas[i].Responses.length; r++) {
+                                    VolBlank = false;
+                                    trialVolunteer[datas[i].Responses[r].QuestionID] = datas[i].Responses[r].ResponseValue;
+                                }
+                                if (VolBlank == false) {
+                                    complianceTable = { "Trial_Id": datas[i].TrialID, "Locked": datas[i].Locked, "Sync": 0, "Date_of_Burn_Down": trialVolunteer[1], "Method_of_Burn_Down": trialVolunteer[2], "Method_of_Burn_Down_Herbicide": trialVolunteer[3], "Method_of_Burn_Down_TDR": trialVolunteer[4], "Method_of_Burn_Down_TDR_Herbicide": trialVolunteer[5], "Date_of_Preemergence": trialVolunteer[6], "Method_of_Preemergence_Herbicide": trialVolunteer[7], "Method_of_Preemergence_TDR": trialVolunteer[8], "Method_of_Preemergence_TDR_Herbicide": trialVolunteer[9], "Date_of_Postemergence": trialVolunteer[10], "Method_of_Postemergence_Herbicide": trialVolunteer[11], "Method_of_Postemergence_TDR": trialVolunteer[12], "Method_of_Postemergence_TDR_Herbicide": trialVolunteer[13], "Date_of_Effectiveness": trialVolunteer[14], "App_Effective": trialVolunteer[15], "Date_of_Postemergence2": trialVolunteer[16], "Method_of_Postemergence2_Herbicide": trialVolunteer[17], "Method_of_Postemergence2_TDR": trialVolunteer[18], "Method_of_Postemergence2_TDR_Herbicide": trialVolunteer[19], "App_Effective2": trialVolunteer[20], "App_Effective_Approved2": trialVolunteer[21], "Date_of_Postemergence3": trialVolunteer[22], "Method_of_Postemergence3_Herbicide": trialVolunteer[23], "Method_of_Postemergence3_TDR": trialVolunteer[24], "Method_of_Postemergence3_TDR_Herbicide": trialVolunteer[25], "App_Effective3": trialVolunteer[26], "App_Effective_Approved3": trialVolunteer[27], "Date_of_Postemergence4": trialVolunteer[28], "Method_of_Postemergence4_Herbicide": trialVolunteer[29], "Method_of_Postemergence4_TDR": trialVolunteer[30], "Method_of_Postemergence4_TDR_Herbicide": trialVolunteer[31], "App_Effective4": trialVolunteer[32], "App_Effective_Approved4": trialVolunteer[33], "Date_of_Postemergence5": trialVolunteer[34], "Method_of_Postemergence5_Herbicide": trialVolunteer[35], "Method_of_Postemergence5_TDR": trialVolunteer[36], "Method_of_Postemergence5_TDR_Herbicide": trialVolunteer[37], "App_Effective5": trialVolunteer[38], "App_Effective_Approved5": trialVolunteer[39], "Planted_Crop": trialVolunteer[73], "Planted_Crop_Date": trialVolunteer[74] };
+
+                                    SetLocalStorageData(fullCatalogName, datas[i].TrialID, "Trial_Id", complianceTable);
+                                } else if (VolBlank != false && datas[i].Locked == 1) {
+                                    var dashData = GetLocalStorageData("D01", datas[i].TrialID, "Trial_Id");
+                                    dashData[DashName] = 4;
+                                    SetLocalStorageData("D01_Trial", datas[i].TrialID, "Trial_Id", dashData);
+                                    complianceTable = { "Trial_Id": datas[i].TrialID, "Locked": datas[i].Locked, "Sync": 0, "Date_of_Burn_Down": "", "Method_of_Burn_Down": 0, "Method_of_Burn_Down_Herbicide": 0, "Method_of_Burn_Down_TDR": "", "Method_of_Burn_Down_TDR_Herbicide": "", "Date_of_Preemergence": "", "Method_of_Preemergence_Herbicide": 0, "Method_of_Preemergence_TDR": "", "Method_of_Preemergence_TDR_Herbicide": "", "Date_of_Postemergence": "", "Method_of_Postemergence_Herbicide": 0, "Method_of_Postemergence_TDR": "", "Method_of_Postemergence_TDR_Herbicide": "", "Date_of_Effectiveness": "", "App_Effective": -1, "Date_of_Postemergence2": "", "Method_of_Postemergence2_Herbicide": 0, "Method_of_Postemergence2_TDR": "", "Method_of_Postemergence2_TDR_Herbicide": "", "App_Effective2": -1, "App_Effective_Approved2": 0, "Date_of_Postemergence3": "", "Method_of_Postemergence3_Herbicide": 0, "Method_of_Postemergence3_TDR": "", "Method_of_Postemergence3_TDR_Herbicide": "", "App_Effective3": -1, "App_Effective_Approved3": 0, "Date_of_Postemergence4": "", "Method_of_Postemergence4_Herbicide": 0, "Method_of_Postemergence4_TDR": "", "Method_of_Postemergence4_TDR_Herbicide": "", "App_Effective4": -1, "App_Effective_Approved4": 0, "Date_of_Postemergence5": "", "Method_of_Postemergence5_Herbicide": 0, "Method_of_Postemergence5_TDR": "", "Method_of_Postemergence5_TDR_Herbicide": "", "App_Effective5": -1, "App_Effective_Approved5": 0, "Planted_Crop": 0, "Planted_Crop_Date": "" };
+                                    SetLocalStorageData(fullCatalogName, datas[i].TrialID, "Trial_Id", complianceTable);
+                                }
+
+                            } else if (datas[i].WorkflowID == 3) {
+                                DashName = "Site_Selection_Checklist";
+                                for (var r = 0; r < datas[i].Responses.length; r++) {
+                                    SSCBlank = false;
+                                    trialSSC[datas[i].Responses[r].QuestionID] = datas[i].Responses[r].ResponseValue;
+                                }
+                                if (SSCBlank == false) {
+
+                                    complianceTable = {
+                                        "Trial_Id": datas[i].TrialID,
+                                        "Locked": datas[i].Locked,
+                                        "Sync": 0,
+                                        "Located_Flood_Plain": trialSSC[40],
+                                        "Trial_Site_Sloped_Surface": trialSSC[41],
+                                        "Washout_5_Years": trialSSC[42],
+                                        "Site_Located_Area": trialSSC[43],
+                                        "Drains_Site_Alleyway": trialSSC[44],
+                                        "Outlet_Drain_Area": trialSSC[45],
+                                        "Drip_Tube_Tape_Monitoring": trialSSC[46],
+                                        "Mitigation_Controls": trialSSC[47],
+                                        "File_Name": "",
+                                        "File_ID": ""
+                                    };
+
+                                    SetLocalStorageData(fullCatalogName, datas[i].TrialID, "Trial_Id", complianceTable);
+                                } else if (SSCBlank != false && datas[i].Locked == 1) {
+                                    var dashData = GetLocalStorageData("D01", datas[i].TrialID, "Trial_Id");
+                                    dashData[DashName] = 4;
+                                    SetLocalStorageData("D01_Trial", datas[i].TrialID, "Trial_Id", dashData);
+                                    complianceTable = { "Trial_Id": datas[i].TrialID, "Locked": datas[i].Locked, "Sync": 0, "Located_Flood_Plain": -1, "Trial_Site_Sloped_Surface": -1, "Washout_5_Years": -1, "Site_Located_Area": -1, "Drains_Site_Alleyway": -1, "Outlet_Drain_Area": -1, "Drip_Tube_Tape_Monitoring": -1, "Mitigation_Controls": "", "File_Name": "", "File_ID": "" };
+                                    SetLocalStorageData(fullCatalogName, datas[i].TrialID, "Trial_Id", complianceTable);
+                                }
+                            } else if (datas[i].WorkflowID == 4) {
+                                DashName = "Land_Contracts";
+                                for (var r = 0; r < datas[i].Responses.length; r++) {
+                                    LandContractBlank = false;
+                                    trialLandContract[datas[i].Responses[r].QuestionID] = datas[i].Responses[r].ResponseValue;
+                                }
+                                if (LandContractBlank == false) {
+                                    complianceTable = { "Trial_Id": datas[i].TrialID, "Locked": datas[i].Locked, "Sync": 0, "Contract_Signed": trialLandContract[48], "Date_of_Contract": trialLandContract[49] };
+
+                                    SetLocalStorageData(fullCatalogName, datas[i].TrialID, "Trial_Id", complianceTable);
+                                } else if (LandContractBlank != false && datas[i].Locked == 1) {
+                                    var dashData = GetLocalStorageData("D01", datas[i].TrialID, "Trial_Id");
+                                    dashData[DashName] = 4;
+                                    SetLocalStorageData("D01_Trial", datas[i].TrialID, "Trial_Id", dashData);
+                                    complianceTable = { "Trial_Id": datas[i].TrialID, "Locked": datas[i].Locked, "Sync": 0, "Contract_Signed": -1, "Date_of_Contract": "" };
+                                    SetLocalStorageData(fullCatalogName, datas[i].TrialID, "Trial_Id", complianceTable);
+                                }
+                            } else if (datas[i].WorkflowID == 5) {
+                                DashName = "Compliance_Exceptions";
+                                for (var r = 0; r < datas[i].Responses.length; r++) {
+                                    ComplianceExceptionsBlank = false;
+                                    trialComplianceExceptions[datas[i].Responses[r].QuestionID] = datas[i].Responses[r].ResponseValue;
+                                }
+                                if (ComplianceExceptionsBlank == false) {
+                                    complianceTable = {
+                                        "Trial_Id": datas[i].TrialID,
+                                        "Locked": datas[i].Locked,
+                                        "Sync": 0,
+                                        "Compliance_Exceptions_Needed": trialComplianceExceptions[50],
+                                        "Date_of_Exception": trialComplianceExceptions[51],
+                                        "Duration_of_Exception": trialComplianceExceptions[52],
+                                        "Trial_type": trialComplianceExceptions[53],
+                                        "Exception_Description": trialComplianceExceptions[54],
+                                        "File_Name": (datas[i].Attachments.length > 0 ? datas[i].Attachments[0].Name : ""),
+                                        "File_ID": (datas[i].Attachments.length > 0 ? datas[i].Attachments[0].AttachmentID : "")
+                                    };
+
+                                    SetLocalStorageData(fullCatalogName, datas[i].TrialID, "Trial_Id", complianceTable);
+                                } else if (ComplianceExceptionsBlank != false && datas[i].Locked == 1) {
+                                    var dashData = GetLocalStorageData("D01", datas[i].TrialID, "Trial_Id");
+                                    dashData[DashName] = 4;
+                                    SetLocalStorageData("D01_Trial", datas[i].TrialID, "Trial_Id", dashData);
+                                    complianceTable = { "Trial_Id": datas[i].TrialID, "Locked": datas[i].Locked, "Sync": 0, "Compliance_Exceptions_Needed": -1, "Date_of_Exception": "", "Duration_of_Exception": "", "Trial_type": "", "Exception_Description": "", "File_Name": "", "File_ID": "" };
+                                    SetLocalStorageData(fullCatalogName, datas[i].TrialID, "Trial_Id", complianceTable);
+                                }
+                            } else if (datas[i].WorkflowID == 6) {
+                                DashName = "Compliance_Map";
+                                for (var r = 0; r < datas[i].Responses.length; r++) {
+                                    ComplianceMapBlank = false;
+                                    trialComplianceMap[datas[i].Responses[r].QuestionID] = datas[i].Responses[r].ResponseValue;
+                                }
+                                if (ComplianceMapBlank == false) {
+                                    complianceTable = {
+                                        "Trial_Id": datas[i].TrialID,
+                                        "Locked": datas[i].Locked,
+                                        "Sync": 0,
+                                        "Isolation_Method": trialComplianceMap[55],
+                                        "GPS_1_lat": trialComplianceMap[56],
+                                        "GPS_1_long": trialComplianceMap[57],
+                                        "GPS_2_lat": trialComplianceMap[58],
+                                        "GPS_2_long": trialComplianceMap[59],
+                                        "GPS_3_lat": trialComplianceMap[60],
+                                        "GPS_3_long": trialComplianceMap[61],
+                                        "GPS_4_lat": trialComplianceMap[62],
+                                        "GPS_4_long": trialComplianceMap[63],
+                                        "GPS_5_lat": trialComplianceMap[64],
+                                        "GPS_5_long": trialComplianceMap[65],
+                                        "GPS_6_lat": trialComplianceMap[66],
+                                        "GPS_6_long": trialComplianceMap[67],
+                                        "GPS_7_lat": trialComplianceMap[68],
+                                        "GPS_7_long": trialComplianceMap[69],
+                                        "GPS_8_lat": trialComplianceMap[70],
+                                        "GPS_8_long": trialComplianceMap[71],
+                                        "Certification_Agreement": trialComplianceMap[72],
+                                        "File_Name": (datas[i].Attachments.length > 0 ? datas[i].Attachments[0].Name : ""),
+                                        "File_ID": (datas[i].Attachments.length > 0 ? datas[i].Attachments[0].AttachmentID : "")
+                                    };
+
+                                    SetLocalStorageData(fullCatalogName, datas[i].TrialID, "Trial_Id", complianceTable);
+                                } else if (ComplianceMapBlank != false && datas[i].Locked == 1) {
+                                    var dashData = GetLocalStorageData("D01", datas[i].TrialID, "Trial_Id");
+                                    dashData[DashName] = 4;
+                                    SetLocalStorageData("D01_Trial", datas[i].TrialID, "Trial_Id", dashData);
+                                    complianceTable = { "Trial_Id": datas[i].TrialID, "Locked": datas[i].Locked, "Sync": 0, "Isolation_Method": 0, "GPS_1_lat": "", "GPS_1_long": "", "GPS_2_lat": "", "GPS_2_long": "", "GPS_3_lat": "", "GPS_3_long": "", "GPS_4_lat": "", "GPS_4_long": "", "GPS_5_lat": "", "GPS_5_long": "", "GPS_6_lat": "", "GPS_6_long": "", "GPS_7_lat": "", "GPS_7_long": "", "GPS_8_lat": "", "GPS_8_long": "", "Certification_Agreement": -1, "File_Name": "", "File_ID": "" };
+                                    SetLocalStorageData(fullCatalogName, datas[i].TrialID, "Trial_Id", complianceTable);
+                                }
+                            } else if (datas[i].WorkflowID == 18) {
+                                DashName = "PrePlanting";
+                                for (var r = 0; r < datas[i].Responses.length; r++) {
+                                    PrePlantingBlank = false;
+                                    trialPrePlanting[datas[i].Responses[r].QuestionID] = datas[i].Responses[r].ResponseValue;
+                                }
+                                if (PrePlantingBlank == false) {
+
+                                    complianceTable = { "Trial_Id": datas[i].TrialID, "Locked": datas[i].Locked, "Sync": 0, "Previous_Trained_and_Recorded": trialPrePlanting[75], "Contained_of_Material": trialPrePlanting[76], "Received_Good_Condition": trialPrePlanting[77], "Received_Seed_Labeled": trialPrePlanting[78] };
+
+                                    SetLocalStorageData(fullCatalogName, datas[i].TrialID, "Trial_Id", complianceTable);
+                                } else if (PrePlantingBlank != false && datas[i].Locked == 1) {
+                                    var dashData = GetLocalStorageData("D01", datas[i].TrialID, "Trial_Id");
+                                    dashData[DashName] = 4;
+                                    SetLocalStorageData("D01_Trial", datas[i].TrialID, "Trial_Id", dashData);
+                                    complianceTable = { "Trial_Id": datas[i].TrialID, "Locked": datas[i].Locked, "Sync": 0, "Previous_Trained_and_Recorded": -1, "Contained_of_Material": -1, "Received_Good_Condition": -1, "Received_Seed_Labeled": -1 };
+                                    SetLocalStorageData(fullCatalogName, datas[i].TrialID, "Trial_Id", complianceTable);
+                                }
+                            } else if (datas[i].WorkflowID == 19) {
+                                DashName = "Planting";
+                                for (var r = 0; r < datas[i].Responses.length; r++) {
+                                    PlantingBlank = false;
+                                    trialPlanting[datas[i].Responses[r].QuestionID] = datas[i].Responses[r].ResponseValue;
+                                }
+                                if (PlantingBlank == false) {
+
+                                    complianceTable = { "Trial_Id": datas[i].TrialID, "Locked": datas[i].Locked, "Sync": 0, "Physical_Markers": trialPlanting[79], "Planting_Start_Date": trialPlanting[80], "Planting_End_Date": trialPlanting[81], "Actual_Planted_Acres": trialPlanting[82], "Commercial_Soybeans_Planted": trialPlanting[83], "Type_of_Isolation": trialPlanting[84], "Natural_Barrier": trialPlanting[85], "SRR_or_Delegate_Present": trialPlanting[86], "Seed_Tender_Used": trialPlanting[87], "Seed_Tender_Cleaned_Out": trialPlanting[88], "Date_of_Verbal_or_Visual_Confirm_1": trialPlanting[89], "Equip_Cleanout_Contact_Person_1": trialPlanting[90], "Planter_Cleaned_Out": trialPlanting[91], "Date_of_Verbal_or_Visual_Confirm_2": trialPlanting[92], "Equip_Cleanout_Contact_Person_2": trialPlanting[93], "Seed_Leftover_after_Planting": trialPlanting[94], "Amount_of_Material_Leftover": trialPlanting[95], "Disposition_of_Leftover": trialPlanting[96], "Next_Planted_Field": trialPlanting[97] };
+
+                                    SetLocalStorageData(fullCatalogName, datas[i].TrialID, "Trial_Id", complianceTable);
+                                } else if (PlantingBlank != false && datas[i].Locked == 1) {
+                                    var dashData = GetLocalStorageData("D01", datas[i].TrialID, "Trial_Id");
+                                    dashData[DashName] = 4;
+                                    SetLocalStorageData("D01_Trial", datas[i].TrialID, "Trial_Id", dashData);
+                                    complianceTable = { "Trial_Id": datas[i].TrialID, "Locked": datas[i].Locked, "Sync": 0, "Physical_Markers": -1, "Planting_Start_Date": "", "Planting_End_Date": "", "Actual_Planted_Acres": "", "Commercial_Soybeans_Planted": -1, "Type_of_Isolation": -1, "Natural_Barrier": "", "SRR_or_Delegate_Present": -1, "Seed_Tender_Used": -1, "Seed_Tender_Cleaned_Out": -1, "Date_of_Verbal_or_Visual_Confirm_1": "", "Equip_Cleanout_Contact_Person_1": "", "Planter_Cleaned_Out": -1, "Date_of_Verbal_or_Visual_Confirm_2": "", "Equip_Cleanout_Contact_Person_2": "", "Seed_Leftover_after_Planting": -1, "Amount_of_Material_Leftover": "", "Disposition_of_Leftover": -1, "Next_Planted_Field": 0 };
+                                    SetLocalStorageData(fullCatalogName, datas[i].TrialID, "Trial_Id", complianceTable);
+                                }
+                            } else if (datas[i].WorkflowID == 10) {
+                                DashName = "Dicamba_Spray_Tracking";
+                                for (r = 0; r < datas[i].Responses.length; r++) {
+                                    DicambaSprayTrakingBlank = false;
+                                    trialDicambaSprayTraking[datas[i].Responses[r].QuestionID] = datas[i].Responses[r].ResponseValue;
+                                }
+                                if (DicambaSprayTrakingBlank == false) {
+
+                                    complianceTable = {
+                                        "Trial_Id": datas[i].TrialID, "Locked": datas[i].Locked, "Sync": 0,
+                                        "Field_Sprayed_M1691_Burndown": trialDicambaSprayTraking[98],
+                                        "BD_SRR_Present": trialDicambaSprayTraking[99],
+                                        "BD_Applicator_FN": trialDicambaSprayTraking[100],
+                                        "BD_Applicator_LN": trialDicambaSprayTraking[101],
+                                        "BD_Applicator_Trained": trialDicambaSprayTraking[102],
+                                        "BD_Applicator_Possession_M1691_Label": trialDicambaSprayTraking[103],
+                                        "BD_Crop_Stage": trialDicambaSprayTraking[104],
+                                        "BD_Adjacent_Non_RR2X": trialDicambaSprayTraking[105],
+                                        "BD_Growth_Stage_Non_RR2X_Soybean": trialDicambaSprayTraking[106],
+                                        "BD_Growth_Stage_Flowering": trialDicambaSprayTraking[107],
+                                        "BD_Herbicide": trialDicambaSprayTraking[108],
+                                        "BD_Mon_10_Used": trialDicambaSprayTraking[109],
+                                        "BD_Drift_Reduction": trialDicambaSprayTraking[110],
+                                        "BD_DateTime": trialDicambaSprayTraking[111],
+                                        "BD_Nozzle_Type": trialDicambaSprayTraking[112],
+                                        "BD_Nozzle_Spacing": trialDicambaSprayTraking[113],
+                                        "BD_Boom_Length": trialDicambaSprayTraking[114],
+                                        "BD_Boom_Height": trialDicambaSprayTraking[115],
+                                        "BD_Hooded": trialDicambaSprayTraking[116],
+                                        "BD_Operating_Pressure_PSI": trialDicambaSprayTraking[117],
+                                        "BD_Ground_Speed_MPH": trialDicambaSprayTraking[118],
+                                        "BD_GPA": trialDicambaSprayTraking[119],
+                                        "BD_Treated_Acreage": trialDicambaSprayTraking[120],
+                                        "BD_Equipment_Triple_Rinsed": trialDicambaSprayTraking[121],
+                                        "BD_Additional_App_Notes": trialDicambaSprayTraking[122],
+                                        "BD_Wind_Speed": trialDicambaSprayTraking[123],
+                                        "BD_Wind_Direction": trialDicambaSprayTraking[124],
+                                        "BD_Air_Temp": trialDicambaSprayTraking[125],
+                                        "BD_Percent_Relative_Humidity": trialDicambaSprayTraking[126],
+                                        "BD_Additional_Notes_Comments": trialDicambaSprayTraking[127],
+                                        "Field_Sprayed_M1691_In_Season": trialDicambaSprayTraking[128],
+                                        "IS_SRR_Present": trialDicambaSprayTraking[129],
+                                        "IS_Applicator_FN": trialDicambaSprayTraking[130],
+                                        "IS_Applicator_LN": trialDicambaSprayTraking[131],
+                                        "IS_Applicator_Trained": trialDicambaSprayTraking[132],
+                                        "IS_Applicator_Possession_M1691_Label": trialDicambaSprayTraking[133],
+                                        "IS_Crop_Stage": trialDicambaSprayTraking[134],
+                                        "IS_Adjacent_Non_RR2X": trialDicambaSprayTraking[135],
+                                        "IS_Growth_Stage_Non_RR2X_Soybean": trialDicambaSprayTraking[136],
+                                        "IS_Growth_Stage_Flowering": trialDicambaSprayTraking[137],
+                                        "IS_Herbicide": trialDicambaSprayTraking[138],
+                                        "IS_Mon_10_Used": trialDicambaSprayTraking[139],
+                                        "IS_Drift_Reduction": trialDicambaSprayTraking[140],
+                                        "IS_DateTime": trialDicambaSprayTraking[141],
+                                        "IS_Nozzle_Type": trialDicambaSprayTraking[142],
+                                        "IS_Nozzle_Spacing": trialDicambaSprayTraking[143],
+                                        "IS_Boom_Length": trialDicambaSprayTraking[144],
+                                        "IS_Boom_Height": trialDicambaSprayTraking[145],
+                                        "IS_Hooded": trialDicambaSprayTraking[146],
+                                        "IS_Operating_Pressure_PSI": trialDicambaSprayTraking[147],
+                                        "IS_Ground_Speed_MPH": trialDicambaSprayTraking[148],
+                                        "IS_GPA": trialDicambaSprayTraking[149],
+                                        "IS_Treated_Acreage": trialDicambaSprayTraking[150],
+                                        "IS_Equipment_Triple_Rinsed": trialDicambaSprayTraking[151],
+                                        "IS_Additional_App_Notes": trialDicambaSprayTraking[152],
+                                        "IS_Wind_Speed": trialDicambaSprayTraking[153],
+                                        "IS_Wind_Direction": trialDicambaSprayTraking[154],
+                                        "IS_Air_Temp": trialDicambaSprayTraking[155],
+                                        "IS_Percent_Relative_Humidity": trialDicambaSprayTraking[156],
+                                        "IS_Additional_Notes_Comments": trialDicambaSprayTraking[157]
+                                    };
+
+                                    SetLocalStorageData(fullCatalogName, datas[i].TrialID, "Trial_Id", complianceTable);
+                                } else if (DicambaSprayTrakingBlank != false && datas[i].Locked) {
+                                    var dashData = GetLocalStorageData("D01", datas[i].TrialID, "Trial_Id");
+                                    dashData[DashName] = 4;
+                                    SetLocalStorageData("D01_Trial", datas[i].TrialID, "Trial_Id", dashData);
+                                    complianceTable = {
+                                        "Trial_Id": datas[i].TrialID, "Locked": datas[i].Locked, "Sync": 0,
+                                        "Field_Sprayed_M1691_Burndown": 1015,
+                                        "BD_SRR_Present": 1015,
+                                        "BD_Applicator_FN": "",
+                                        "BD_Applicator_LN": "",
+                                        "BD_Applicator_Trained": 1015,
+                                        "BD_Applicator_Possession_M1691_Label": 1015,
+                                        "BD_Crop_Stage": 1015,
+                                        "BD_Adjacent_Non_RR2X": 1015,
+                                        "BD_Growth_Stage_Non_RR2X_Soybean": 1015,
+                                        "BD_Growth_Stage_Flowering": "",
+                                        "BD_Herbicide": "",
+                                        "BD_Mon_10_Used": 1015,
+                                        "BD_Drift_Reduction": 1015,
+                                        "BD_DateTime": "",
+                                        "BD_Nozzle_Type": 1015,
+                                        "BD_Nozzle_Spacing": "",
+                                        "BD_Boom_Length": "",
+                                        "BD_Boom_Height": "",
+                                        "BD_Hooded": 1015,
+                                        "BD_Operating_Pressure_PSI": "",
+                                        "BD_Ground_Speed_MPH": "",
+                                        "BD_GPA": "",
+                                        "BD_Treated_Acreage": "",
+                                        "BD_Equipment_Triple_Rinsed": 1015,
+                                        "BD_Additional_App_Notes": "",
+                                        "BD_Wind_Speed": "",
+                                        "BD_Wind_Direction": "",
+                                        "BD_Air_Temp": "",
+                                        "BD_Percent_Relative_Humidity": "",
+                                        "BD_Additional_Notes_Comments": "",
+                                        "Field_Sprayed_M1691_In_Season": 1015,
+                                        "IS_SRR_Present": 1015,
+                                        "IS_Applicator_FN": "",
+                                        "IS_Applicator_LN": "",
+                                        "IS_Applicator_Trained": 1015,
+                                        "IS_Applicator_Possession_M1691_Label": 1015,
+                                        "IS_Crop_Stage": 1015,
+                                        "IS_Adjacent_Non_RR2X": 1015,
+                                        "IS_Growth_Stage_Non_RR2X_Soybean": 1015,
+                                        "IS_Growth_Stage_Flowering": "",
+                                        "IS_Herbicide": "",
+                                        "IS_Mon_10_Used": 1015,
+                                        "IS_Drift_Reduction": 1015,
+                                        "IS_DateTime": "",
+                                        "IS_Nozzle_Type": 1015,
+                                        "IS_Nozzle_Spacing": "",
+                                        "IS_Boom_Length": "",
+                                        "IS_Boom_Height": "",
+                                        "IS_Hooded": 1015,
+                                        "IS_Operating_Pressure_PSI": "",
+                                        "IS_Ground_Speed_MPH": "",
+                                        "IS_GPA": "",
+                                        "IS_Treated_Acreage": "",
+                                        "IS_Equipment_Triple_Rinsed": 1015,
+                                        "IS_Additional_App_Notes": "",
+                                        "IS_Wind_Speed": "",
+                                        "IS_Wind_Direction": "",
+                                        "IS_Air_Temp": "",
+                                        "IS_Percent_Relative_Humidity": "",
+                                        "IS_Additional_Notes_Comments": ""
+                                    };
+                                    SetLocalStorageData(fullCatalogName, datas[i].TrialID, "Trial_Id", complianceTable);
+                                }
+                            } else if (datas[i].WorkflowID == 11) {
+                                DashName = "In_Season_Monitoring";
+                                for (var r = 0; r < datas[i].Responses.length; r++) {
+                                    InSeasonBlank = false;
+                                    trialInSeason[datas[i].Responses[r].QuestionID] = datas[i].Responses[r].ResponseValue;
+                                }
+                                if (InSeasonBlank == false) {
+
+                                    complianceTable = {
+                                        "Trial_Id": datas[i].TrialID, "Locked": datas[i].Locked, "Sync": 0,
+                                        "Ft_Isolation_Planting": trialInSeason[158],
+                                        "PP_Record_Isolation_Date": trialInSeason[159],
+                                        "PP_Isolation_Area_Inspected": trialInSeason[160],
+                                        "PP_Compatible_Plants_Found": trialInSeason[161],
+                                        "PP_Compatible_Plants_Destroyed": trialInSeason[162],
+                                        "PP_Compatible_Plants_Destruction_Method": trialInSeason[163],
+                                        "PH_Record_Isolation_Date": trialInSeason[164],
+                                        "PH_Isolation_Area_Inspected": trialInSeason[165],
+                                        "PH_Compatible_Plants_Found": trialInSeason[166],
+                                        "PH_Compatible_Plants_Destroyed": trialInSeason[167],
+                                        "PH_Compatible_Plants_Destruction_Method": trialInSeason[168],
+                                        "SRR_Confirmation": trialInSeason[169],
+                                        "Cover_Crops_Destroyed": trialInSeason[170]
+                                    };
+
+                                    SetLocalStorageData(fullCatalogName, datas[i].TrialID, "Trial_Id", complianceTable);
+                                } else if (InSeasonBlank != false && datas[i].Locked == 1) {
+                                    var dashData = GetLocalStorageData("D01", datas[i].TrialID, "Trial_Id");
+                                    dashData[DashName] = 4;
+                                    SetLocalStorageData("D01_Trial", datas[i].TrialID, "Trial_Id", dashData);
+                                    complianceTable = { "Trial_Id": datas[i].TrialID, "Locked": datas[i].Locked, "Sync": 0, "Ft_Isolation_Planting": 1015, "PP_Record_Isolation_Date": 1015, "PP_Isolation_Area_Inspected": 1015, "PP_Compatible_Plants_Found": 1015, "PP_Compatible_Plants_Destroyed": 1015, "PP_Compatible_Plants_Destruction_Method": 1015, "PH_Record_Isolation_Date": 1015, "PH_Isolation_Area_Inspected": 1015, "PH_Compatible_Plants_Found": 1015, "PH_Compatible_Plants_Destroyed": 1015, "PH_Compatible_Plants_Destruction_Method": 1015, "SRR_Confirmation": 1015, "Cover_Crops_Destroyed": 1015 };
+                                    SetLocalStorageData(fullCatalogName, datas[i].TrialID, "Trial_Id", complianceTable);
+                                }
+                            } else if (datas[i].WorkflowID == 12) {
+                                DashName = "Harvest_and_Destruct";
+                                for (var r = 0; r < datas[i].Responses.length; r++) {
+                                    HarvestAndDestructBlank = false;
+                                    trialHarvestAndDestruct[datas[i].Responses[r].QuestionID] = datas[i].Responses[r].ResponseValue;
+                                }
+                                if (HarvestAndDestructBlank == false) {
+                                    //TODO: LOAD HARVEST AND DESTRUCT
+                                    complianceTable = {
+                                        "Trial_Id": datas[i].TrialID, "Locked": datas[i].Locked, "Sync": 0,
+                                        //"CD_Prior_to_flowering": trialHarvestAndDestruct[261],
+                                        //"CD_Method": trialHarvestAndDestruct[262],
+                                        //"CD_Date": trialHarvestAndDestruct[263],
+                                        "PH_Trained_Prior_to_Harvest": trialHarvestAndDestruct[264],
+                                        "H_Harvest_Visited": trialHarvestAndDestruct[265],
+                                        //"H_Grower_Has_Plan_to_Empty_Equipment": trialHarvestAndDestruct[266],
+                                        "H_Portion_Not_Harvested": trialHarvestAndDestruct[267],
+                                        //"H_Estimated_Acres": trialHarvestAndDestruct[268],
+                                        "H_Start_Date": trialHarvestAndDestruct[269],
+                                        "H_End_Date": trialHarvestAndDestruct[270],
+                                        "H_Material_Stored_In": trialHarvestAndDestruct[271],
+                                        "H_Bin_Number_and_Location": trialHarvestAndDestruct[272],
+                                        "Equipment_Cleaned_Out": trialHarvestAndDestruct[273],
+                                        "Next_Harvested_Field": trialHarvestAndDestruct[274],
+                                        //"ECO_Forced_Air_Used": trialHarvestAndDestruct[275],
+                                        "ECO_Confirmation_Date": trialHarvestAndDestruct[276],
+                                        "ECO_Contact_Person": trialHarvestAndDestruct[277],
+                                        "GBL_Equipment_Clean_Out": trialHarvestAndDestruct[278],
+                                        "GBL_ECO_Confirmation_Date": trialHarvestAndDestruct[279],
+                                        "GBL_ECO_Contact_Person": trialHarvestAndDestruct[280],
+                                        //"harvested_Materials_Disposition": trialHarvestAndDestruct[281],
+                                        //"PH_Adjencent_Fields_Completed_Harvest": trialHarvestAndDestruct[338],
+                                        "H_Acres_Harvested": trialHarvestAndDestruct[339],
+                                        "H_Estimated_Harvest_Volume": trialHarvestAndDestruct[340],
+                                        "H_Material_Properly_Contained": trialHarvestAndDestruct[341],
+                                        "H_Material_Storage_Properly_Labeled": trialHarvestAndDestruct[342],
+                                        "H_Material_Storage_Properly_Secured": trialHarvestAndDestruct[343],
+                                        "ECO_Checklist_Completed_Prior_To": trialHarvestAndDestruct[344],
+                                        "ECO_Disposed_Per_Approved_Method": trialHarvestAndDestruct[345],
+                                        //"GBL_ECO_Checklist_Completed_Prior_To": trialHarvestAndDestruct[346],
+                                        "GBL_ECO_Disposed_Per_Approved_Method": trialHarvestAndDestruct[347],
+                                        "H_Delay_Harvesting": trialHarvestAndDestruct[348],
+                                    };
+
+                                    SetLocalStorageData(fullCatalogName, datas[i].TrialID, "Trial_Id", complianceTable);
+                                } else if (HarvestAndDestructBlank != false && datas[i].Locked == 1) {
+                                    var dashData = GetLocalStorageData("D01", datas[i].TrialID, "Trial_Id");
+                                    dashData[DashName] = 4;
+                                    SetLocalStorageData("D01_Trial", datas[i].TrialID, "Trial_Id", dashData);
+
+                                    //TODO: LOAD HARVEST AND DESTRUCT
+                                    complianceTable = {
+                                        "Trial_Id": datas[i].TrialID, "Locked": datas[i].Locked, "Sync": 0,
+                                        "Trial_Id": datas[i].TrialID, "Locked": datas[i].Locked, "Sync": 0,
+                                        //"CD_Prior_to_flowering": 1015,
+                                        //"CD_Method": 1015,
+                                        //"CD_Date": "",
+                                        "PH_Trained_Prior_to_Harvest": 1015,
+                                        "H_Harvest_Visited": 1015,
+                                        //"H_Grower_Has_Plan_to_Empty_Equipment": 1015,
+                                        "H_Portion_Not_Harvested": 1015,
+                                        //"H_Estimated_Acres": "",
+                                        "H_Start_Date": "",
+                                        "H_End_Date": "",
+                                        "H_Material_Stored_In": 1015,
+                                        "H_Bin_Number_and_Location": "",
+                                        "Equipment_Cleaned_Out": 1015,
+                                        "Next_Harvested_Field": "",
+                                        //"ECO_Forced_Air_Used": 1015,
+                                        "ECO_Confirmation_Date": "",
+                                        "ECO_Contact_Person": "",
+                                        "GBL_Equipment_Clean_Out": 1015,
+                                        "GBL_ECO_Confirmation_Date": "",
+                                        "GBL_ECO_Contact_Person": "",
+                                        //"harvested_Materials_Disposition": 1015,
+                                        //"PH_Adjencent_Fields_Completed_Harvest": 1015,
+                                        "H_Acres_Harvested": "",
+                                        "H_Estimated_Harvest_Volume": "",
+                                        "H_Material_Properly_Contained": 1015,
+                                        "H_Material_Storage_Properly_Labeled": 1015,
+                                        "H_Material_Storage_Properly_Secured": 1015,
+                                        "ECO_Checklist_Completed_Prior_To": 1015,
+                                        "ECO_Disposed_Per_Approved_Method": 1015,
+                                        //"GBL_ECO_Checklist_Completed_Prior_To": 1015,
+                                        "GBL_ECO_Disposed_Per_Approved_Method": 1015,
+                                        "H_Delay_Harvesting": 1015,
+                                    };
+
+                                    SetLocalStorageData(fullCatalogName, datas[i].TrialID, "Trial_Id", complianceTable);
+                                }
+                            } else if (datas[i].WorkflowID == 14) {
+                                DashName = "Bin_Inspections";
+                                for (var r = 0; r < datas[i].Responses.length; r++) {
+                                    BinInspectionsBlank = false;
+                                    trialBinInspections[datas[i].Responses[r].QuestionID] = datas[i].Responses[r].ResponseValue;
+                                }
+                                if (BinInspectionsBlank == false) {
+
+                                    complianceTable = {
+                                        "Trial_Id": datas[i].TrialID, "Locked": datas[i].Locked, "Sync": 0,
+                                        "Trial_Use_Bin_Storage": trialBinInspections[282],
+                                        "Bin_Number": trialBinInspections[171],
+                                        "Bin_Location": trialBinInspections[172],
+                                        "Bin_Inspector_Name": trialBinInspections[283],
+                                        "Bin_Appropriate_Size": trialBinInspections[284],
+                                        "Bin_Clean_And_Good": trialBinInspections[285],
+                                        "Bin_Secureable": trialBinInspections[286],
+                                        //"Bin_Statement_Storage": trialBinInspections[287],
+                                        "Bin_Signage_Appropriated": trialBinInspections[288],
+                                        //"Bin_Type_of_Storage": trialBinInspections[173],
+                                        //"Bin_Diameter": trialBinInspections[174],
+                                        //"Bin_Height": trialBinInspections[175],
+                                        //"Bin_Capacity": trialBinInspections[176],
+                                        //"False_Floor": trialBinInspections[177],
+                                        //"Unloading_Tube_Clearance": trialBinInspections[178],
+                                        //"Access_by_Semi": trialBinInspections[179],
+                                        //"Distance_to_Rock": trialBinInspections[180],
+                                        //"Electricity_Near_Bin": trialBinInspections[181],
+                                        //"Door_on_Top": trialBinInspections[182],
+                                        //"Aeration_System": trialBinInspections[183],
+                                        //"Walls_Clean": trialBinInspections[184],
+                                        //"Floor_Clean": trialBinInspections[185],
+                                        //"Bin_Approved": trialBinInspections[186],
+                                        "Additional_Comments": trialBinInspections[187],
+                                        "Bin_Inspected_Date": trialBinInspections[188],
+                                        "Bin_Loc_GPS_Lat": trialBinInspections[313],
+                                        "Bin_Loc_GPS_Long": trialBinInspections[314],
+                                        "Bin_Same_Trait": trialBinInspections[323],
+                                        "Bin_Independent": trialBinInspections[324],
+                                        "Bin_Load_System_Not_Used_For_Commodities": trialBinInspections[325],
+
+                                        "Bin_Number2": trialBinInspections[189],
+                                        "Bin_Location2": trialBinInspections[190],
+                                        "Bin_Inspector_Name2": trialBinInspections[289],
+                                        "Bin_Appropriate_Size2": trialBinInspections[290],
+                                        "Bin_Clean_And_Good2": trialBinInspections[291],
+                                        "Bin_Secureable2": trialBinInspections[292],
+                                        //"Bin_Statement_Storage2": trialBinInspections[293],
+                                        "Bin_Signage_Appropriated2": trialBinInspections[294],
+                                        //"Bin_Type_of_Storage2": trialBinInspections[191],
+                                        //"Bin_Diameter2": trialBinInspections[192],
+                                        //"Bin_Height2": trialBinInspections[193],
+                                        //"Bin_Capacity2": trialBinInspections[194],
+                                        //"False_Floor2": trialBinInspections[195],
+                                        //"Unloading_Tube_Clearance2": trialBinInspections[196],
+                                        //"Access_by_Semi2": trialBinInspections[197],
+                                        //"Distance_to_Rock2": trialBinInspections[198],
+                                        //"Electricity_Near_Bin2": trialBinInspections[199],
+                                        //"Door_on_Top2": trialBinInspections[200],
+                                        //"Aeration_System2": trialBinInspections[201],
+                                        //"Walls_Clean2": trialBinInspections[202],
+                                        //"Floor_Clean2": trialBinInspections[203],
+                                        //"Bin_Approved2": trialBinInspections[204],
+                                        "Additional_Comments2": trialBinInspections[205],
+                                        "Bin_Inspected_Date2": trialBinInspections[206],
+                                        "Bin_Loc_GPS_Lat2": trialBinInspections[315],
+                                        "Bin_Loc_GPS_Long2": trialBinInspections[316],
+                                        "Bin_Same_Trait2": trialBinInspections[326],
+                                        "Bin_Independent2": trialBinInspections[327],
+                                        "Bin_Load_System_Not_Used_For_Commodities2": trialBinInspections[328],
+
+
+                                        "Bin_Number3": trialBinInspections[207],
+                                        "Bin_Location3": trialBinInspections[208],
+                                        "Bin_Inspector_Name3": trialBinInspections[295],
+                                        "Bin_Appropriate_Size3": trialBinInspections[296],
+                                        "Bin_Clean_And_Good3": trialBinInspections[297],
+                                        "Bin_Secureable3": trialBinInspections[298],
+                                        //"Bin_Statement_Storage3": trialBinInspections[299],
+                                        "Bin_Signage_Appropriated3": trialBinInspections[300],
+                                        //"Bin_Type_of_Storage3": trialBinInspections[209],
+                                        //"Bin_Diameter3": trialBinInspections[210],
+                                        //"Bin_Height3": trialBinInspections[211],
+                                        //"Bin_Capacity3": trialBinInspections[212],
+                                        //"False_Floor3": trialBinInspections[213],
+                                        //"Unloading_Tube_Clearance3": trialBinInspections[214],
+                                        //"Access_by_Semi3": trialBinInspections[215],
+                                        //"Distance_to_Rock3": trialBinInspections[216],
+                                        //"Electricity_Near_Bin3": trialBinInspections[217],
+                                        //"Door_on_Top3": trialBinInspections[218],
+                                        //"Aeration_System3": trialBinInspections[219],
+                                        //"Walls_Clean3": trialBinInspections[220],
+                                        //"Floor_Clean3": trialBinInspections[221],
+                                        //"Bin_Approved3": trialBinInspections[222],
+                                        "Additional_Comments3": trialBinInspections[223],
+                                        "Bin_Inspected_Date3": trialBinInspections[224],
+                                        "Bin_Loc_GPS_Lat3": trialBinInspections[317],
+                                        "Bin_Loc_GPS_Long3": trialBinInspections[318],
+                                        "Bin_Same_Trait3": trialBinInspections[329],
+                                        "Bin_Independent3": trialBinInspections[330],
+                                        "Bin_Load_System_Not_Used_For_Commodities3": trialBinInspections[331],
+
+
+                                        "Bin_Number4": trialBinInspections[225],
+                                        "Bin_Location4": trialBinInspections[226],
+                                        "Bin_Inspector_Name4": trialBinInspections[301],
+                                        "Bin_Appropriate_Size4": trialBinInspections[302],
+                                        "Bin_Clean_And_Good4": trialBinInspections[303],
+                                        "Bin_Secureable4": trialBinInspections[304],
+                                        //"Bin_Statement_Storage4": trialBinInspections[305],
+                                        "Bin_Signage_Appropriated4": trialBinInspections[306],
+                                        //"Bin_Type_of_Storage4": trialBinInspections[227],
+                                        //"Bin_Diameter4": trialBinInspections[228],
+                                        //"Bin_Height4": trialBinInspections[229],
+                                        //"Bin_Capacity4": trialBinInspections[230],
+                                        //"False_Floor4": trialBinInspections[231],
+                                        //"Unloading_Tube_Clearance4": trialBinInspections[232],
+                                        //"Access_by_Semi4": trialBinInspections[233],
+                                        //"Distance_to_Rock4": trialBinInspections[234],
+                                        //"Electricity_Near_Bin4": trialBinInspections[235],
+                                        //"Door_on_Top4": trialBinInspections[236],
+                                        //"Aeration_System4": trialBinInspections[237],
+                                        //"Walls_Clean4": trialBinInspections[238],
+                                        //"Floor_Clean4": trialBinInspections[239],
+                                        //"Bin_Approved4": trialBinInspections[240],
+                                        "Additional_Comments4": trialBinInspections[241],
+                                        "Bin_Inspected_Date4": trialBinInspections[242],
+                                        "Bin_Loc_GPS_Lat4": trialBinInspections[319],
+                                        "Bin_Loc_GPS_Long4": trialBinInspections[320],
+                                        "Bin_Same_Trait4": trialBinInspections[332],
+                                        "Bin_Independent4": trialBinInspections[333],
+                                        "Bin_Load_System_Not_Used_For_Commodities4": trialBinInspections[334],
+
+                                        "Bin_Number5": trialBinInspections[243],
+                                        "Bin_Location5": trialBinInspections[244],
+                                        "Bin_Inspector_Name5": trialBinInspections[307],
+                                        "Bin_Appropriate_Size5": trialBinInspections[308],
+                                        "Bin_Clean_And_Good5": trialBinInspections[309],
+                                        "Bin_Secureable5": trialBinInspections[310],
+                                        //"Bin_Statement_Storage5": trialBinInspections[311],
+                                        "Bin_Signage_Appropriated5": trialBinInspections[312],
+                                        //"Bin_Type_of_Storage5": trialBinInspections[245],
+                                        //"Bin_Diameter5": trialBinInspections[246],
+                                        //"Bin_Height5": trialBinInspections[247],
+                                        //"Bin_Capacity5": trialBinInspections[248],
+                                        //"False_Floor5": trialBinInspections[249],
+                                        //"Unloading_Tube_Clearance5": trialBinInspections[250],
+                                        //"Access_by_Semi5": trialBinInspections[251],
+                                        //"Distance_to_Rock5": trialBinInspections[252],
+                                        //"Electricity_Near_Bin5": trialBinInspections[253],
+                                        //"Door_on_Top5": trialBinInspections[254],
+                                        //"Aeration_System5": trialBinInspections[255],
+                                        //"Walls_Clean5": trialBinInspections[256],
+                                        //"Floor_Clean5": trialBinInspections[257],
+                                        //"Bin_Approved5": trialBinInspections[258],
+                                        "Additional_Comments5": trialBinInspections[259],
+                                        "Bin_Inspected_Date5": trialBinInspections[260],
+                                        "Bin_Loc_GPS_Lat5": trialBinInspections[321],
+                                        "Bin_Loc_GPS_Long5": trialBinInspections[322],
+                                        "Bin_Same_Trait5": trialBinInspections[335],
+                                        "Bin_Independent5": trialBinInspections[336],
+                                        "Bin_Load_System_Not_Used_For_Commodities5": trialBinInspections[337],
+
+                                    };
+
+                                    SetLocalStorageData(fullCatalogName, datas[i].TrialID, "Trial_Id", complianceTable);
+
+                                } else if (BinInspectionsBlank != false && datas[i].Locked == 1) {
+
+                                    var dashData = GetLocalStorageData("D01", datas[i].TrialID, "Trial_Id");
+                                    dashData[DashName] = 4;
+                                    SetLocalStorageData("D01_Trial", datas[i].TrialID, "Trial_Id", dashData);
+
+                                    //TODO: fill with bin inspection questions/answers
+                                    complianceTable = {
+                                        "Trial_Id": datas[i].TrialID, "Locked": datas[i].Locked, "Sync": 0,
+
+                                        "Trial_Use_Bin_Storage": 1015,
+
+                                        "Bin_Number": "",
+                                        "Bin_Location": "",
+                                        "Bin_Inspector_Name": "",
+                                        "Bin_Appropriate_Size": 1015,
+                                        //"Bin_Type_of_Storage": 1015,
+                                        //"Bin_Diameter": 0,
+                                        //"Bin_Height": 0,
+                                        //"Bin_Capacity": 0,
+                                        //"False_Floor": 1015,
+                                        //"Unloading_Tube_Clearance": 0,
+                                        //"Access_by_Semi": 1015,
+                                        //"Distance_to_Rock": 0,
+                                        //"Electricity_Near_Bin": 1015,
+                                        //"Door_on_Top": 1015,
+                                        "Aeration_System": 1015,
+                                        "Walls_Clean": 1015,
+                                        //"Floor_Clean": 1015,
+                                        //"Bin_Approved": 1015,
+                                        "Additional_Comments": "",
+                                        "Bin_Inspected_Date": "",
+                                        "Bin_Loc_GPS_Lat": "",
+                                        "Bin_Loc_GPS_Long": "",
+                                        "Bin_Same_Trait": 1015,
+                                        "Bin_Independent": 1015,
+                                        "Bin_Load_System_Not_Used_For_Commodities": 1015,
+
+                                        "Bin_Number2": "",
+                                        "Bin_Location2": "",
+                                        "Bin_Inspector_Name2": "",
+                                        "Bin_Appropriate_Size2": 1015,
+                                        //"Bin_Type_of_Storage2": 1015,
+                                        //"Bin_Diameter2": 0,
+                                        //"Bin_Height2": 0,
+                                        //"Bin_Capacity2": 0,
+                                        //"False_Floor2": 1015,
+                                        //"Unloading_Tube_Clearance2": 0,
+                                        //"Access_by_Semi2": 1015,
+                                        //"Distance_to_Rock2": 0,
+                                        //"Electricity_Near_Bin2": 1015,
+                                        //"Door_on_Top2": 1015,
+                                        "Aeration_System2": 1015,
+                                        "Walls_Clean2": 1015,
+                                        //"Floor_Clean2": 1015,
+                                        //"Bin_Approved2": 1015,
+                                        "Additional_Comments2": "",
+                                        "Bin_Inspected_Date2": "",
+                                        "Bin_Loc_GPS_Lat2": "",
+                                        "Bin_Loc_GPS_Long2": "",
+                                        "Bin_Same_Trait2": 1015,
+                                        "Bin_Independent2": 1015,
+                                        "Bin_Load_System_Not_Used_For_Commodities2": 1015,
+
+                                        "Bin_Number3": "",
+                                        "Bin_Location3": "",
+                                        "Bin_Inspector_Name3": "",
+                                        "Bin_Appropriate_Size3": 1015,
+                                        //"Bin_Type_of_Storage3": 1015,
+                                        //"Bin_Diameter3": 0,
+                                        //"Bin_Height3": 0,
+                                        //"Bin_Capacity3": 0,
+                                        //"False_Floor3": 1015,
+                                        //"Unloading_Tube_Clearance3": 0,
+                                        //"Access_by_Semi3": 1015,
+                                        //"Distance_to_Rock3": 0,
+                                        //"Electricity_Near_Bin3": 1015,
+                                        //"Door_on_Top3": 1015,
+                                        "Aeration_System3": 1015,
+                                        "Walls_Clean3": 1015,
+                                        //"Floor_Clean3": 1015,
+                                        //"Bin_Approved3": 1015,
+                                        "Additional_Comments3": "",
+                                        "Bin_Inspected_Date3": "",
+                                        "Bin_Loc_GPS_Lat3": "",
+                                        "Bin_Loc_GPS_Long3": "",
+                                        "Bin_Same_Trait3": 1015,
+                                        "Bin_Independent3": 1015,
+                                        "Bin_Load_System_Not_Used_For_Commodities3": 1015,
+
+
+                                        "Bin_Number4": "",
+                                        "Bin_Location4": "",
+                                        "Bin_Inspector_Name4": "",
+                                        "Bin_Appropriate_Size4": 1015,
+                                        //"Bin_Type_of_Storage4": 1015,
+                                        //"Bin_Diameter4": 0,
+                                        //"Bin_Height4": 0,
+                                        //"Bin_Capacity4": 0,
+                                        //"False_Floor4": 1015,
+                                        //"Unloading_Tube_Clearance4": 0,
+                                        //"Access_by_Semi4": 1015,
+                                        //"Distance_to_Rock4": 0,
+                                        //"Electricity_Near_Bin4": 1015,
+                                        //"Door_on_Top4": 1015,
+                                        "Aeration_System4": 1015,
+                                        "Walls_Clean4": 1015,
+                                        //"Floor_Clean4": 1015,
+                                        //"Bin_Approved4": 1015,
+                                        "Additional_Comments4": "",
+                                        "Bin_Inspected_Date4": "",
+                                        "Bin_Loc_GPS_Lat4": "",
+                                        "Bin_Loc_GPS_Long4": "",
+                                        "Bin_Same_Trait4": 1015,
+                                        "Bin_Independent4": 1015,
+                                        "Bin_Load_System_Not_Used_For_Commodities4": 1015,
+
+
+                                        "Bin_Number5": "",
+                                        "Bin_Location5": "",
+                                        "Bin_Inspector_Name5": "",
+                                        "Bin_Appropriate_Size5": 1015,
+                                        //"Bin_Type_of_Storage5": 1015,
+                                        //"Bin_Diameter5": 0,
+                                        //"Bin_Height5": 0,
+                                        //"Bin_Capacity5": 0,
+                                        //"False_Floor5": 1015,
+                                        //"Unloading_Tube_Clearance5": 0,
+                                        //"Access_by_Semi5": 1015,
+                                        //"Distance_to_Rock5": 0,
+                                        //"Electricity_Near_Bin5": 1015,
+                                        //"Door_on_Top5": 1015,
+                                        "Aeration_System5": 1015,
+                                        "Walls_Clean5": 1015,
+                                        //"Floor_Clean5": 1015,
+                                        //"Bin_Approved5": 1015,
+                                        "Additional_Comments5": "",
+                                        "Bin_Inspected_Date5": "",
+                                        "Bin_Loc_GPS_Lat5": "",
+                                        "Bin_Loc_GPS_Long5": "",
+                                        "Bin_Same_Trait5": 1015,
+                                        "Bin_Independent5": 1015,
+                                        "Bin_Load_System_Not_Used_For_Commodities5": 1015,
+
+                                    };
+                                    SetLocalStorageData(fullCatalogName, datas[i].TrialID, "Trial_Id", complianceTable);
+                                }
+                            } else if (datas[i].WorkflowID == 15) {
+                                DashName = "Post_Harvest_SRR_Evaluation";
+                                for (var r = 0; r < datas[i].Responses.length; r++) {
+                                    HarvestAndDestructBlank = false;
+                                    trialHarvestAndDestruct[datas[i].Responses[r].QuestionID] = datas[i].Responses[r].ResponseValue;
+                                }
+                                if (HarvestAndDestructBlank == false) {
+
+                                    //TODO: fill with bin inspection questions/answers
+                                    complianceTable = { "Trial_Id": datas[i].TrialID, "Locked": datas[i].Locked, "Sync": 0, };
+                                    SetLocalStorageData(fullCatalogName, datas[i].TrialID, "Trial_Id", complianceTable);
+
+                                } else if (HarvestAndDestructBlank != false && datas[i].Locked == 1) {
+
+                                    var dashData = GetLocalStorageData("D01", datas[i].TrialID, "Trial_Id");
+                                    dashData[DashName] = 4;
+                                    SetLocalStorageData("D01_Trial", datas[i].TrialID, "Trial_Id", dashData);
+
+                                    //TODO: fill with bin inspection questions/answers
+                                    complianceTable = { "Trial_Id": datas[i].TrialID, "Locked": datas[i].Locked, "Sync": 0, };
+                                    SetLocalStorageData(fullCatalogName, datas[i].TrialID, "Trial_Id", complianceTable);
+                                }
+                            } else {
+                                DashName = FormArrNames[(datas[i].WorkflowID)];
+                                var dashData = GetLocalStorageData("D01", datas[i].TrialID, "Trial_Id");
+                                if (datas[i].Locked == 1) {
+                                    dashData[DashName] = 4;
+                                    SetLocalStorageData("D01_Trial", datas[i].TrialID, "Trial_Id", dashData);
+                                    complianceTable = { "Trial_Id": datas[i].TrialID, "Locked": datas[i].Locked, "Sync": 0 };
+                                    SetLocalStorageData(fullCatalogName, datas[i].TrialID, "Trial_Id", complianceTable);
+                                }
+                            }
+
+                            VolBlank = true;
+                            SSCBlank = true;
+                            LandContractBlank = true;
+                            ComplianceExceptionsBlank = true;
+                            ComplianceMapBlank = true;
+                            PrePlantingBlank = true;
+                            PlantingBlank = true;
+                            DicambaSprayTrakingBlank = true;
+                            InSeasonBlank = true;
+
+                        } catch (e) {
+                            debugger;
+                        }
+                    }
+
+                    var todate = (new Date()).toJSON();
+                    data.Forms = todate;
+                    localStorage.setItem('LastSync', JSON.stringify(data));
+
+                    FinishDownload += 1;
+                    DownloadInitialData();
+
+                },
+                error: function (a, b, c) {
+                    QtyCat = 99999;
+                    FinishDownload += 1;
+                    DownloadInitialData();
+                }
+            });
+        }
+
+        function SetFormsInDashboard() {
+
+            QtyCat = 0;
+            QtyProcess = 0;
+            var datacount = localStorage.length;
+
+            for (var i2 = 0; i2 < datacount; i2++) {
+                if (localStorage.key(i2).substr(0, 1) == "F") {
+                    QtyCat += 1;
+                }
+            }
+
+            for (var i1 = 0; i1 < datacount; i1++) {
+                if (localStorage.key(i1).substr(0, 1) == "F") {
+                    QtyProcess += 1;
+                    var trial = localStorage.getItem(localStorage.key(i1)); //Get Data from Key
+                    var data = JSON.parse(trial); //Parse the Data back into the object
+                    var n = localStorage.key(i1).lastIndexOf("_");
+                    var DashName = localStorage.key(i1).substr(9, n - 9);
+                    var NumDashboard = 1;
+
+                    if (DashName == "Bin_Inspections") {
+                        if (IsDataArrayCompleted('14', data)) {
+                            NumDashboard = 3;
+                        }
+                    }
+
+                    if (DashName == "Harvest_and_Destruct") {
+                        if (IsDataArrayCompleted('12', data)) {
+                            NumDashboard = 3;
+                        }
+                    }
+
+                    if (DashName == "Volunteer_Monitoring") {
+                        if (IsDataArrayCompleted('16', data)) {
+                            NumDashboard = 3;
+                        }
+                    }
+
+                    if (DashName == "Site_Selection_Checklist") {
+                        if (IsDataArrayCompleted('03', data)) {
+                            NumDashboard = 3;
+                        }
+                    }
+
+                    if (DashName == "Land_Contracts") {
+                        if (IsDataArrayCompleted('04', data)) {
+                            NumDashboard = 3;
+                        }
+                    }
+
+                    if (DashName == "Compliance_Exceptions") {
+                        if (IsDataArrayCompleted('05', data)) {
+                            NumDashboard = 3;
+                        }
+                    }
+
+                    if (DashName == "Compliance_Map") {
+                        if (IsDataArrayCompleted('06', data)) {
+                            NumDashboard = 3;
+                        }
+
+                    }
+
+                    if (DashName == "PrePlanting") {
+                        if (IsDataArrayCompleted('18', data)) {
+                            NumDashboard = 3;
+                        }
+                    }
+
+                    if (DashName == "Planting") {
+                        if (IsDataArrayCompleted('19', data)) {
+                            NumDashboard = 3;
+                        }
+
+                    }
+
+                    if (DashName == "Dicamba_Spray_Tracking") {
+                        NumDashboard = 1;
+                        if (IsDataArrayCompleted('10', data)) {
+                            NumDashboard = 3;
+                        }
+
+                    }
+
+                    if (DashName == "In_Season_Monitoring") {
+                        NumDashboard = 1;
+                        if (IsDataArrayCompleted('11', data)) {
+                            NumDashboard = 3;
+                        }
+
+                    }
+
+                    var dashData = GetLocalStorageData("D01", data.Trial_Id, "Trial_Id");
+                    NumDashboard = (data.Locked == true ? "4" : NumDashboard.toString());
+                    dashData[DashName] = NumDashboard;
+
+                    if (NumDashboard != 0) {
+                        SetLocalStorageData("D01_Trial", data.Trial_Id, "Trial_Id", dashData);
+                    }
+                }
+            }
+
+            FinishDownload += 1;
+            DownloadInitialData();
+        }
+    </script>
+</head>
+<body>
+    <div data-role="page" id="SyncPage" style="overflow: hidden;">
+        <div id="backscreen" class="modalBack2">
+        </div>
+        <div id="DownloadSync" class="modalDialog2">
+            <h2>Synchronizing Data...</h2>
+            <div id="DownloadInfoDiv" style="width: 410px; height: 440px; float: left; overflow-y: auto;overflow-x: hidden; overflow-wrap: break-word;">
+                <div id="DownloadInfo">
+                </div>
+            </div>
+            <div style="width: 290px; height: 440px; float: right;">
+                <div id="topLoader" style="top: 75px; left: 40px; position: relative;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        var $topLoader = $("#topLoader").percentageLoader({
+            width: 220, height: 220, controllable: true, progress: 0.0, onProgressUpdate: function (val) {
+                $topLoader.setValue(Math.round(val * 100.0));
+            }
+        });
+    </script>
+</body>
+</html>

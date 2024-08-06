@@ -1,0 +1,108 @@
+﻿@model FIDOVictory.AdminTool.Models.TrialFormStatus
+
+@{
+    ViewBag.Title = "Unlock/Lock Trial Forms";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Trial ID</th>
+                    <th>Trial Name</th>
+                    <th>Farm Name</th>
+                    <th>Year</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Html.DisplayFor(m => m.Trial.TrialID)</td>
+                    <td>@Html.DisplayFor(m => m.Trial.Name)</td>
+                    <td>@Html.DisplayFor(m => m.Trial.Farm)</td>
+                    <td>@Html.DisplayFor(m => m.Trial.Year)</td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+        @using (Html.BeginForm("Unlock", "Trial", FormMethod.Post))
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Form</th>
+                        <th class="text-center">Locked</th>
+                        <th class="text-center">Unlocked</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    @foreach (var f in Model.FormsStatuses)
+                    {
+                        <tr>
+                            <td>
+                                @f.WorkflowName
+                            </td>
+                            <td class="text-center">
+                                @if (f.WorkflowComplete)
+                                {
+                                    <input type="radio" name="@f.WorkflowID.ToString()" value="lock" checked="checked" />
+                                }
+                                else
+                                {
+                                    <input type="radio" name="@f.WorkflowID.ToString()" value="lock" />
+                                }
+                            </td>
+                            <td class="text-center">
+                                @if (!f.WorkflowComplete)
+                                {
+                                    <input type="radio" name="@f.WorkflowID.ToString()" value="unlock" checked="checked" />
+                                }
+                                else
+                                {
+                                    <input type="radio" name="@f.WorkflowID.ToString()" value="unlock" />
+                                }
+                            </td>
+                            @*<td>
+                        @Html.RadioButtonFor(model => f.WorkflowComplete, "false", new { id = "lock" })
+                        @Html.Label("lock", "Lock")
+
+                        @Html.RadioButtonFor(model => f.WorkflowComplete, "true", new { id = "unlock" })
+                        @Html.Label("unlock", "Unlock")
+
+                    </td>*@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+    <div class="form-group">
+        <div class="col-md-offset-3 col-md-9">
+            <div class="pull-right">
+                @{
+                var backLinkHref = Url.Action("Index", "Trial");
+                backLinkHref += "?Page=" + ViewBag.Session.CurrentTrialSearchFilter.Page;
+                backLinkHref += "&SearchTrialID=" + ViewBag.Session.CurrentTrialSearchFilter.TrialID;
+                backLinkHref += "&SearchTrialName=" + ViewBag.Session.CurrentTrialSearchFilter.TrialName;
+
+                }
+                <a href="@backLinkHref" class="btn btn-default">Back</a>
+
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+            
+            <div>
+
+
+            </div>
+
+        }
+    </div>
+    <div class="col-md-1"></div>
+</div>
+
+

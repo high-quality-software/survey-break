@@ -1,0 +1,55 @@
+﻿@using MvcFlashMessages
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - Victory Admin Tool</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @Styles.Render("~/bundles/css/site")
+    @Styles.Render("~/bundles/css/select2")
+    @Scripts.Render("~/bundles/js/modernizr")
+</head>
+<body>
+    <header>
+        @Html.Partial("_MainMenuPartial")
+        @Html.Partial("_LoginPartial")
+    </header>
+    <main>
+        <div class="container-fluid">
+
+            @*//TODO: determine if this section is required*@
+            @RenderSection("featured", required: false)
+            <br />
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    @Html.RenderFlash()
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+
+            @RenderBody()
+
+        </div>
+    </main>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <footer class="footer">
+        <div class="container-fluid">
+            <p>&copy; @DateTime.Now.Year - Victory Admin Tool - Version @FIDOVictory.AdminTool.Tools.Reflection.Assembly.GetCustomVersion()</p>
+        </div>
+    </footer>
+
+
+    @Scripts.Render("~/bundles/js/jquery")
+    @Scripts.Render("~/bundles/js/jqueryval")
+    @Scripts.Render("~/bundles/js/select2")
+    @Scripts.Render("~/bundles/js/bootstrap")
+    @Scripts.Render("~/bundles/js/app")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

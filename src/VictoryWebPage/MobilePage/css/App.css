@@ -1,0 +1,732 @@
+﻿
+        #ios7statusbar
+        {
+            width: 112%;
+            height: 20px;
+            background-color: black;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            overflow: hidden;
+            position: fixed;
+        }
+        
+        .ios7 .ui-page, .ios7 .ui-header, .ios7 .ui-pane
+        {
+            margin-top: 20px;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        body
+        {
+            background: url(../images/bkg3.jpg) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            overflow: hidden;
+        }
+        .modalWindow
+        {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 1500;
+            background: white;
+            opacity: 0.7;
+        }
+        
+        .ui-loader
+        {
+            z-index: 1501;
+        }
+        html head + body .ui-body-c.ui-focus
+        {
+            -webkit-box-shadow: 0 0 12px #3388cc /*{b-active-background-color}*/;
+            -moz-box-shadow: 0 0 12px #3388cc /*{b-active-background-color}*/;
+            box-shadow: 0 0 12px #3388cc /*{b-active-background-color}*/;
+        }
+        .ui-body-c, .ui-page-theme-c .ui-body-inherit, html .ui-bar-c .ui-body-inherit, html .ui-body-c .ui-body-inherit, html body .ui-group-theme-c .ui-body-inherit, html .ui-panel-page-container-c
+        {
+            background-color: white /*{b-body-background-color}*/;
+            border-color: #ADADAD /*{b-body-border}*/;
+            color: #444444 /*{b-body-color}*/;
+            text-shadow: 0 /*{b-body-shadow-x}*/ 1px /*{b-body-shadow-y}*/ 0 /*{b-body-shadow-radius}*/ #444444 /*{b-body-shadow-color}*/;
+        }
+        .ui-body-c
+        {
+            border-width: 2px;
+            border-style: solid;
+        }
+        ::-webkit-input-placeholder
+        {
+            text-align: center;
+        }
+        
+        :-moz-placeholder
+        {
+            /* Firefox 18- */
+            text-align: center;
+        }
+        
+        ::-moz-placeholder
+        {
+            /* Firefox 19+ */
+            text-align: center;
+        }
+        
+        :-ms-input-placeholder
+        {
+            text-align: center;
+        }
+        input.centerText
+        {
+            text-align: center;
+        }
+        
+        
+        input.leftText
+        {
+            text-align: left;
+        }
+        
+        input.rightText
+        {
+            text-align: right;
+        }
+        .ui-mobile .ui-page
+        {
+            background: transparent;
+            -webkit-backface-visibility: hidden;
+        }
+        .ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper
+        {
+            background-color: transparent;
+        }
+        .ui-content
+        {
+            color: #FFFFFF;
+            text-shadow: 1px 1px 1px #000000;
+        }
+        .dxbButton
+        {
+            background: transparent;
+        }
+        .ui-page
+        {
+            background: transparent;
+            -webkit-backface-visibility: hidden;
+        }
+        .InnerBox
+        {
+            -webkit-border-radius: 20px 20px 5px 5px;
+            -moz-border-radius: 20px 20px 5px 5px;
+            -border-radius: 20px 20px 5px 5px;
+            background-color: #B3B3B3;
+            -webkit-box-shadow: #D9D9D9 7px 7px 7px;
+            -moz-box-shadow: #D9D9D9 7px 7px 7px;
+            -box-shadow: #D9D9D9 7px 7px 7px;
+            height: 50%;
+            width: 574px;
+        }
+        .InnerBox2
+        {
+            -webkit-border-radius: 20px 20px 5px 5px;
+            -moz-border-radius: 20px 20px 5px 5px;
+            -border-radius: 20px 20px 5px 5px;
+            background-color: #B3B3B3;
+            -webkit-box-shadow: #D9D9D9 7px 7px 7px;
+            -moz-box-shadow: #D9D9D9 7px 7px 7px;
+            -box-shadow: #D9D9D9 7px 7px 7px;
+            height: 50%;
+            width: 100%;
+        }
+        .InnerBox3
+        {
+            -webkit-border-radius: 20px 20px 5px 5px;
+            -moz-border-radius: 20px 20px 5px 5px;
+            -border-radius: 20px 20px 5px 5px;
+            background-color: #B3B3B3;
+            -webkit-box-shadow: #D9D9D9 7px 7px 7px;
+            -moz-box-shadow: #D9D9D9 7px 7px 7px;
+            -box-shadow: #D9D9D9 7px 7px 7px;
+            height: 50%;
+            width: 370px;
+        }
+        
+        .innerDiv
+        {
+            background: white;
+            margin: 20px 6px 0;
+            /*padding: 0 10px;*/
+            overflow-wrap: break-word;
+        }
+        
+        .title
+        {
+            position: absolute;
+            text-align: center;
+            width: 60%;
+            color: white;
+            font-size: larger;
+            font-family: calibri;
+            margin-top: -3px;
+        }
+        .title2
+        {
+            position: relative;
+            text-align: center;
+            width: 100%;
+            color: white;
+            font-size: larger;
+            font-family: calibri;
+            margin-bottom: -15px;
+        }
+        
+        .title3
+        {
+            position: absolute;
+            text-align: center;
+            width: 370px;
+            color: white;
+            font-size: larger;
+            font-family: calibri;
+            margin-top: -3px;
+        }
+        #BigTable
+        {
+            position: relative;
+            width: 100%;
+            top: 0;
+            border-spacing: 20px;
+        }
+        #BigTable th, td
+        {
+            /*padding: 5px;*/
+            font-size: 11px;
+        }
+        
+        th.simpleheader
+        {
+            padding-top: 100px;
+        }
+        th.rotate
+        {
+            /* Something you can count on */
+            height: 140px;
+            white-space: nowrap;
+            color: black;
+            text-shadow: 0px 0px 0px;
+        }
+        
+        th.rotate > div
+        {
+            -webkit-transform: /* Magic Numbers */ translate(15px, 51px) /* 45 is really 360 - 45 */ rotate(300deg);
+            transform: /* Magic Numbers */ translate(15px, 51px) /* 45 is really 360 - 45 */ rotate(300deg);
+            width: 30px;
+        }
+        th.rotate > div > span
+        {
+            padding: 5px 10px;
+        }
+        
+        #FormTable th {
+            color: black;
+            text-shadow: 0px 0px 0px;
+            font-size: small;
+            padding: 0;
+            margin: 0;
+            border: 0;
+        }
+        
+        .TableHeader:after
+        {
+            content: "";
+            z-index: -1;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            border-left: 2px dotted gray;
+        }
+        td.check
+        {
+            height: 40px;
+            border: 1px solid gray;
+            cursor: pointer;
+        }
+        td.check img {
+            height: 40px;
+        }
+        td.check:nth-child(4), td.check:nth-child(7), td.check:nth-child(10)
+        {
+            height: 40px;
+            border-right: 3px solid #666362;
+        }
+        tr.check:nth-child(odd)
+        {
+            background: white;
+        }
+        tr.check:hover
+        {
+            background-color: #001A6C !important;
+        }
+        table.tab
+        {
+            border-collapse: collapse;
+        }
+        
+        table.tab, td.tab, th.tab
+        {
+            border: 1px solid white;
+        }
+        
+        .verticalAlignParent
+        {
+            display: table;
+        }
+        
+        .verticalAlignChild
+        {
+            display: table-cell;
+            vertical-align: middle;
+        }
+        
+        .verticalAlignChildNav
+        {
+            display: table-cell;
+            vertical-align: middle;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        
+        .RowClick
+        {
+            background-color: rgb(79, 129, 188) !important;
+            text-shadow: black 0 0;
+            font-weight: bold;
+        }
+        .badge
+        {
+            background: #BA070F;
+            color: #fff;
+            padding: 1px 7px;
+            right: 51px;
+            top: 9px;
+            z-index: 1010;
+            border-radius: .8em;
+            border: 2px solid #fff;
+            font-size: small;
+            margin-left: 10px;
+        }
+        .countBubl
+        {
+            float: left;
+            margin-top: -42px;
+            margin-left: 35px;
+            background: #ed1d24;
+            color: #fff;
+            padding: 2px;
+        }
+        a.ui-li-has-count span span.ui-btn-text
+        {
+            padding-right: 0;
+            position: static;
+        }
+        .ui-badge-container
+        {
+            position: relative;
+            border: 2px solid #D0D0D0;
+            color: #fff; /* padding: 10px; */
+            width: 100%;
+            height: 35px;
+            padding-top: 15px;
+            margin-top: 20px;
+            background: rgb(132, 132, 132);
+            text-align: center; /* font-weight: bold; */
+            -border-radius: 20px 20px 5px 5px;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px 20px 5px 5px;
+        }
+        .iconImage
+        {
+            width: 40px;
+        }
+        
+        .NavPaddingStartSingle
+        {
+            padding: 18px 30px 15px 20px;
+        }
+        
+        .NavPaddingStartDoble
+        {
+            padding: 7px 30px 15px 20px;
+        }
+        
+        .NavPaddingProgressSingle
+        {
+            padding: 18px 30px 15px 40px;
+        }
+        
+        .NavPaddingProgressDoble
+        {
+            padding: 7px 30px 15px 40px;
+        }
+        
+        .NavStart
+        {
+            float: left;
+            text-align: center;
+            vertical-align: middle;
+            width: 163px;
+            height: 60px;
+            word-wrap: break-word;
+            cursor: pointer;
+        }
+        
+        .NavProgress
+        {
+            float: left;
+            margin-left: -20px;
+            text-align: center;
+            vertical-align: middle;
+            width: 143px;
+            height: 60px;
+            word-wrap: break-word;
+            cursor: pointer;
+        }
+        
+        .NavStop
+        {
+            float: left;
+            margin-left: -17px;
+            text-align: center;
+            vertical-align: middle;
+            width: 55px;
+            height: 60px;
+            word-wrap: break-word;
+        }
+        
+        .GreenStartNav
+        {
+            background: url(../images/btnGreenAlmostStart.png) no-repeat;
+        }
+        
+        .GreenProgressNav
+        {
+            background: url(../images/btnGreenAlmostProgress.png) no-repeat;
+        }
+        
+        .GreenStopNav
+        {
+            background: url(../images/btnGreenAlmostStop.png) no-repeat;
+        }
+        
+        .BlackStartNav
+        {
+            background: url(../images/btnBlackAlmostStart.png) no-repeat;
+        }
+        
+        .BlackProgressNav
+        {
+            background: url(../images/btnBlackAlmostProgress.png) no-repeat;
+        }
+        
+        .BlackStopNav
+        {
+            background: url(../images/btnBlackAlmostStop.png) no-repeat;
+        }
+        
+        .YellowStartNav
+        {
+            background: url(../images/btnYellowAlmostStart.png) no-repeat;
+        }
+        
+        .YellowProgressNav
+        {
+            background: url(../images/btnYellowAlmostProgress.png) no-repeat;
+        }
+        
+        .YellowStopNav
+        {
+            background: url(../images/btnYellowAlmostStop.png) no-repeat;
+        }
+        
+        .RedStartNav
+        {
+            background: url(../images/btnRedAlmostStart.png) no-repeat;
+        }
+        
+        .RedProgressNav
+        {
+            background: url(../images/btnRedAlmostProgress.png) no-repeat;
+        }
+        
+        .RedStopNav
+        {
+            background: url(../images/btnRedAlmostStop.png) no-repeat;
+        }
+        
+        .BlueStartNav
+        {
+            background: url(../images/btnBlueAlmostStart.png) no-repeat;
+        }
+        
+        .BlueProgressNav
+        {
+            background: url(../images/btnBlueAlmostProgress.png) no-repeat;
+        }
+        
+        .BlueStopNav
+        {
+            background: url(../images/btnBlueAlmostStop.png) no-repeat;
+        }
+        .BackgroundPages
+        {
+            padding: 0px;
+            overflow: hidden;
+            background-color: black;
+            opacity: 0.9;
+            filter: alpha(opacity=90);
+        }
+        .Vol_Cancel_btn, .Vol_Save_btn, .SRR, .Admin, .User, .Forms, .NavTrialInfo, .NavStopTrial, .NavSRREval, .NavSiteSelec, .NavLandContr, .NavCompliExce, .NavCompliMap, .NavStopPrePlant, .NavPlanting, .NavStopPlant, .NavCleanouts, .NavDicamApp, .NavSpatIso, .NavInSeas, .NavHaverst, .NavDripTape, .NavPostHarv, .NavStopHarvest, .NavVolMoni, .NavReplant, .NavPrePlanting, .NavMaterialMov, .NavBinInspec
+        {
+        }
+        .Forms_Data
+        {
+            overflow-y: auto;
+        }
+        .headerTitle
+        {
+            font-weight: bold;
+            font-size: large;
+        }
+        .Vol, .TrialCropHeader, .TrialTraitHeader, .TrialComplianceStatusHeader, .TrialSRRNameHeader, .TrialSRRPhoneNumberHeader, .TrialSRRSiteLocationHeader, .TrialIRPNameHeader, .TrialIRPPhoneNumberHeader, .TrialIRPSiteLocationHeader, .TrialIDHeader, .TrialTrialNameHeader, .TrialFarmNameHeader, .TrialTrialCityHeader, .TrialTrialStateHeader, .TrialTrialCountryHeader
+        {
+            font-style: italic;
+        }
+        .ui-input-text
+        {
+            margin: .4em 0;
+        }
+        .ui-mini
+        {
+            font-size: 13px;
+        }
+        select .defaultvalue
+        {
+            display: none;
+        }
+        .ui-disabled, .ui-state-disabled
+        {
+            opacity: 1;
+        }
+    
+        #pushPanel {
+            z-index: 2000;
+        }
+        
+table.scrollTable {
+width: 100%;
+border: 1px solid #ddd;
+}
+.scrollTable {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: medium;
+}
+
+.scrollThead, .scrollTbody { display: block; }
+
+.scrollThead:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+.scrollTbody {
+    overflow-y: auto;
+color: black;
+text-shadow: 0 0;
+}
+
+.scrollThead {
+    /* fallback */
+    width: 97%;
+    /* minus scroll bar width */
+    width: calc(100% - 16px);
+    background-color: #6C6C6C;
+    background-image: -webkit-gradient( linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.2)), color-stop(50%,rgba(255,255,255,0.4)), color-stop(51%,rgba(255,255,255,0.4)), color-stop(100%,rgba(255,255,255,0.2)));
+}
+
+.scrollThead th { height: 50px}
+.scrollTbody td:first-child { text-align:left; }
+.scrollTbody td:first-child, .scrollThead th:first-child { width:170px; }
+.scrollTbody td, .scrollThead th { text-align:center; border:1px solid gray }
+/*.scrollTbody td { padding: 0px;}*/
+
+.modalDialog {
+	position: fixed;
+	font-family: Arial, Helvetica, sans-serif;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+    width: 0;
+    height: 0;
+	background: rgba(0,0,0,0.8);
+	z-index: -10000;
+	opacity:0;
+}
+
+.modalDialog2 {
+	position: fixed;
+opacity: 1;
+width: 700px;
+height: 500px;
+margin-left: -350px;
+left: 50%;
+margin-top: -250px;
+top: 50%;
+    z-index: 1003;
+	padding: 5px 20px 13px 20px;
+	border-radius: 20px;
+	background: #fff;
+-webkit-transition: opacity 400ms ease-in;
+	-moz-transition: opacity 400ms ease-in;
+	transition: opacity 400ms ease-in;
+	background: -moz-linear-gradient(#fff, #999);
+	background: -webkit-linear-gradient(#fff, #999);
+	background: -o-linear-gradient(#fff, #999);
+}
+.modalBack{
+  background: black;
+  position: fixed;
+  top:  0;
+  left: 0;
+  width: 0%;
+  height: 0%;
+  z-index: -10000;
+}
+.modalBack2{
+opacity: .8;
+  background: black;
+  position: fixed;
+  top:  0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+    z-index: 1002;
+}
+
+.SRR_Profile_Grid {
+    margin-bottom: 15px;
+}
+
+.tooltip {
+	display:none;
+	position:absolute;
+	border:1px solid #333;
+	background-color:#161616;
+	border-radius:5px;
+	padding:10px;
+	color:#fff;
+	font-size:12px;
+}
+
+.required label:after {
+    color: white;
+    content: ' *';
+    display:inline;
+    font-weight: bold;
+    font-size: larger;
+}
+.zoomInOn, .zoomInOff, .zoomOutOn, .zoomOutOff
+{
+   width:86px;
+   height:22px;
+   display:block;
+   position:absolute;
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}
+ 
+.zoomInOn, .zoomInOff
+{
+   background-image:url(../assets/custom_zoom_in.png);
+   bottom:10px;
+   left:50%;
+}
+ 
+.zoomOutOn, .zoomOutOff
+{
+   background-image:url(../assets/custom_zoom_out.png);
+   bottom:10px;
+   right:50%;
+}
+ 
+.zoomInOn, .zoomOutOn
+{
+   opacity:1;
+   cursor:pointer;
+}
+ 
+.zoomInOff, .zoomOutOff
+{
+   opacity:0.3;
+   cursor:auto;
+}
+
+table.scroll {
+    width: 600px; /* 140px * 5 column + 16px scrollbar width */
+    border-spacing: 0;
+    border: 2px solid #f5f5f5;
+    color: black;
+    text-shadow: white 0 0;
+}
+
+table.scroll tbody,
+table.scroll thead tr { 
+    display: block;
+    border-bottom: #666666 1px solid;
+}
+
+table.scroll tbody {
+    height: 196px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+table.scroll thead th {
+    width: 576px;
+    height: 30px;
+    border-right: 1px solid #f5f5f5;
+    font-size: medium;
+}
+
+table.scroll tbody td.nox {
+    width: 566px;
+    height: 30px;
+    border-right: 1px solid #f5f5f5;
+    font-size: medium;
+}
+
+table.scroll tbody tr:nth-child(odd) {
+    background-color: #F1F4F8;
+}
+
+.boxshadow 
+{
+  -moz-box-shadow:  9px 13px 20px #000;
+  -webkit-box-shadow:  9px 13px 20px #000;       
+  box-shadow: 9px 13px 20px #000;
+}
+.roundbox
+{  
+  -moz-border-radius: 6px 6px 6px 6px;
+  -webkit-border-radius: 6px;  
+  border-radius: 6px 6px 6px 6px;
+}

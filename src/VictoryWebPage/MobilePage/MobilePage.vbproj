@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>
+    </SchemaVersion>
+    <ProjectGuid>{881913EA-9675-4654-A0BE-78DD879DD523}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>MobilePage</RootNamespace>
+    <AssemblyName>MobilePage</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MyType>Custom</MyType>
+    <UseIISExpress>false</UseIISExpress>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>MobilePage.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>MobilePage.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Collections.Specialized" />
+    <Import Include="System.Configuration" />
+    <Import Include="System.Text" />
+    <Import Include="System.Text.RegularExpressions" />
+    <Import Include="System.Web" />
+    <Import Include="System.Web.Caching" />
+    <Import Include="System.Web.SessionState" />
+    <Import Include="System.Web.Security" />
+    <Import Include="System.Web.Profile" />
+    <Import Include="System.Web.UI" />
+    <Import Include="System.Web.UI.WebControls" />
+    <Import Include="System.Web.UI.WebControls.WebParts" />
+    <Import Include="System.Web.UI.HtmlControls" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\custom_zoom_in.png" />
+    <Content Include="assets\custom_zoom_out.png" />
+    <Content Include="assets\preloader.gif" />
+    <Content Include="assets\zoom_in.png" />
+    <Content Include="assets\zoom_out.png" />
+    <Content Include="css\addtohomescreen.css" />
+    <Content Include="css\App2.css" />
+    <Content Include="css\pinchzoomer.min.css" />
+    <Content Include="dls.html" />
+    <Content Include="image.html" />
+    <Content Include="images\switchoff.png" />
+    <Content Include="images\switchon.png" />
+    <Content Include="js\addtohomescreen.js" />
+    <Content Include="js\App2.js" />
+    <Content Include="js\App3.js" />
+    <Content Include="js\GlobalVariables.js" />
+    <Content Include="js\jquery.hammer.min.js" />
+    <Content Include="js\jquery.mousewheel.min.js" />
+    <Content Include="js\jquery.pinchzoomer.min.js" />
+    <Content Include="js\jquery.specialevent.hammer.js" />
+    <Content Include="js\jquery.touchSwipe.min.js" />
+    <Content Include="js\modernizr.min.js" />
+    <Content Include="js\TweenMax.min.js" />
+    <Content Include="css\BebasNeue-webfont.woff" />
+    <None Include="cache.appcache.template" />
+    <None Include="MobilePage.Publish.xml" />
+    <Content Include="SRR_Profile.html" />
+    <Content Include="Sync.html" />
+    <Content Include="ComplianceDashboard.html" />
+    <Content Include="js\localstore2.js" />
+    <Content Include="index.html" />
+    <Content Include="Testinput.html" />
+    <Content Include="css\classic.css" />
+    <Content Include="css\colorbox.css" />
+    <Content Include="css\jquery.percentageloader-0.1.css" />
+    <Content Include="TestDomainName.html" />
+    <Content Include="images\arrow-left.png" />
+    <Content Include="images\arrow-right.png" />
+    <Content Include="images\icon_download.png" />
+    <Content Include="images\search.png" />
+    <Content Include="js\jquery.colorbox.js" />
+    <Content Include="js\jquery.columns.js" />
+    <Content Include="js\jquery.percentageloader-0.1.js" />
+    <Content Include="js\lz-string.js" />
+    <Content Include="ReadLS.html" />
+    <Content Include="css\App.css" />
+    <Content Include="images\btnBlueAlmostProgress.png" />
+    <Content Include="images\btnBlueAlmostStart.png" />
+    <Content Include="images\btnBlueAlmostStop.png" />
+    <Content Include="js\Config.js" />
+    <Content Include="js\jquery-1.11.2.min.js" />
+    <Content Include="js\jquery.mobile-1.4.5.js" />
+    <Content Include="css\alertify.core.css" />
+    <Content Include="css\alertify.default.css" />
+    <Content Include="css\jquery-ui.css" />
+    <Content Include="images\bkg3.jpg" />
+    <Content Include="images\Button1.png" />
+    <Content Include="images\Button2.png" />
+    <Content Include="images\Button3.png" />
+    <Content Include="images\Button4.png" />
+    <Content Include="images\logo.png" />
+    <Content Include="images\Victoryfavicon.ico" />
+    <Content Include="css\images\ajax-loader.gif" />
+    <Content Include="css\jquery.mobile-1.4.5.min.css" />
+    <Content Include="css\jquery.mobile.icons.min.css" />
+    <Content Include="css\Victory.css" />
+    <Content Include="images\btnBlackAlmostProgress.png" />
+    <Content Include="images\btnBlackAlmostStart.png" />
+    <Content Include="images\btnBlackAlmostStop.png" />
+    <Content Include="images\btnGreenAlmostProgress.png" />
+    <Content Include="images\btnGreenAlmostStart.png" />
+    <Content Include="images\btnGreenAlmostStop.png" />
+    <Content Include="images\btnRedAlmostProgress.png" />
+    <Content Include="images\btnRedAlmostStart.png" />
+    <Content Include="images\btnRedAlmostStop.png" />
+    <Content Include="images\btnYellowAlmostProgress.png" />
+    <Content Include="images\btnYellowAlmostStart.png" />
+    <Content Include="images\btnYellowAlmostStop.png" />
+    <Content Include="images\icons\Victoryapple-touch-startup-image-1024x768.png" />
+    <Content Include="images\icons\Victory_96x96.png" />
+    <Content Include="images\Compliancebtn.png" />
+    <Content Include="images\QMSbtn.png" />
+    <Content Include="cache.appcache" />
+    <Content Include="js\ajax-loader.gif" />
+    <Content Include="js\alertify.min.js" />
+    <Content Include="js\General.js" />
+    <Content Include="js\jquery-ui.js" />
+    <Content Include="js\localstore.js" />
+    <Content Include="UnlockApp\ComplianceDashboard.html" />
+    <Content Include="UnlockApp\index.html" />
+    <Content Include="UnlockApp\Sync.html" />
+    <None Include="My Project\PublishProfiles\Profile1.pubxml" />
+    <None Include="web.config" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <Content Include="UnlockApp\cache.appcache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\MyExtensions\MyWebExtension.vb">
+      <VBMyExtensionTemplateID>Microsoft.VisualBasic.Web.MyExtension</VBMyExtensionTemplateID>
+      <VBMyExtensionTemplateVersion>1.0.0.0</VBMyExtensionTemplateVersion>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>57651</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PreBuildEvent>$(SolutionDir)BuildScripts\pre_build.cmd $(SolutionDir)</PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

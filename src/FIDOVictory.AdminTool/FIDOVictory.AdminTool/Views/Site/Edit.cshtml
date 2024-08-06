@@ -1,0 +1,51 @@
+﻿@model FIDOVictory.AdminTool.Models.Site.SiteModel
+
+@{
+    ViewBag.Title = "Edit Site";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        @using (Html.BeginForm("Edit", "Site", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.HiddenFor(model => model.SiteID);
+            
+            <div class="form-group">
+                <label for="SiteID" class="control-label col-md-3">Site ID:</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.SiteID, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Name" class="control-label col-md-3">Name:</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                </div>
+            </div>
+            <br />
+            <br />
+    <br />
+    <br />
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9">
+                    <div class="pull-right">
+                        <a href="@Url.RouteUrl("ListSites")" class="btn btn-default">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+    <br />
+    <br />
+    <br />
+    <br />
+        }
+    </div>
+    <div class="col-md-2"></div>
+</div>

@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Inputs</title>
+    <!-- Set Up the App Icon -->
+    <link rel="icon" href="images/Victoryfavicon.ico" />
+    <script src="js/jquery-1.11.2.min.js"></script>
+    <script src="js/jquery.mobile-1.4.5.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="css/Victory.css" />
+    <link rel="stylesheet" href="css/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="css/jquery-ui.css" />
+</head>
+<body>
+    <input type="text" name="firstname">
+    <input type="password" name="psw">
+    <input type="submit" value="Submit">
+    <input type="radio" name="sex" value="male" checked>Male
+    <input type="checkbox" name="vehicle" value="Bike">I have a bike
+    <input type="button" onclick="alert('Hello World!')" value="Click Me!">
+    <input type="number" name="quantity" min="1" max="5">
+    <input type="number" name="points" min="0" max="100" step="10" value="30">
+    <input type="date" name="bday">
+    <input type="date" name="bday" max="1979-12-31">
+    <input type="date" name="bday" min="2000-01-02">
+    <input type="color" name="favcolor">
+    <input type="range" name="points" min="0" max="10">
+    <input type="month" name="bdaymonth">
+    <input type="week" name="week_year">
+    <input type="time" name="usr_time">
+    <input type="datetime" name="bdaytime">
+    <input type="datetime-local" name="bdaytime">
+    <input type="email" name="email">
+    <input type="search" name="googlesearch">
+    <input type="tel" name="usrtel">
+    <input type="url" name="homepage">
+    <br />
+    <input type='number' pattern='[0-9]*' class="">
+    <input type='number' pattern="\d+(\.\d*)?" class="">
+    <input type='number' pattern="\d*" class="">
+    <input type='number' pattern="[\d]*" class="">
+    <input type='number' pattern="[\d\.]*" step="0.01" class="">
+    <br />
+    <input type='text' class="">
+    <input type='text' pattern='[0-9]*' class="NumberOnly">
+    
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.NumberOnly').keypress(function (key) {
+                if (key.charCode >= 48 && key.charCode <= 57) {
+                    return true;
+                } else if (key.charCode == 45) {
+                    if ($(this).val().indexOf('-') == -1 && $(this).val().length == 0) {
+                        return true;
+                    }
+                } else if (key.charCode == 46) {
+                    if ($(this).val().indexOf('.') == -1) {
+                        return true;
+                    }
+                } else {
+                    return false;
+                }
+                return false;
+            });
+        });
+    </script>
+</body>
+</html>

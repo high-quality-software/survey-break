@@ -1,0 +1,590 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>SRR Profile Page</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <!-- Set Up the App Icon -->
+    <link rel="icon" href="images/Victoryfavicon.ico" />
+    <!-- Load It Like A Native App -->
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Victory" />
+    <!-- Customize the Startup Screen -->
+    <script type="text/javascript" src="js/Config.js"></script>
+    <link rel="apple-touch-icon" href="images/icons/Victory_96x96.png">
+    <link rel="apple-touch-startup-image" href="images/icons/Victoryapple-touch-startup-image-1024x768.png">
+    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
+    <script type="text/javascript" src="js/alertify.min.js"></script>
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="css/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="css/alertify.core.css" />
+    <link rel="stylesheet" href="css/alertify.default.css" />
+    <script type="text/javascript" src="js/GlobalVariables.js"></script>
+    <script type="text/javascript" src="js/General.js"></script>
+    <style type="text/css">
+        body
+        {
+            background: url(images/bkg3.jpg) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            overflow: hidden;
+        }
+        .ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper
+        {
+            background-color: transparent;
+        }
+        html head + body .ui-body-c.ui-focus
+        {
+            -webkit-box-shadow: 0 0 12px #3388cc /*{b-active-background-color}*/;
+            -moz-box-shadow: 0 0 12px #3388cc /*{b-active-background-color}*/;
+            box-shadow: 0 0 12px #3388cc /*{b-active-background-color}*/;
+        }
+        .ui-body-c, .ui-page-theme-c .ui-body-inherit, html .ui-bar-c .ui-body-inherit, html .ui-body-c .ui-body-inherit, html body .ui-group-theme-c .ui-body-inherit, html .ui-panel-page-container-c
+        {
+            background-color: white /*{b-body-background-color}*/;
+            border-color: #ADADAD /*{b-body-border}*/;
+            color: #444444 /*{b-body-color}*/;
+            text-shadow: 0 /*{b-body-shadow-x}*/ 1px /*{b-body-shadow-y}*/ 0 /*{b-body-shadow-radius}*/ #444444 /*{b-body-shadow-color}*/;
+        }
+        input.centerText
+        {
+            text-align: center;
+        }
+        
+        .modalDialog2
+        {
+            position: fixed;
+            opacity: 1;
+            width: 700px;
+            height: 500px;
+            margin-left: -350px;
+            left: 50%;
+            margin-top: -250px;
+            top: 50%;
+            z-index: 1003;
+            padding: 5px 20px 13px 20px;
+            border-radius: 20px;
+            background: #fff;
+            -webkit-transition: opacity 400ms ease-in;
+            -moz-transition: opacity 400ms ease-in;
+            transition: opacity 400ms ease-in;
+            background: -moz-linear-gradient(#fff, #999);
+            background: -webkit-linear-gradient(#fff, #999);
+            background: -o-linear-gradient(#fff, #999);
+        }
+        .modalBack2
+        {
+            opacity: .8;
+            background: black;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1002;
+        }
+        ::-webkit-scrollbar
+        {
+            -webkit-appearance: none;
+            width: 7px;
+        }
+        ::-webkit-scrollbar-thumb
+        {
+            border-radius: 4px;
+            background-color: rgba(0,0,0,.5);
+            -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+        }
+    </style>
+    <script type="text/javascript">
+        
+        function Submit_SRR_Profile() {
+
+            var data = JSON.parse(localStorage.getItem("Login"));
+            var inputs = document.getElementsByClassName("form_SRR_Profile");
+
+            if (inputs['SRR_Experience'].value == -1 ||
+                inputs['Lead_Experience'].value == -1 ||
+                inputs['SRR_Field_Responsible'].value == -1 ||
+                inputs['SRR_Acres'].value == '' ||
+                isNaN(parseInt($("#backup_SRR :radio:checked").val())) ||
+                (parseInt($("#backup_SRR :radio:checked").val()) == 1 && inputs['backup_SRR_Name'].value == 0) ||
+                inputs['Training_Year'].value == "" ||
+                isNaN(parseInt($("#Complete_All_Mandatory :radio:checked").val())) ||
+                (parseInt($("#Complete_All_Mandatory :radio:checked").val()) == 0 && inputs['Complete_All_MandatoryResponse'].value == '') ||
+                isNaN(parseInt($("#Total_Number_of_Trial :radio:checked").val())) ||
+                (parseInt($("#Total_Number_of_Trial :radio:checked").val()) == 0 && inputs['Total_Number_of_TrialResponse'].value == '') ||
+                isNaN(parseInt($("#Confined_Field_Trails :radio:checked").val())) ||
+                (parseInt($("#Confined_Field_Trails :radio:checked").val()) == 0 && inputs['Confined_Field_TrailsResponse'].value == '') ||
+                isNaN(parseInt($("#Distance_of_Trial_Sites :radio:checked").val())) ||
+                (parseInt($("#Distance_of_Trial_Sites :radio:checked").val()) == 0 && inputs['Distance_of_Trial_SitesResponse'].value == '') ||
+                isNaN(parseInt($("#Experience_in_Running_Confined_Field :radio:checked").val())) ||
+                (parseInt($("#Experience_in_Running_Confined_Field :radio:checked").val()) == 0 && inputs['Experience_in_Running_Confined_FieldResponse'].value == '') ||
+                isNaN(parseInt($("#Notify_my_Direct_Supervisor :radio:checked").val())) ||
+                (parseInt($("#Notify_my_Direct_Supervisor :radio:checked").val()) == 0 && inputs['Notify_my_Direct_SupervisorResponse'].value == '')) {
+                alertify.alert('Please complete the entire form before submitting.');
+            } else {
+
+                var SRRData = {
+                    "CurrentUserAlias": data.UserId,
+                    "Data": {
+                        "SRRUserID": data.UserIdId,
+                        "SRRYearsExperience": inputs['SRR_Experience'].value,
+                        "SiteLeadSRRYearsOfExperience": inputs['Lead_Experience'].value,
+                        "NumFieldsReponsibleFor": inputs['SRR_Field_Responsible'].value,
+                        "NumAcresSRRManages": inputs['SRR_Acres'].value,
+                        "BackupSRRIdentified": parseInt($("#backup_SRR :radio:checked").val()),
+                        "BackupSRRUserID": inputs['backup_SRR_Name'].value,
+                        "BackupSRRInformed": ((typeof $("#backup_Informed :radio:checked").val() == 'undefined') ? 0 : parseInt($("#backup_Informed :radio:checked").val())),
+                        "LastTrainingYear": inputs['Training_Year'].value,
+                        "ComplianceQuestion1": parseInt($("#Complete_All_Mandatory :radio:checked").val()),
+                        "ComplianceQuestion2": parseInt($("#Total_Number_of_Trial :radio:checked").val()),
+                        "ComplianceQuestion3": parseInt($("#Confined_Field_Trails :radio:checked").val()),
+                        "ComplianceQuestion4": parseInt($("#Distance_of_Trial_Sites :radio:checked").val()),
+                        "ComplianceQuestion5": parseInt($("#Experience_in_Running_Confined_Field :radio:checked").val()),
+                        "ComplianceQuestion6": parseInt($("#Notify_my_Direct_Supervisor :radio:checked").val()),
+                        "ComplianceResponse1": inputs['Complete_All_MandatoryResponse'].value,
+                        "ComplianceResponse2": inputs['Total_Number_of_TrialResponse'].value,
+                        "ComplianceResponse3": inputs['Confined_Field_TrailsResponse'].value,
+                        "ComplianceResponse4": inputs['Distance_of_Trial_SitesResponse'].value,
+                        "ComplianceResponse5": inputs['Experience_in_Running_Confined_FieldResponse'].value,
+                        "ComplianceResponse6": inputs['Notify_my_Direct_SupervisorResponse'].value,
+                        "Flagged": 0
+                    }
+                };
+                SendData("form/srr/evaluation", 'SRR Profile', JSON.stringify(SRRData));
+                data.SRREval = false;
+                localStorage.setItem("Login", JSON.stringify(data));
+                window.location.href = "ComplianceDashboard.html";
+                //$(".modalDialog2").removeClass("modalDialog2").addClass("modalDialog");
+                //hideModal();
+                //$.mobile.navigate('#PageHome');
+                //window.location.reload();
+                //TableResize();
+            }
+        }
+        $(document).ready(function () {
+
+        });
+    </script>
+</head>
+<body class="ios7">
+    <div data-role="page" id="SRR_Profile" style="overflow: hidden;">
+        <div id="backscreen" class="modalBack2">
+        </div>
+        <div id="window" class="modalDialog2">
+            <div>
+            </div>
+            <h1>
+                SRR Profile</h1>
+            <h3 style="font-size: medium;">
+                Please review these questions and fill them with the most accurate information.</h3>
+            <div class="ui-grid-a" style="padding: 10px 20px; overflow-y: auto; height: 360px;">
+                <div class="ui-block-a SRR_Profile_Grid">
+                    <label for="SRR_Experience">
+                        SRR experience <span style="color: gray;">(# of years working as SRR)</span></label></div>
+                <div class="ui-block-b SRR_Profile_Grid" style="text-align: center;">
+                    <select name="SRR_Experience" id="SRR_Experience" data-mini="true" class="form_SRR_Profile"
+                            data-native-menu="true" data-theme="b">
+                        <option value="-1" class="defaultvalue"></option>
+                        <option value="1">0</option>
+                        <option value="2">1-2</option>
+                        <option value="3">3-5</option>
+                        <option value="4">>5</option>
+                    </select>
+                </div>
+                <div class="ui-block-a SRR_Profile_Grid">
+                    <label for="Lead_Experience">
+                        Number of years site lead has worked as a SRR</label></div>
+                <div class="ui-block-b SRR_Profile_Grid" style="text-align: center;">
+                    <select name="Lead_Experience" id="Lead_Experience" data-mini="true" class="form_SRR_Profile"
+                            data-native-menu="true" data-theme="b">
+                        <option value="-1" class="defaultvalue"></option>
+                        <option value="1">0</option>
+                        <option value="2">1-2</option>
+                        <option value="3">3-5</option>
+                        <option value="4">>5</option>
+                    </select>
+                </div>
+                <div class="ui-block-a SRR_Profile_Grid">
+                    <label for="SRR_Field_Responsible">
+                        # of post harvest VM fields SRR is responsible for</label></div>
+                <div class="ui-block-b SRR_Profile_Grid" style="text-align: center;">
+                    <select name="SRR_Field_Responsible" id="SRR_Field_Responsible" data-mini="true"
+                            class="form_SRR_Profile" data-native-menu="true" data-theme="b">
+                        <option value="-1" class="defaultvalue"></option>
+                        <option value="1">0-2</option>
+                        <option value="2">3-4</option>
+                        <option value="3">5-10</option>
+                        <option value="4">>10</option>
+                    </select>
+                </div>
+                <div class="ui-block-a SRR_Profile_Grid">
+                    <label for="SRR_Acres">
+                        Total number of acres that SRR will be managing</label></div>
+                <div class="ui-block-b SRR_Profile_Grid" style="text-align: center;">
+                    <input type="number" name="SRR_Acres" id="SRR_Acres" class="form_SRR_Profile" value=""
+                           placeholder="Total of Acres" data-theme="b" />
+                </div>
+                <div class="ui-block-a SRR_Profile_Grid">
+                    <label for="backup_SRR">
+                        Do you have a back-up SRR identified in the event of an emergency/vacation?
+                    </label>
+                </div>
+                <div class="ui-block-b SRR_Profile_Grid" style="text-align: center;">
+                    <fieldset name="backup_SRR" id="backup_SRR" data-role="controlgroup" data-type="horizontal"
+                              class="form_SRR_Profile" data-theme="b">
+                        <input type="radio" name="backup_SRRRadio" id="backup_SRRRadioa" value="1" />
+                        <label for="backup_SRRRadioa">
+                            Yes</label>
+                        <input type="radio" name="backup_SRRRadio" id="backup_SRRRadiob" value="0" />
+                        <label for="backup_SRRRadiob">
+                            No</label>
+                    </fieldset>
+                </div>
+                <div id="backup_SRR_NameYeslbl" class="ui-block-a SRR_Profile_Grid" style="display: none;">
+                    <label for="backup_SRR_Name">
+                        Who?</label></div>
+                <div id="backup_SRR_NameYes" class="ui-block-b SRR_Profile_Grid" style="display: none;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        text-align: center;">
+                    <select name="backup_SRR_Name" id="backup_SRR_Name" data-mini="true" class="form_SRR_Profile"
+                            data-native-menu="true" data-theme="b">
+                        <option value="0" class="defaultvalue"></option>
+                    </select>
+                </div>
+                <div id="backup_InformedYeslbl" class="ui-block-a SRR_Profile_Grid" style="display: none;">
+                    <label for="backup_Informed">
+                        Have they been informed?</label></div>
+                <div id="backup_InformedYes" class="ui-block-b SRR_Profile_Grid" style="display: none;
+                                                                                                                                                                                        text-align: center;">
+                    <fieldset name="backup_Informed" id="backup_Informed" data-role="controlgroup" data-type="horizontal"
+                              class="form_SRR_Profile" data-theme="b">
+                        <input type="radio" name="backup_InformedRadio" id="backup_InformedRadioa" value="1" />
+                        <label for="backup_InformedRadioa">
+                            Yes</label>
+                        <input type="radio" name="backup_InformedRadio" id="backup_InformedRadiob" value="0" />
+                        <label for="backup_InformedRadiob">
+                            No</label>
+                    </fieldset>
+                </div>
+                <script type="text/javascript">
+                    $("input[name='backup_SRRRadio']").change(function () {
+                        var volradval = this.value;
+                        var sphb1 = $("#backup_SRR_NameYeslbl");
+                        var sphb2 = $("#backup_SRR_NameYes");
+                        var sphb3 = $("#backup_InformedYeslbl");
+                        var sphb4 = $("#backup_InformedYes");
+                        if (volradval == "1") {
+
+                            sphb1.show();
+                            sphb2.show();
+                            sphb3.show();
+                            sphb4.show();
+                        } else {
+                            sphb1.hide();
+                            sphb2.hide();
+                            sphb3.hide();
+                            sphb4.hide();
+                        }
+                    });
+                </script>
+                <div class="ui-block-a SRR_Profile_Grid">
+                    <label for="Training_Year">
+                        Most recent SRR training date (as year)</label></div>
+                <div class="ui-block-b SRR_Profile_Grid" style="text-align: center;">
+                    <input type="number" name="Training_Year" id="Training_Year" class="form_SRR_Profile"
+                           value="" placeholder="Training Years" data-theme="b" />
+                </div>
+                <div class="ui-block-a SRR_Profile_Grid">
+                    <label for="Complete_All_Mandatory">
+                        I agree I will complete and comply with all mandatory trainings, assigned by the
+                        Functional Compliance Lead, and Regional Compliance Committee, and Monsanto Corporate
+                        Policies.</label></div>
+                <div class="ui-block-b SRR_Profile_Grid" style="text-align: center;">
+                    <fieldset name="Complete_All_Mandatory" id="Complete_All_Mandatory" data-role="controlgroup"
+                              data-type="horizontal" class="form_SRR_Profile" data-theme="b">
+                        <input type="radio" name="Complete_All_MandatoryRadio" id="Complete_All_MandatoryRadioa"
+                               value="1" />
+                        <label for="Complete_All_MandatoryRadioa">
+                            Yes</label>
+                        <input type="radio" name="Complete_All_MandatoryRadio" id="Complete_All_MandatoryRadiob"
+                               value="0" />
+                        <label for="Complete_All_MandatoryRadiob">
+                            No</label>
+                    </fieldset>
+                </div>
+                <div id="Complete_All_MandatoryNolbl" class="ui-block-a SRR_Profile_Grid" style="display: none;">
+                    <label for="Complete_All_MandatoryResponse">
+                        please explain your response.</label></div>
+                <div id="Complete_All_MandatoryNo" class="ui-block-b SRR_Profile_Grid" style="text-align: center;
+                                                                                                                                                                                                                                                                                                                                                                              display: none;">
+                    <input type="text" name="Complete_All_MandatoryResponse" id="Complete_All_MandatoryResponse"
+                           class="form_SRR_Profile" value="" placeholder="response" data-theme="b" />
+                </div>
+                <script type="text/javascript">
+                    $("input[name='Complete_All_MandatoryRadio']").change(function () {
+                        var volradval = this.value;
+                        var sphb1 = $("#Complete_All_MandatoryNo");
+                        var sphb2 = $("#Complete_All_MandatoryNolbl");
+                        if (volradval == "0") {
+
+                            sphb1.show();
+                            sphb2.show();
+                        } else {
+                            sphb1.hide();
+                            sphb2.hide();
+                            $("#Complete_All_MandatoryResponse").val('');
+                        }
+                    });
+                </script>
+                <div class="ui-block-a SRR_Profile_Grid">
+                    <label for="Total_Number_of_Trial">
+                        I certify that the total number of trial sites does not exceed my abilities to meet
+                        all requirements set forth within specified functional and/or governmental requirements
+                        of management of Confined Field Trails.</label></div>
+                <div class="ui-block-b SRR_Profile_Grid" style="text-align: center;">
+                    <fieldset name="Total_Number_of_Trial" id="Total_Number_of_Trial" data-role="controlgroup"
+                              data-type="horizontal" class="form_SRR_Profile" data-theme="b">
+                        <input type="radio" name="Total_Number_of_TrialRadio" id="Total_Number_of_TrialRadioa"
+                               value="1" />
+                        <label for="Total_Number_of_TrialRadioa">
+                            Yes</label>
+                        <input type="radio" name="Total_Number_of_TrialRadio" id="Total_Number_of_TrialRadiob"
+                               value="0" />
+                        <label for="Total_Number_of_TrialRadiob">
+                            No</label>
+                    </fieldset>
+                </div>
+                <div id="Total_Number_of_TrialNolbl" class="ui-block-a SRR_Profile_Grid" style="display: none;">
+                    <label for="Total_Number_of_TrialResponse">
+                        please explain your response.</label></div>
+                <div id="Total_Number_of_TrialNo" class="ui-block-b SRR_Profile_Grid" style="text-align: center;
+                                                                                                                                                                                                                                                                                display: none;">
+                    <input type="text" name="Total_Number_of_TrialResponse" id="Total_Number_of_TrialResponse"
+                           class="form_SRR_Profile" value="" placeholder="response" data-theme="b" />
+                </div>
+                <script type="text/javascript">
+                    $("input[name='Total_Number_of_TrialRadio']").change(function () {
+                        var volradval = this.value;
+                        var sphb1 = $("#Total_Number_of_TrialNo");
+                        var sphb2 = $("#Total_Number_of_TrialNolbl");
+                        if (volradval == "0") {
+
+                            sphb1.show();
+                            sphb2.show();
+                        } else {
+                            sphb1.hide();
+                            sphb2.hide();
+                            $("#Total_Number_of_TrialResponse").val('');
+                        }
+                    });
+                </script>
+                <div class="ui-block-a SRR_Profile_Grid">
+                    <label for="Confined_Field_Trails">
+                        I certify that the complexity of trial load, including number of unique trial replications
+                        conducted does not exceed my abilities to meet all requirements set forth within
+                        specified functional and/or governmental requirements of management of Confined
+                        Field Trails.</label></div>
+                <div class="ui-block-b SRR_Profile_Grid" style="text-align: center;">
+                    <fieldset name="Confined_Field_Trails" id="Confined_Field_Trails" data-role="controlgroup"
+                              data-type="horizontal" class="form_SRR_Profile" data-theme="b">
+                        <input type="radio" name="Confined_Field_TrailsRadio" id="Confined_Field_TrailsRadioa"
+                               value="1" />
+                        <label for="Confined_Field_TrailsRadioa">
+                            Yes</label>
+                        <input type="radio" name="Confined_Field_TrailsRadio" id="Confined_Field_TrailsRadiob"
+                               value="0" />
+                        <label for="Confined_Field_TrailsRadiob">
+                            No</label>
+                    </fieldset>
+                </div>
+                <div id="Confined_Field_TrailsNolbl" class="ui-block-a SRR_Profile_Grid" style="display: none;">
+                    <label for="Confined_Field_TrailsResponse">
+                        please explain your response.</label></div>
+                <div id="Confined_Field_TrailsNo" class="ui-block-b SRR_Profile_Grid" style="text-align: center;
+                                                                                                                                                                                                                                                                                display: none;">
+                    <input type="text" name="Confined_Field_TrailsResponse" id="Confined_Field_TrailsResponse"
+                           class="form_SRR_Profile" value="" placeholder="response" data-theme="b" />
+                </div>
+                <script type="text/javascript">
+                    $("input[name='Confined_Field_TrailsRadio']").change(function () {
+                        var volradval = this.value;
+                        var sphb1 = $("#Confined_Field_TrailsNo");
+                        var sphb2 = $("#Confined_Field_TrailsNolbl");
+                        if (volradval == "0") {
+
+                            sphb1.show();
+                            sphb2.show();
+                        } else {
+                            sphb1.hide();
+                            sphb2.hide();
+                            $("#Confined_Field_TrailsResponse").val('');
+                        }
+                    });
+                </script>
+                <div class="ui-block-a SRR_Profile_Grid">
+                    <label for="Distance_of_Trial_Sites">
+                        I certify that the distance of trial sites to my home location does not prevent
+                        me from meeting all requirements set forth within specified functional and/or governmental
+                        requirements of management of confined field trials.</label></div>
+                <div class="ui-block-b SRR_Profile_Grid" style="text-align: center;">
+                    <fieldset name="Distance_of_Trial_Sites" id="Distance_of_Trial_Sites" data-role="controlgroup"
+                              data-type="horizontal" class="form_SRR_Profile" data-theme="b">
+                        <input type="radio" name="Distance_of_Trial_SitesRadio" id="Distance_of_Trial_SitesRadioa"
+                               value="1" />
+                        <label for="Distance_of_Trial_SitesRadioa">
+                            Yes</label>
+                        <input type="radio" name="Distance_of_Trial_SitesRadio" id="Distance_of_Trial_SitesRadiob"
+                               value="0" />
+                        <label for="Distance_of_Trial_SitesRadiob">
+                            No</label>
+                    </fieldset>
+                </div>
+                <div id="Distance_of_Trial_SitesNolbl" class="ui-block-a SRR_Profile_Grid" style="display: none;">
+                    <label for="Distance_of_Trial_SitesResponse">
+                        please explain your response.</label></div>
+                <div id="Distance_of_Trial_SitesNo" class="ui-block-b SRR_Profile_Grid" style="text-align: center;
+                                                                                                                                                                                                                                                                                  display: none;">
+                    <input type="text" name="Distance_of_Trial_SitesResponse" id="Distance_of_Trial_SitesResponse"
+                           class="form_SRR_Profile" value="" placeholder="response" data-theme="b" />
+                </div>
+                <script type="text/javascript">
+                    $("input[name='Distance_of_Trial_SitesRadio']").change(function () {
+                        var volradval = this.value;
+                        var sphb1 = $("#Distance_of_Trial_SitesNo");
+                        var sphb2 = $("#Distance_of_Trial_SitesNolbl");
+                        if (volradval == "0") {
+
+                            sphb1.show();
+                            sphb2.show();
+                        } else {
+                            sphb1.hide();
+                            sphb2.hide();
+                            $("#Distance_of_Trial_SitesResponse").val('');
+                        }
+                    });
+                </script>
+                <div class="ui-block-a SRR_Profile_Grid">
+                    <label for="Experience_in_Running_Confined_Field">
+                        I certify that my experience in running confined field trials allows me to meet
+                        all requirements set forth within specified functional and/or governmental requirements
+                        of management of Confined Field Trails.</label></div>
+                <div class="ui-block-b SRR_Profile_Grid" style="text-align: center;">
+                    <fieldset name="Experience_in_Running_Confined_Field" id="Experience_in_Running_Confined_Field"
+                              data-role="controlgroup" data-type="horizontal" class="form_SRR_Profile" data-theme="b">
+                        <input type="radio" name="Experience_in_Running_Confined_FieldRadio" id="Experience_in_Running_Confined_FieldRadioa"
+                               value="1" />
+                        <label for="Experience_in_Running_Confined_FieldRadioa">
+                            Yes</label>
+                        <input type="radio" name="Experience_in_Running_Confined_FieldRadio" id="Experience_in_Running_Confined_FieldRadiob"
+                               value="0" />
+                        <label for="Experience_in_Running_Confined_FieldRadiob">
+                            No</label>
+                    </fieldset>
+                </div>
+                <div id="Experience_in_Running_Confined_FieldNolbl" class="ui-block-a SRR_Profile_Grid"
+                     style="display: none;">
+                    <label for="Experience_in_Running_Confined_FieldResponse">
+                        please explain your response.</label></div>
+                <div id="Experience_in_Running_Confined_FieldNo" class="ui-block-b SRR_Profile_Grid"
+                     style="text-align: center; display: none;">
+                    <input type="text" name="Experience_in_Running_Confined_FieldResponse" id="Experience_in_Running_Confined_FieldResponse"
+                           class="form_SRR_Profile" value="" placeholder="response" data-theme="b" />
+                </div>
+                <script type="text/javascript">
+                    $("input[name='Experience_in_Running_Confined_FieldRadio']").change(function () {
+                        var volradval = this.value;
+                        var sphb1 = $("#Experience_in_Running_Confined_FieldNo");
+                        var sphb2 = $("#Experience_in_Running_Confined_FieldNolbl");
+                        if (volradval == "0") {
+
+                            sphb1.show();
+                            sphb2.show();
+                        } else {
+                            sphb1.hide();
+                            sphb2.hide();
+                            $("#Experience_in_Running_Confined_FieldResponse").val('');
+                        }
+                    });
+                </script>
+                <div class="ui-block-a SRR_Profile_Grid">
+                    <label for="Notify_my_Direct_Supervisor">
+                        I will immediately notify my direct supervisor and Functional Compliance Lead in
+                        the event that I am unable to meet all requirements set forth within specified functional
+                        and/or governmental requirements of management of Confined Field Trails.</label></div>
+                <div class="ui-block-b SRR_Profile_Grid" style="text-align: center;">
+                    <fieldset name="Notify_my_Direct_Supervisor" id="Notify_my_Direct_Supervisor" data-role="controlgroup"
+                              data-type="horizontal" class="form_SRR_Profile" data-theme="b">
+                        <input type="radio" name="Notify_my_Direct_SupervisorRadio" id="Notify_my_Direct_SupervisorRadioa"
+                               value="1" />
+                        <label for="Notify_my_Direct_SupervisorRadioa">
+                            Yes</label>
+                        <input type="radio" name="Notify_my_Direct_SupervisorRadio" id="Notify_my_Direct_SupervisorRadiob"
+                               value="0" />
+                        <label for="Notify_my_Direct_SupervisorRadiob">
+                            No</label>
+                    </fieldset>
+                </div>
+                <div id="Notify_my_Direct_SupervisorNolbl" class="ui-block-a SRR_Profile_Grid" style="display: none;">
+                    <label for="Notify_my_Direct_SupervisorResponse">
+                        please explain your response.</label></div>
+                <div id="Notify_my_Direct_SupervisorNo" class="ui-block-b SRR_Profile_Grid" style="text-align: center;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         display: none;">
+                    <input type="text" name="Notify_my_Direct_SupervisorResponse" id="Notify_my_Direct_SupervisorResponse"
+                           class="form_SRR_Profile" value="" placeholder="response" data-theme="b" />
+                </div>
+                <script type="text/javascript">
+                    $("input[name='Notify_my_Direct_SupervisorRadio']").change(function () {
+                        var volradval = this.value;
+                        var sphb1 = $("#Notify_my_Direct_SupervisorNo");
+                        var sphb2 = $("#Notify_my_Direct_SupervisorNolbl");
+                        if (volradval == "0") {
+
+                            sphb1.show();
+                            sphb2.show();
+                        } else {
+                            sphb1.hide();
+                            sphb2.hide();
+                            $("#Notify_my_Direct_SupervisorResponse").val('');
+                        }
+                    });
+                </script>
+                <button id="Submit_SRR_Profile" onclick="Submit_SRR_Profile()">
+                    Submit</button>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).on('change', '[type="radio"]', function () { 
+            document.activeElement.blur();
+        });
+        $(document).bind("touchmove", function (e) {
+            e.preventDefault();
+        });
+
+        $('#window').on('touchmove', function (e) {
+            e.stopPropagation();
+        });
+
+        var datacount = localStorage.length;
+        for (var i = 0; i < datacount; i++) {
+            if (localStorage.key(i).substr(0, 3) == "C02") {
+
+                var key = localStorage.key(i); //Get  the Key 
+                var trial = localStorage.getItem(key); //Get Data from Key 
+                var data = JSON.parse(trial); //Parse the Data back into the object 
+                if (data.UserTypeID == 1) {
+                    $('#backup_SRR_Name').append($('<option/>', {
+                        value: data.UserID,
+                        text: data.FirstName + ' ' + data.LastName
+                    }));
+                }
+            }
+        }
+    </script>
+</body>
+</html>

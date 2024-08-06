@@ -1,0 +1,157 @@
+﻿@model FIDOVictory.AdminTool.Models.User.UserModel
+
+@{
+    ViewBag.Title = "Edit User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        @using (Html.BeginForm("Edit", "User", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            <div class="form-group">
+                <label for="UserID" class="control-label col-md-3">Victory User ID:</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.UserID, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="UserTypeID" class="control-label col-md-3">User Type:</label>
+                <div class="col-md-9">
+                    @Html.DropDownListFor(model => model.UserTypeID, (SelectList)ViewBag.UserTypeList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.UserTypeID)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="FName" class="control-label col-md-3">First Name:</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.FName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FName)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="LName" class="control-label col-md-3">Last Name:</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.LName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.LName)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Internal" class="control-label col-md-3">Internal:</label>
+                <div class="col-md-9">
+
+                    <!-- bootstrap button group -->
+                    <div id="InternalOptionList" class="btn-group btn-toggle-radio" data-toggle="buttons-radio">
+                        @foreach (var item in (SelectList)ViewBag.InternalOptionList)
+                        {
+                            <button type="button" data-model-field="InternalOption" value="@(item.Value)" class="btn @(Model.InternalOption.ToString() == item.Value ? "active btn-success" : "btn-default")">@item.Text</button>
+                        }
+                    </div>
+
+                    <!-- MVC razor code -->
+                    @Html.HiddenFor(model => model.InternalOption)
+                    @Html.ValidationMessageFor(model => model.InternalOption)
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Alias" class="control-label col-md-3">Monsanto User ID:</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.Alias, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Alias)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Email" class="control-label col-md-3">Email:</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="OfficeNumber" class="control-label col-md-3">Office Number:</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.OfficeNumber, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="CellNumber" class="control-label col-md-3">Cell Number:</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.CellNumber, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="SiteLocation" class="control-label col-md-3">Site Location:</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.SiteLocation, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ManagerID" class="control-label col-md-3">Manager:</label>
+                <div class="col-md-9">
+                    @Html.DropDownListFor(model => model.ManagerID, (SelectList)ViewBag.SelectedManagerList, new { @class = "form-control" })
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9">
+                    <div class="pull-right">
+                        <a href="@Url.RouteUrl("ListUsers")" class="btn btn-default">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+        }
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var applicationBaseUrl = '@(ViewBag.Session.ApplicationBaseUrl)';
+
+            var managerIDSelector = $("#ManagerID");
+            managerIDSelector.select2({
+                ajax: {
+                    url: applicationBaseUrl + 'api/user',
+                    allowClear: true,
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            filter: params.term, // search term
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data) {
+                        return {
+                            results: $.map(data, function (item) {
+                                return {
+                                    id: item.UserID,
+                                    text: item.FName + " " + item.LName,
+                                    full: item,
+                                }
+                            })
+                        };
+                    },
+                    cache: true
+                },
+                escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+                minimumInputLength: 1,
+            });
+        });
+    </script>
+}

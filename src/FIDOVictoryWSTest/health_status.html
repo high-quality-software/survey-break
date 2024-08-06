@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" manifest="cache.manifest">
+<head>
+    <title>Health Status Test</title>
+	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.10.2.js"></script>
+
+    <script>
+
+	$( document ).ready(function() {
+
+		$.ajax({
+
+			url: 'http://w3d.fido20.monsanto.com/victoryAPI/API/health',
+			type: 'GET',
+			dataType: 'json', 
+			success: function(status) {
+				debugger;
+				alert(status.Version); 
+			},
+			error: function() { alert('Failed!'); }			
+		});
+		
+	});
+
+    </script>
+</head>
+<body>
+   
+</body>
+</html>

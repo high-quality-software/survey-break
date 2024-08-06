@@ -1,0 +1,274 @@
+﻿@model FIDOVictory.AdminTool.Models.Trial.CreateTrialModel
+
+@{
+    ViewBag.Title = "Create Trial";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        @using (Html.BeginForm("Create", "Trial", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            <div class="form-group">
+                <label for="SRRLeadUserID" class="control-label col-md-3">Lead SRR:</label>
+                <div class="col-md-9">
+                    @Html.DropDownListFor(model => model.SRRLeadUserID, (SelectList)ViewBag.SelectedSRRLeadUserList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SRRLeadUserID)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="IRPUserID" class="control-label col-md-3">IRP:</label>
+                <div class="col-md-9">
+                    @Html.DropDownListFor(model => model.IRPUserID, (SelectList)ViewBag.SelectedIRPUserList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IRPUserID)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="CropID" class="control-label col-md-3">Crop:</label>
+                <div class="col-md-9">
+                    @Html.DropDownListFor(model => model.CropID, (SelectList)ViewBag.CropList, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="TraitID" class="control-label col-md-3">Trait:</label>
+                <div class="col-md-9">
+                    @Html.DropDownListFor(model => model.TraitID, (SelectList)ViewBag.TraitList, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="SiteID" class="control-label col-md-3">Site:</label>
+                <div class="col-md-9">
+                    @Html.DropDownListFor(model => model.SiteID, (SelectList)ViewBag.SelectedSiteList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SiteID)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Year" class="control-label col-md-3">Trial Year:</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.Year, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Year)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Name" class="control-label col-md-3">Trial Name:</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Internal" class="control-label col-md-3">Internal:</label>
+                <div class="col-md-9">
+
+                    <!-- bootstrap button group -->
+                    <div id="InternalOptionList" class="btn-group btn-toggle-radio" data-toggle="buttons-radio">
+                        @foreach (var item in (SelectList)ViewBag.InternalOptionList)
+                        {
+                            <button type="button" data-model-field="InternalOption" value="@(item.Value)" class="btn @(Model.InternalOption.ToString() == item.Value ? "active btn-success" : "btn-default")">@item.Text</button>
+                        }
+                    </div>
+
+                    <!-- MVC razor code -->
+                    @Html.HiddenFor(model => model.InternalOption)
+                    @Html.ValidationMessageFor(model => model.InternalOption)
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="PrimarySRRUserID" class="control-label col-md-3">SRR:</label>
+                <div class="col-md-9">
+                    @Html.DropDownListFor(model => model.PrimarySRRUserID, (SelectList)ViewBag.SelectedSRRUserList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PrimarySRRUserID)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="City" class="control-label col-md-3">City:</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.City, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="State" class="control-label col-md-3">State:</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.State, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Zip" class="control-label col-md-3">Zip:</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.Zip, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="County" class="control-label col-md-3">County:</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.County, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Farm" class="control-label col-md-3">Farm Name:</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.Farm, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ComplianceStatus" class="control-label col-md-3">Compliance Status:</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.ComplianceStatus, new { @class = "form-control" })
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9">
+                    <div class="pull-right">
+                        <a href="@Url.RouteUrl("ListTrials")" class="btn btn-default">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+        }
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var applicationBaseUrl = '@(ViewBag.Session.ApplicationBaseUrl)';
+
+            var SiteIDSelector = $("#SiteID");
+            SiteIDSelector.select2({
+                ajax: {
+                    url: applicationBaseUrl + 'api/site',
+                    allowClear: true,
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            filter: params.term, // search term
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data) {
+                        return {
+                            results: $.map(data, function (item) {
+                                return {
+                                    id: item.SiteID,
+                                    text: item.Name,
+                                    full: item,
+                                }
+                            })
+                        };
+                    },
+                    cache: true
+                },
+                escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+                minimumInputLength: 1,
+            });
+
+            var SRRLeadUserIDSelector = $("#SRRLeadUserID");
+            SRRLeadUserIDSelector.select2({
+                ajax: {
+                    url: applicationBaseUrl + 'api/user/leadsrr',
+                    allowClear: true,
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            filter: params.term, // search term
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data) {
+                        return {
+                            results: $.map(data, function (item) {
+                                return {
+                                    id: item.UserID,
+                                    text: item.FName + " " + item.LName,
+                                    full: item,
+                                }
+                            })
+                        };
+                    },
+                    cache: true
+                },
+                escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+                minimumInputLength: 1,
+            });
+
+            var IRPUserIDSelector = $("#IRPUserID");
+            IRPUserIDSelector.select2({
+                ajax: {
+                    url: applicationBaseUrl + 'api/user/irp',
+                    allowClear: true,
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            filter: params.term, // search term
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data) {
+                        return {
+                            results: $.map(data, function (item) {
+                                return {
+                                    id: item.UserID,
+                                    text: item.FName + " " + item.LName,
+                                    full: item,
+                                }
+                            })
+                        };
+                    },
+                    cache: true
+                },
+                escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+                minimumInputLength: 1,
+            });
+
+            var PrimarySRRUserIDSelector = $("#PrimarySRRUserID");
+            PrimarySRRUserIDSelector.select2({
+                ajax: {
+                    url: applicationBaseUrl + 'api/user/srr',
+                    allowClear: true,
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            filter: params.term, // search term
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data) {
+                        return {
+                            results: $.map(data, function (item) {
+                                return {
+                                    id: item.UserID,
+                                    text: item.FName + " " + item.LName,
+                                    full: item,
+                                }
+                            })
+                        };
+                    },
+                    cache: true
+                },
+                escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+                minimumInputLength: 1,
+            });
+        });
+
+    </script>
+}

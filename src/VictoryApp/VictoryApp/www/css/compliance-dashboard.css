@@ -1,0 +1,226 @@
+﻿/*.modalWindow {*/
+    /*width: 100%;*/
+    /*height: 100%;*/
+    /*position: absolute;*/
+    /*z-index: 1500;*/
+    /*background: white;*/
+    /*opacity: 0.7;*/
+/*}*/
+
+/*.ui-loader {*/
+    /*z-index: 1501;*/
+/*}*/
+
+html head + body .ui-body-c.ui-focus {
+    -webkit-box-shadow: 0 0 12px #3388cc /*{b-active-background-color}*/;
+    -moz-box-shadow: 0 0 12px #3388cc /*{b-active-background-color}*/;
+    box-shadow: 0 0 12px #3388cc /*{b-active-background-color}*/;
+}
+
+.ui-body-c, .ui-page-theme-c .ui-body-inherit, html .ui-bar-c .ui-body-inherit, html .ui-body-c .ui-body-inherit, html body .ui-group-theme-c .ui-body-inherit, html .ui-panel-page-container-c {
+    background-color: white /*{b-body-background-color}*/;
+    border-color: #ADADAD /*{b-body-border}*/;
+    color: #444444 /*{b-body-color}*/;
+    text-shadow: 0 /*{b-body-shadow-x}*/ 1px /*{b-body-shadow-y}*/ 0 /*{b-body-shadow-radius}*/ #444444 /*{b-body-shadow-color}*/;
+}
+
+.ui-body-c {
+    border-width: 2px;
+    border-style: solid;
+}
+
+::-webkit-input-placeholder {
+    text-align: center;
+}
+
+:-moz-placeholder {
+    /* Firefox 18- */
+    text-align: center;
+}
+
+::-moz-placeholder {
+    /* Firefox 19+ */
+    text-align: center;
+}
+
+:-ms-input-placeholder {
+    text-align: center;
+}
+
+.ui-mobile .ui-page {
+    background: transparent;
+    -webkit-backface-visibility: hidden;
+}
+
+.ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper {
+    background-color: transparent;
+}
+
+/*.dxbButton {*/
+    /*background: transparent;*/
+/*}*/
+
+.ui-page {
+    background: transparent;
+    -webkit-backface-visibility: hidden;
+}
+
+
+.verticalAlignParent {
+    display: table;
+}
+
+.verticalAlignChild {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.verticalAlignChildNav {
+    display: table-cell;
+    vertical-align: middle;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.badge {
+    background: #BA070F;
+    color: #fff;
+    padding: 1px 7px;
+    right: 51px;
+    top: 9px;
+    z-index: 1010;
+    border-radius: .8em;
+    border: 2px solid #fff;
+    font-size: small;
+    margin-left: 10px;
+}
+
+.countBubl {
+    float: left;
+    margin-top: -42px;
+    margin-left: 35px;
+    background: #ed1d24;
+    color: #fff;
+    padding: 2px;
+}
+
+a.ui-li-has-count span span.ui-btn-text {
+    padding-right: 0;
+    position: static;
+}
+
+.ui-badge-container {
+    position: relative;
+    border: 2px solid #D0D0D0;
+    color: #fff; /* padding: 10px; */
+    width: 100%;
+    height: 35px;
+    padding-top: 15px;
+    margin-top: 20px;
+    background: rgb(132, 132, 132);
+    text-align: center; /* font-weight: bold; */
+    -border-radius: 20px 20px 5px 5px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px 20px 5px 5px;
+}
+
+.iconImage {
+    width: 40px;
+}
+
+.Vol_Cancel_btn, .Vol_Save_btn, .SRR, .Admin, .User, .FormsNavigation, .NavTrialInfo, .NavStopTrial, .NavSRREval, .NavSiteSelec, .NavLandContr, .NavCompliExce, .NavCompliMap, .NavStopPrePlant, .NavPlanting, .NavStopPlant, .NavCleanouts, .NavDicamApp, .NavSpatIso, .NavInSeas, .NavHaverst, .NavDripTape, .NavPostHarv, .NavStopHarvest, .NavVolMoni, .NavReplant, .NavPrePlanting, .NavMaterialMov, .NavBinInspec {
+}
+
+.Vol, .TrialCropHeader, .TrialTraitHeader, .TrialComplianceStatusHeader, .TrialSRRNameHeader, .TrialSRRPhoneNumberHeader, .TrialSRRSiteLocationHeader, .TrialIRPNameHeader, .TrialIRPPhoneNumberHeader, .TrialIRPSiteLocationHeader, .TrialIDHeader, .TrialTrialNameHeader, .TrialFarmNameHeader, .TrialTrialCityHeader, .TrialTrialStateHeader, .TrialTrialCountryHeader {
+    font-style: italic;
+}
+
+/*.ui-mini {*/
+    /*font-size: 13px;*/
+/*}*/
+
+select .defaultvalue {
+    display: none;
+}
+
+.ui-disabled, .ui-state-disabled {
+    opacity: 1;
+}
+
+/*.modalDialog {*/
+    /*position: fixed;*/
+    /*font-family: Arial, Helvetica, sans-serif;*/
+    /*top: 0;*/
+    /*right: 0;*/
+    /*bottom: 0;*/
+    /*left: 0;*/
+    /*width: 0;*/
+    /*height: 0;*/
+    /*background: rgba(0,0,0,0.8);*/
+    /*z-index: -10000;*/
+    /*opacity: 0;*/
+/*}*/
+
+/*.modalDialog2 {*/
+    /*position: fixed;*/
+    /*opacity: 1;*/
+    /*width: 700px;*/
+    /*height: 500px;*/
+    /*margin-left: -350px;*/
+    /*left: 50%;*/
+    /*margin-top: -250px;*/
+    /*top: 50%;*/
+    /*z-index: 1003;*/
+    /*padding: 5px 20px 13px 20px;*/
+    /*border-radius: 20px;*/
+    /*background: #fff;*/
+    /*-webkit-transition: opacity 400ms ease-in;*/
+    /*-moz-transition: opacity 400ms ease-in;*/
+    /*transition: opacity 400ms ease-in;*/
+    /*background: -moz-linear-gradient(#fff, #999);*/
+    /*background: -webkit-linear-gradient(#fff, #999);*/
+    /*background: -o-linear-gradient(#fff, #999);*/
+/*}*/
+
+/*.modalBack {*/
+    /*background: black;*/
+    /*position: fixed;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*width: 0%;*/
+    /*height: 0%;*/
+    /*z-index: -10000;*/
+/*}*/
+
+/*.modalBack2 {*/
+    /*opacity: .8;*/
+    /*background: black;*/
+    /*position: fixed;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*width: 100%;*/
+    /*height: 100%;*/
+    /*z-index: 1002;*/
+/*}*/
+
+.tooltip {
+    display: none;
+    position: absolute;
+    border: 1px solid #333;
+    background-color: #161616;
+    border-radius: 5px;
+    padding: 10px;
+    color: #fff;
+    font-size: 12px;
+}
+
+.required label:after {
+    color: white;
+    content: ' *';
+    display: inline;
+    font-weight: bold;
+    font-size: larger;
+}
+
+
+

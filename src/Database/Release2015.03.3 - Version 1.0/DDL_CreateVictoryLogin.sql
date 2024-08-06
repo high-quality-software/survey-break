@@ -1,0 +1,48 @@
+-- Ran in Dev on 2/24. 
+-- This MUST be run in all other environments
+
+-- Create login 
+USE master
+GO
+-- Create login
+CREATE LOGIN [NORTH_AMERICA\NA-1000-VICT-SUPPORT-G]  FROM WINDOWS WITH DEFAULT_DATABASE=[RegFieldTrials]
+GO
+CREATE LOGIN [NORTH_AMERICA\NA-1000-VICT_RPTUSER-G]  FROM WINDOWS WITH DEFAULT_DATABASE=[RegFieldTrials]
+go
+
+
+-- Create User 
+USE [RegFieldTrials]
+GO
+-- when dba performs backup, these will become orphaned users, so lets drop them first.
+IF  EXISTS (SELECT * FROM sys.database_principals WHERE name = N'NORTH_AMERICA\NA-1000-VICT-SUPPORT-G')
+DROP USER [NORTH_AMERICA\NA-1000-VICT-SUPPORT-G]
+GO
+IF  EXISTS (SELECT * FROM sys.database_principals WHERE name = N'NORTH_AMERICA\NA-1000-VICT_RPTUSER-G')
+DROP USER [NORTH_AMERICA\NA-1000-VICT_RPTUSER-G]
+GO
+
+CREATE USER [NORTH_AMERICA\NA-1000-VICT-SUPPORT-G] FOR LOGIN [NORTH_AMERICA\NA-1000-VICT-SUPPORT-G]
+CREATE USER [NORTH_AMERICA\NA-1000-VICT_RPTUSER-G] FOR LOGIN [NORTH_AMERICA\NA-1000-VICT_RPTUSER-G]
+GO
+
+
+-- Create role
+USE [RegFieldTrials]
+GO
+
+EXEC sp_addrolemember N'db_datareader' , N'NORTH_AMERICA\NA-1000-VICT-SUPPORT-G'
+EXEC sp_addrolemember N'db_datareader' , N'NORTH_AMERICA\NA-1000-VICT_RPTUSER-G'
+GO
+
+
+-- for prod, drop user NORTH_AMERICA\NA-1000-FIDO-APP-Q-G and add user NORTH_AMERICA\NA-1000-FIDO-APP-P-G
+DECLARE @dbserver varchar(100)
+SET @dbserver = (SELECT @@SERVERNAME)
+if @dbserver = 'STLWFIDOPRD01'
+	begin
+		IF  EXISTS (SELECT * FROM sys.database_principals WHERE name = N'NORTH_AMERICA\NA-1000-FIDO-APP-Q-G') DROP USER [NORTH_AMERICA\NA-1000-FIDO-APP-Q-G]
+		CREATE USER [NORTH_AMERICA\NA-1000-FIDO-APP-P-G] FOR LOGIN [NORTH_AMERICA\NA-1000-FIDO-APP-P-G]
+		EXEC sp_addrolemember N'db_datareader' , N'NORTH_AMERICA\NA-1000-FIDO-APP-P-G'
+		EXEC sp_addrolemember N'db_datawriter' , N'NORTH_AMERICA\NA-1000-FIDO-APP-P-G'
+	end

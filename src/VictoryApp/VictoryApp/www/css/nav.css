@@ -1,0 +1,107 @@
+
+.NavPaddingStartSingle {
+    padding: 18px 30px 15px 20px;
+}
+
+.NavPaddingStartDoble {
+    padding: 7px 30px 15px 20px;
+}
+
+.NavPaddingProgressSingle {
+    padding: 18px 30px 15px 40px;
+}
+
+.NavPaddingProgressDoble {
+    padding: 7px 30px 15px 40px;
+}
+
+.NavStart {
+    float: left;
+    text-align: center;
+    vertical-align: middle;
+    width: 163px;
+    height: 60px;
+    word-wrap: break-word;
+    cursor: pointer;
+}
+
+.NavProgress {
+    float: left;
+    margin-left: -20px;
+    text-align: center;
+    vertical-align: middle;
+    width: 143px;
+    height: 60px;
+    word-wrap: break-word;
+    cursor: pointer;
+}
+
+.NavStop {
+    float: left;
+    margin-left: -17px;
+    text-align: center;
+    vertical-align: middle;
+    width: 55px;
+    height: 60px;
+    word-wrap: break-word;
+}
+
+.GreenStartNav {
+    background: url(../images/btnGreenAlmostStart.png) no-repeat;
+}
+
+.GreenProgressNav {
+    background: url(../images/btnGreenAlmostProgress.png) no-repeat;
+}
+
+.GreenStopNav {
+    background: url(../images/btnGreenAlmostStop.png) no-repeat;
+}
+
+.BlackStartNav {
+    background: url(../images/btnBlackAlmostStart.png) no-repeat;
+}
+
+.BlackProgressNav {
+    background: url(../images/btnBlackAlmostProgress.png) no-repeat;
+}
+
+.BlackStopNav {
+    background: url(../images/btnBlackAlmostStop.png) no-repeat;
+}
+
+.YellowStartNav {
+    background: url(../images/btnYellowAlmostStart.png) no-repeat;
+}
+
+.YellowProgressNav {
+    background: url(../images/btnYellowAlmostProgress.png) no-repeat;
+}
+
+.YellowStopNav {
+    background: url(../images/btnYellowAlmostStop.png) no-repeat;
+}
+
+.RedStartNav {
+    background: url(../images/btnRedAlmostStart.png) no-repeat;
+}
+
+.RedProgressNav {
+    background: url(../images/btnRedAlmostProgress.png) no-repeat;
+}
+
+.RedStopNav {
+    background: url(../images/btnRedAlmostStop.png) no-repeat;
+}
+
+.BlueStartNav {
+    background: url(../images/btnBlueAlmostStart.png) no-repeat;
+}
+
+.BlueProgressNav {
+    background: url(../images/btnBlueAlmostProgress.png) no-repeat;
+}
+
+.BlueStopNav {
+    background: url(../images/btnBlueAlmostStop.png) no-repeat;
+}

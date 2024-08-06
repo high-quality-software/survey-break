@@ -1,0 +1,118 @@
+﻿2014, April 21: Victory Phase 1 fall in the history. Victory Phase 2 released to Production
+
+v0.20.1:
+- Fix issue injected on v0.20.0 in save form data code.
+
+v0.20.0:
+- New Health Status Reponse with success field and exception message field if exception raised
+- Trace logging thru Log4Net and VictoryLoggingFilter Class (IActionFilter)
+- Remove "CurrentUserAlias" field in GET Forms API
+- Add Attachments array in GET Forms API so UI can knows if workflow+trial combination has attachements
+
+
+0.19:
+- AppSetting "FIDO.Victory.Swagger.Enable" to disable Swagger in QA and PROD.
+- fix attachment type equals 0 when retrieve an attachemnt
+- Update attachments functionality
+- Delete attachment fix
+- Get deleted attachment fix
+
+
+0.18:
+- Web API Documentation using Swagger
+
+0.17:
+- Allow specification of attachment types.
+- Use dbo.v_UserTrials to retrieve trials assigned to a user
+- Allow delete attachemnts
+
+0.16:
+- Allow Attachments to Trials + Workflow combinations using JSON with Base64 encoding for image file
+
+0.15:
+- Hotfix for [SRR_EvalResponse].[LastTrainingDate] to [SRR_EvalResponse].[LastTrainingYear] change.
+
+0.14 :
+- Allow ADMIN users download all trials (internal logic).
+- When GET Forms fill DueDate and UserID fiels
+- Update SRR Eval Response Form API for today (new fields) database change.
+- Tool for automatically generate data in Response table.
+
+0.13:
+- When AD Authentication fails API response with error code and accordingly message
+- Update in upload form data api accordingly to changes in Response and TrialProgress tables
+
+
+0.12:
+- Login API, now authenticate user against AD
+- DueDate field in TrialProgress (should be sent by iPad when save a form and Web API can sent to iPad when read forms)
+- Web API to GET SRR Evaluation Form
+- Web API to POST SRR Evaluation Form
+- Login API, now returns a flag when logged user is SRR and must fill the Evaluation Form
+
+
+
+
+
+0.11:
+- Add to Trial Catalog API following fields:
+    Trait_ID
+	Site_ID
+    TrialYear
+- Add a new API for Site synchronization 
+- Add a new API for Trait synchronization 
+- Add to Trial Catalog API following field PrimarySRRUser_ID
+- Trial Catalog API only exposes not archived records (Archive = 0)
+- Fill SSRUser_ID in TrialProgress with the PrimarySRRUser_ID from SRRUser_Trial_Xref
+- New Health Status fields for API and DB:
+  "APIVersion": "0.11",
+  "APIReleaseName": "RC 01",
+  "DBReleaseName": "RC 01",
+  "DBReleaseComment": "",
+- New web.config appSetting named FIDO.Victory.Cors.Origins for setup allowed cross domain origins (named in web api cors origins)
+- TrialCatalog Internal field sent to iPad by Trial Catalog API
+- TrialCatalog Compliance Status sent to iPad by Trial Catalog API
+
+
+
+
+
+0.10
+-	Chemical Catalog API (API to expose chemicals and chemical types with lastSync parameter)
+-	User Info Download API (with lastSync parameter)
+-	Fill WorkflowComplete and WorkflowCompleteDate columns in table TrialProgress
+-	Fill SRRUser_ID column in table TrialProgress with the first SRR assigned to the Trial
+
+
+0.9:
+
+-	Filter Get Trials API by current user (LeadSRR and SRR) 
+-	Filter Get Form data API by current user (LeadSRR and SRR)
+
+
+0.8
+ 
+- download data form from database to ipad without filter (all form data since last sync)
+
+
+0.7 
+- Dummy login web api 
+	URL: api/login 
+	VERB: POST
+	REQUEST BODY: { UserID = "hcasa", Password = "123"}
+
+- implement [usp_ReceiveResponses] SP to save form data into database
+- custom xml serializer for sql parameter (faster)
+- use updatedatetime column in workflowquestion table to evaluate that a workflow have been changed. (take in care in lastSync evaluation)
+
+0.6
+- Hotfix to allow cross domain AJAX
+
+0.5
+- Elmah config for send emails and not log to database, instead log in memory only last 15 unhandled exceptions.
+  (to see this log access to /elmah.axd webpage )
+- API to send form data to database (POST to api/form) finished with pure LINQ code. Almost certainly I will try SP and MERGE approach. 
+
+0.4
+- Fix TrialCatalog nullable value issue
+- added Elmah support

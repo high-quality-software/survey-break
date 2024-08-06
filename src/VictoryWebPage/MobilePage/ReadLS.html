@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="js/jquery-1.11.2.min.js"></script>
+    <!-- Set Up the App Icon -->
+    <link rel="icon" href="images/Victoryfavicon.ico" />    
+</head>
+<body>
+    <div id="LocalSto"></div>
+    <script>
+        var catalog = [];
+        for (var i = 0; i < localStorage.length; i++) {
+            catalog.push("<br/>" + localStorage.key(i) + ": " + localStorage.key(i).substr(0, localStorage.key(i).lastIndexOf("_")) + "  " + localStorage.getItem(localStorage.key(i)));
+        
+        }
+        catalog.sort();
+        $('body').append(catalog + "<br/> Total LocalStorage: " + localStorage.length);
+        $('body').append(catalog + "<br/>" + localStorage.D01_Trial_153);
+    </script>
+</body>
+</html>

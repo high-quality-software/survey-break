@@ -1,0 +1,10 @@
+﻿@if (Request.IsAuthenticated)
+{
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="pull-right">Current User: @Html.DisplayName(User.Identity.Name)</div>
+            </div>
+        </div>
+    </div>
+}
